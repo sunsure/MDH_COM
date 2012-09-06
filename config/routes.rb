@@ -1,4 +1,6 @@
 Mdh::Application.routes.draw do
+  resources :users
+
   root to: 'my#dashboard'
 
   # The priority is based upon order of creation:
