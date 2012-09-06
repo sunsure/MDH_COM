@@ -2,4 +2,16 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  application:
+    copyright: "&copy; Phoenixfire Productions %{year}"
+    errors:
+      missing_title: "Title is missing!"
+    titles:
+      main_brand: "MDH.com"
+
+  my:
+    dashboard:
+      title: "My Dashboard"
+  users:
+    index:
+      title: "Listing Users"
