@@ -1,4 +1,3 @@
 class User < ActiveRecord::Base
-  #attr_accessible :email, :first_name, :last_name
-  validates :email, presence: true
+  validates :email, presence: true, uniqueness: { case_sensitive: false }, format: { with: Rails.application.config.email_regex }
 end

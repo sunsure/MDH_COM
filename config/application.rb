@@ -56,6 +56,10 @@ module Mdh
     # Enable the asset pipeline
     config.assets.enabled = true
 
+    # Email Regex
+    # https://gist.github.com/343843
+    config.email_regex = /^(?:[a-z\d!#\$%&'\*\+\-\/=\?\^_`\{\|\}~]+|\.)+@[a-z\d\-]+(?:\.[a-z\d\-]+)*$/i
+
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
   end
