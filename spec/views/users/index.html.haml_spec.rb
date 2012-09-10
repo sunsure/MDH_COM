@@ -2,26 +2,21 @@ require 'spec_helper'
 
 describe "users/index" do
   before(:each) do
-    # TODO: use a factory here instead of a fixture
-    assign(:users, [
-      stub_model(User,
-        :first_name => "First Name",
-        :last_name => "Last Name",
-        :email => "Email"
-      ),
-      stub_model(User,
-        :first_name => "First Name",
-        :last_name => "Last Name",
-        :email => "Email"
-      )
-    ])
+    @first = FactoryGirl.create(:user)
+    @second = FactoryGirl.create(:user)
+    assign(:users, [@first, @second])
   end
 
   it "renders a list of users" do
     render
-    # Run the generator again with the --webrat flag if you want to use webrat matchers
-    assert_select "tr>td", :text => "First Name".to_s, :count => 2
-    assert_select "tr>td", :text => "Last Name".to_s, :count => 2
-    assert_select "tr>td", :text => "Email".to_s, :count => 2
+    assert_select "tr>td", :text => @first.first_name.to_s
+    assert_select "tr>td", :text => @first.last_name.to_s
+    assert_select "tr>td", :text => @first.email.to_s
+    assert_select "tr>td", :text => l(@first.created_at)
+
+    assert_select "tr>td", :text => @second.first_name.to_s
+    assert_select "tr>td", :text => @second.last_name.to_s
+    assert_select "tr>td", :text => @second.email.to_s
+    assert_select "tr>td", :text => l(@second.created_at)
   end
 end
