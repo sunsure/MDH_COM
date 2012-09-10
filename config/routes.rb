@@ -1,5 +1,10 @@
 Mdh::Application.routes.draw do
+
+  get "/login", to: "sessions#new"
+  get "/logout", to: "sessions#destroy"
+
   resources :users
+  resources :sessions, only: [:new, :create, :destroy]
 
   root to: 'my#dashboard'
 

@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe "users/index" do
   before(:each) do
+    # TODO: use a factory here instead of a fixture
     assign(:users, [
       stub_model(User,
         :first_name => "First Name",
