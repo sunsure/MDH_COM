@@ -2,12 +2,34 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  activerecord:
+    attributes:
+      user:
+        id: "ID"
+        first_name: "First Name"
+        last_name: "Last Name"
+        email: "Email"
+        created_at: "Created At"
+    models:
+      user: "User"
+
   application:
     copyright: "&copy; Phoenixfire Productions %{year}"
     errors:
       missing_title: "Title is missing!"
     titles:
       main_brand: "MDH.com"
+  helpers:
+    actions: "Actions"
+    links:
+      back: "Back"
+      destroy: "Destroy"
+      edit: "Edit"
+      new: "New"
+
+  time:
+    formats:
+      short: "%d %b %Y, %l:%M%p"
 
   my:
     dashboard:

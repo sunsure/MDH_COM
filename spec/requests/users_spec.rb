@@ -1,11 +1,27 @@
 require 'spec_helper'
 
 describe "Users" do
+  before(:each) do
+    @first = FactoryGirl.create(:user)
+    @second = FactoryGirl.create(:user)
+  end
+
   describe "GET /users" do
-    it "works! (now write some real specs)" do
-      # Run the generator again with the --webrat flag if you want to use webrat methods/matchers
-      get users_path
-      response.status.should be(200)
+    it "should display a list of users" do
+      visit users_path
+
+      # first user
+      page.should have_content(@first.first_name)
+      page.should have_content(@first.last_name)
+      page.should have_content(@first.email)
+
+      # second user
+      page.should have_content(@second.first_name)
+      page.should have_content(@second.last_name)
+      page.should have_content(@second.email)
+
+      # other things
+      page.should have_selector('h1', content: "Listing Users")
     end
   end
 end
