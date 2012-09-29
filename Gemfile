@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.6'
 
 # Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
+# gem 'rails', git: 'git://github.com/rails/rails.git'
 
 gem 'mysql2'
 gem 'haml-rails'
@@ -18,10 +18,10 @@ gem 'rb-inotify', '~> 0.8.8'
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
-  gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
+  gem 'twitter-bootstrap-rails', git: 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  gem 'therubyracer', :platforms => :ruby
+  gem 'therubyracer', platforms: :ruby
 
   gem 'uglifier', '>= 1.0.3'
 end
@@ -32,7 +32,7 @@ group :test do
   gem 'capybara'
   gem 'launchy'
   gem 'guard-rspec'
-  gem 'rb-fsevent', '~> 0.9.1', :require => false
+  gem 'rb-fsevent', '~> 0.9.1', require: false
 end
 
 group :test, :development do

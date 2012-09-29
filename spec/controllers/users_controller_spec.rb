@@ -1,134 +1,195 @@
 require 'spec_helper'
 
 describe UsersController do
-
-  def valid_attributes
-    {
-      first_name: "Mark",
-      last_name: "Holmberg",
-      email: "mark@example.com"
-    }
-  end
-
-  def valid_session
-    {}
+  before(:each) do
+    @user = FactoryGirl.create(:user)
+    # Note: we use the test_user because users
+    # aren't allowed to destroy their own accounts
+    @test_user = FactoryGirl.create(:user)
+    login_as(@user)
   end
 
   describe "GET index" do
-    it "assigns all users as @users" do
-      user = User.create! valid_attributes
-      get :index, {}, valid_session
-      assigns(:users).should eq([user])
+    it "returns HTTP success" do
+      get :index
+      response.should be_success
+    end
+
+    it "renders the index template" do
+      get :index
+      response.should render_template(:index)
+    end
+
+    it "assigns all users in the variable" do
+      get :index
+      assigns(:users).should eq(User.all)
     end
   end
 
   describe "GET show" do
-    it "assigns the requested user as @user" do
-      user = User.create! valid_attributes
-      get :show, {:id => user.to_param}, valid_session
-      assigns(:user).should eq(user)
+    it "finds the right user" do
+      get :show, {id: @user.id}
+      assigns(:user).should eq(@user)
+    end
+
+    it "should render the show template" do
+      get :show, {id: @user.id}
+      response.should render_template(:show)
+    end
+
+    it "should return HTTP success" do
+      get :show, {id: @user.id}
+      response.should be_success
     end
   end
 
-  describe "GET new" do
-    it "assigns a new user as @user" do
-      get :new, {}, valid_session
+  describe "GET :new" do
+    it "should setup @user as a new User instance" do
+      get :new
       assigns(:user).should be_a_new(User)
     end
+
+    it "should return HTTP success" do
+      get :new
+      response.should be_success
+    end
+
+    it "should render the new template" do
+      get :new
+      response.should render_template(:new)
+    end
   end
 
-  describe "GET edit" do
-    it "assigns the requested user as @user" do
-      user = User.create! valid_attributes
-      get :edit, {:id => user.to_param}, valid_session
-      assigns(:user).should eq(user)
+  describe "GET :edit" do
+    it "should get the right user" do
+      get :edit, { id: @user.id }
+      assigns(:user).should eq(@user)
+    end
+
+    it "should return HTTP success" do
+      get :edit, { id: @user.id }
+      response.should be_success
+    end
+
+    it "should render the new template" do
+      get :edit, { id: @user.id }
+      response.should render_template(:edit)
     end
   end
 
   describe "POST create" do
     describe "with valid params" do
+      before(:each) do
+        @attr =
+          {
+            first_name: "Mark",
+            last_name: "Holmberg",
+            email: "user@example.com",
+            password: "foobar",
+            password_confirmation: "foobar"
+          }
+      end
+
       it "creates a new User" do
         expect {
-          post :create, {:user => valid_attributes}, valid_session
+          post :create, {user: @attr}
         }.to change(User, :count).by(1)
       end
 
       it "assigns a newly created user as @user" do
-        post :create, {:user => valid_attributes}, valid_session
+        post :create, {user: @attr}
         assigns(:user).should be_a(User)
         assigns(:user).should be_persisted
       end
 
       it "redirects to the created user" do
-        post :create, {:user => valid_attributes}, valid_session
+        post :create, {user: @attr}
         response.should redirect_to(User.last)
       end
     end
 
     describe "with invalid params" do
+      before(:each) do
+        @attr =
+          {
+            first_name: "",
+            password: "",
+            password_confirmation: "",
+          }
+      end
+
       it "assigns a newly created but unsaved user as @user" do
-        @user = FactoryGirl.create(:user)
-        post :create, {:id => @user.id, :user => {email: ""}}, valid_session
+        post :create, user: @attr
         assigns(:user).should be_a_new(User)
       end
 
       it "re-renders the 'new' template" do
-        @user = FactoryGirl.create(:user)
-        post :create, {:id => @user.id, :user => {:email => ""}}, valid_session
-        response.should render_template(:new)
+        post :create, user: @attr
+        response.should render_template("new")
       end
     end
   end
 
   describe "PUT update" do
     describe "with valid params" do
+      before(:each) do
+        @attr =
+          {
+            first_name: "Mark",
+            last_name: "Holmberg",
+            email: "user@example.com",
+            password: "foobar",
+            password_confirmation: "foobar"
+          }
+      end
+
       it "updates the requested user" do
-        user = User.create! valid_attributes
-        User.any_instance.should_receive(:update_attributes).with({"first_name" => 'Foobar'})
-        put :update, {:id => user.to_param, :user => {"first_name" => 'Foobar'}}, valid_session
+        put :update, {id: @user, user: {first_name: "mark"}}
       end
 
       it "assigns the requested user as @user" do
-        user = User.create! valid_attributes
-        put :update, {:id => user.to_param, :user => valid_attributes}, valid_session
-        assigns(:user).should eq(user)
+        put :update, {id: @user.id, user: @attr}
+        assigns(:user).should eq(@user)
       end
 
       it "redirects to the user" do
-        user = User.create! valid_attributes
-        put :update, {:id => user.to_param, :user => valid_attributes}, valid_session
-        response.should redirect_to(user)
+        put :update, {id: @user, user: @attr}
+        response.should redirect_to(@user)
       end
     end
 
     describe "with invalid params" do
+      before(:each) do
+        @attr =
+          {
+            first_name: "",
+            email: "invalid_email",
+            password: "foobar",
+            password_confirmation: "",
+          }
+      end
+
       it "assigns the user as @user" do
-        user = User.create! valid_attributes
-        User.any_instance.stub(:save).and_return(false)
-        put :update, {:id => user.to_param, :user => {}}, valid_session
-        assigns(:user).should eq(user)
+        put :update, id: @user, user: @attr
+        assigns(:user).should eq(@user)
       end
 
       it "re-renders the 'edit' template" do
-        user = User.create! valid_attributes
-        User.any_instance.stub(:save).and_return(false)
-        put :update, {:id => user.to_param, :user => {:email => ""}}, valid_session
-        response.should render_template(:edit)
+        put :update, id: @user, user: @attr
+        response.should render_template("edit")
       end
     end
   end
 
   describe "DELETE destroy" do
     it "destroys the requested user" do
-      user = User.create! valid_attributes
       expect {
-        delete :destroy, {:id => user.to_param}, valid_session
+        delete :destroy, {id: @test_user}
       }.to change(User, :count).by(-1)
     end
 
-    it "redirects to the users list" do
-      user = User.create! valid_attributes
-      delete :destroy, {:id => user.to_param}, valid_session
+    it "redirects to the user list" do
+      delete :destroy, {id: @test_user}
       response.should redirect_to(users_url)
     end
   end

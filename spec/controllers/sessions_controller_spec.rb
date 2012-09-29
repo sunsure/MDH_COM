@@ -1,34 +1,43 @@
 require 'spec_helper'
 
 describe SessionsController do
-
-  describe "successful login" do
-    describe "GET :new" do
-      it "returns http success" do
-        get :new
-        response.should be_success
-      end
-
-      it "should render the new template" do
-        get :new
-        response.should render_template(:new)
-      end
-    end
-
-    it "should find the right user" do
-      correct_user = User.find_by_email("test@example.com")
-    end
-
-    it "should find the right user regardless of case" do
-    end
-
-    it "should set the cookie" do
-    end
-
-    it "should redirect to the root url" do
+  describe "GET 'new'" do
+    it "returns http success" do
+      get :new
+      response.should be_success
     end
   end
 
-  # TODO: test create and destroy methods here
+  describe "GET 'unauthorized'" do
+    it "show have a successful response" do
+      get :unauthorized
+      response.should be_success
+    end
+  end
+
+  describe "POST 'create'" do
+    before(:each) do
+     @user = FactoryGirl.create(:user)
+     @attr = { email: @user.email, password: @user.password }
+    end
+
+    it "lets a valid user login" do
+      @user.auth_token.should_not be_nil
+      request.cookies[:auth_token].should be_nil
+      post :create, @attr
+      flash.now[:error].should_not =~ /invalid credentials/i
+      response.should redirect_to(root_path)
+      flash.now[:notice].should =~ /logged in successfully/i
+      response.cookies["auth_token"].should eq(@user.auth_token)
+    end
+
+    it "lets the user logout" do
+      login_as(@user)
+      request.cookies[:auth_token].should eq(@user.auth_token)
+      delete :destroy
+      response.cookies[:auth_token].should be_nil
+      response.should redirect_to(root_path)
+    end
+  end
 
 end
