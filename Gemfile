@@ -10,6 +10,7 @@ gem 'haml-rails'
 gem 'strong_parameters'
 gem 'cancan'
 gem 'simple_form'
+gem 'rb-inotify', '~> 0.8.8'
 
 
 # Gems used only for assets and not required
