@@ -50,6 +50,9 @@ en:
     dashboard:
       title: "My Dashboard"
   users:
+    controller:
+      destroy:
+        prevent_self_destroy: "You cannot destroy your own account!"
     index:
       new: "New User"
       title: "Listing Users"

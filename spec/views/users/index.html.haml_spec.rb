@@ -5,6 +5,7 @@ describe "users/index" do
     @first = FactoryGirl.create(:user)
     @second = FactoryGirl.create(:user)
     assign(:users, [@first, @second])
+    view.stub(:current_user, @first)
   end
 
   it "renders a list of users" do

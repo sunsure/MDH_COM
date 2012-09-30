@@ -192,6 +192,15 @@ describe UsersController do
       delete :destroy, {id: @test_user}
       response.should redirect_to(users_url)
     end
+
+    it "prevents them from destroying their own account" do
+      lambda do
+        delete :destroy, {id: @user}
+        response.should redirect_to(users_url)
+        flash[:error].should_not be_nil
+        flash[:error].should eq("You cannot destroy your own account!")
+      end.should_not change(User, :count).by(-1)
+    end
   end
 
 end

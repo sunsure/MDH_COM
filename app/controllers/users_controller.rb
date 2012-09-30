@@ -61,7 +61,11 @@ class UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
-    @user.destroy
+    unless @user == current_user
+      @user.destroy
+    else
+      flash[:error] = t('users.controller.destroy.prevent_self_destroy')
+    end
 
     respond_to do |format|
       format.html { redirect_to users_url }
