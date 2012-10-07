@@ -4,6 +4,7 @@ Mdh::Application.routes.draw do
   get "/logout", to: "sessions#destroy", as: "logout"
   get "/unauthorized", to: "sessions#unauthorized", as: "unauthorized"
 
+  resources :articles
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
 

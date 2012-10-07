@@ -34,6 +34,7 @@ en:
     actions: "Actions"
     links:
       back: "Back"
+      cancel: "Cancel"
       destroy: "Destroy"
       edit: "Edit"
       new: "New"
@@ -46,6 +47,26 @@ en:
     sidebar:
       content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin facilisis, neque nec consequat convallis, ipsum eros feugiat nisi, ut dignissim elit leo quis est. Nulla elit arcu, hendrerit sed varius et, commodo sit amet risus. Maecenas convallis nulla vel tellus placerat malesuada id quis lorem. Maecenas et rhoncus augue. Donec consequat ligula eget eros elementum eu porttitor ante commodo. Duis eu lectus tortor, sed gravida mi. Etiam placerat euismod varius. Nulla tristique scelerisque mattis. Aenean tristique, libero vitae lobortis vulputate, odio est tincidunt lorem, quis imperdiet justo quam ac dolor."
 
+  articles:
+    controller:
+      create:
+        failure: "Failed to create article!"
+        success: "Article was created successfully."
+      destroy:
+        failure: "Failed to destroy article!"
+        success: "Article was destroyed successfully."
+      update:
+        failure: "Failed to update article!"
+        success: "Article was updated successfully."
+    edit:
+      title: "Editing Article : %{article_title}"
+    new:
+      title: "New Article"
+    index:
+      new: "New Article"
+      title: "Listing Articles"
+    show:
+      title: "Article : %{article_title}"
   my:
     dashboard:
       title: "My Dashboard"
