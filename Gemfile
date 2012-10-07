@@ -10,6 +10,7 @@ gem 'haml-rails'
 gem 'strong_parameters'
 gem 'cancan'
 gem 'simple_form'
+gem 'redcarpet'
 
 unless RUBY_PLATFORM =~ /darwin/i
   gem 'rb-inotify', '~> 0.8.8'
