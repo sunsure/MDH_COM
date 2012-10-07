@@ -10,7 +10,10 @@ gem 'haml-rails'
 gem 'strong_parameters'
 gem 'cancan'
 gem 'simple_form'
-gem 'rb-inotify', '~> 0.8.8', :require => false if RUBY_PLATFORM =~ /darwin/i
+
+unless RUBY_PLATFORM =~ /darwin/i
+  gem 'rb-inotify', '~> 0.8.8'
+end
 
 
 # Gems used only for assets and not required
