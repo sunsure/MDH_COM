@@ -29,9 +29,14 @@
           .container.nav-collapse
             %ul.nav
               - if current_user
-                %li= link_to "Users", users_path
-                %li= link_to "Articles", articles_path
-                %li= link_to "Link 3", "#"
+                %li
+                  = link_to users_path do
+                    %i.icon-user.icon-white
+                    %span.add-on Users
+                %li
+                  = link_to articles_path do
+                    %i.icon-list-alt.icon-white
+                    %span.add-on Articles
               - else
                 %li
                   = link_to "https://github.com/mark-d-holmberg" do
@@ -55,16 +60,18 @@
           = bootstrap_flash
           = yield
         .span3
-          .well.sidebar-nav
+          %div.well.sidebar-nav
             - if current_user
-              %ul.nav.nav-list
-                %li.nav-header Sidebar
-                %li= link_to "Link 1", "#"
-                %li= link_to "Link 2", "#"
-                %li= link_to "Link 3", "#"
+              .nav-header Actions
+              - if content_for?(:sidebar)
+                = yield(:sidebar)
               - else
-                %h3= t('application.titles.my_name')
-                %p= t('layout.sidebar.content')
+                = link_to "#", class: "btn btn-info btn-small btn-block" do
+                  %i.icon-question-sign
+                  %span.addon Nothing to show, Why?
+            - else
+              %h3= t('application.titles.my_name')
+              %p= t('layout.sidebar.content')
       %footer
         %p= t('application.copyright', year: Time.now.year).html_safe
     /

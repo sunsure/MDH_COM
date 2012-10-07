@@ -10,6 +10,8 @@ en:
         first_name: "First Name"
         id: "ID"
         last_name: "Last Name"
+        password: "Password"
+        password_confirmation: "Password Confirmation"
     models:
       user: "User"
 
@@ -35,6 +37,7 @@ en:
     links:
       back: "Back"
       cancel: "Cancel"
+      confirm: "Are you sure?"
       destroy: "Destroy"
       edit: "Edit"
       new: "New"
@@ -74,8 +77,17 @@ en:
     controller:
       destroy:
         prevent_self_destroy: "You cannot destroy your own account!"
+    edit:
+      title: "Editing User : %{name}"
     index:
       new: "New User"
       title: "Listing Users"
+    new:
+      title: "New User"
     show:
+      delete_user_content: "You cannot destroy your own account."
+      delete_user_title: "Destroy User"
       title: "User : %{name}"
+    user:
+      delete_user_content: "You cannot destroy your own account."
+      delete_user_title: "Destroy User"

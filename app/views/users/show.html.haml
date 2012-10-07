@@ -2,6 +2,24 @@
 .page-header
   %h3=t '.title', name: @user.name
 
+- content_for(:sidebar) do
+  = link_to users_path, class: 'btn btn-small btn-block' do
+    %i.icon-arrow-left.icon-white
+    %span.addon= t('.back', default: t("helpers.links.back"))
+
+  = link_to edit_user_path(@user), class: 'btn btn-warning btn-small btn-block' do
+    %i.icon-edit.icon-white
+    %span.addon= t('.edit', default: t("helpers.links.edit"))
+
+  - if current_user == @user
+    = link_to "#", disabled: true, class: 'btn btn-danger btn-small btn-block pop', data: { placement: "left", title: t('.delete_user_title'), content: t('.delete_user_content') } do
+      %i.icon-remove.icon-white
+      %span.addon= t('.destroy', default: t("helpers.links.destroy"))
+  - else
+    = link_to user_path(@user), method: :delete, data: { confirm: t('.confirm', default: "helpers.links.confirm") }, class: 'btn btn-danger btn-small btn-block' do
+      %i.icon-remove.icon-white
+      %span.addon= t('.destroy', default: t("helpers.links.destroy"))
+
 %p
   %strong= User.human_attribute_name(:first_name) + ':'
   %br
@@ -14,8 +32,3 @@
   %strong= User.human_attribute_name(:email) + ':'
   %br
   = @user.email
-
-.form-actions
-  = link_to t('.back', default: t("helpers.links.back")), users_path, class: 'btn'
-  = link_to t('.edit', default: t("helpers.links.edit")), edit_user_path(@user), class: 'btn'
-  = link_to t('.destroy', default: t("helpers.links.destroy")), user_path(@user), method: "delete", data: { confirm: t('.confirm', default: t("helpers.links.confirm", default: 'Are you sure?')) }, class: 'btn btn-danger'
