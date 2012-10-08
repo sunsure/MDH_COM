@@ -1,12 +1,14 @@
 class ArticlesController < ApplicationController
+  skip_before_filter :authorize, only: [:index, :show]
   respond_to :html
+  authorize_resource except: [:index, :show]
 
   def index
     @articles = Article.all
   end
 
   def show
-    @article = current_user.articles.find(params[:id])
+    @article = Article.find(params[:id])
   end
 
   def new

@@ -1,3 +1,53 @@
 // Place all the styles related to the Articles controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+#article_header {
+  position: relative;
+  bottom: 2em;
+  height: 5em;
+}
+#article_title {
+  width: 35em;
+}
+
+#author {
+  font-style: italic;
+  color: #7A7A7A;
+  margin-left: 2em;
+}
+
+#updated_at {
+  &:before {
+    content: "Updated At: ";
+  }
+  margin-left: 4em;
+  color: #CCC;
+  width: 20em;
+  position: relative;
+  bottom: 2.2em;
+}
+
+#published_at {
+  &:before {
+    content: "Published At: ";
+  }
+  margin-left: 4em;
+  color: #CCC;
+  width: 20em;
+  position: relative;
+  bottom: 1.3em;
+}
+
+#big_arrow {
+  float: left;
+}
+section#content {
+  clear: both;
+}
+.page-header h3 {
+  margin: 0em;
+  line-height: 1.2em;
+}
+#content > p {
+  text-indent: 2em;
+}

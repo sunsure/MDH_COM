@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe ArticlesController do
   before(:each) do
-    @user = FactoryGirl.create(:user)
+    @user = FactoryGirl.create(:user_with_roles, with_roles: ["admin"])
     login_as(@user)
 
     @article = FactoryGirl.create(:article, user_id: @user.id)

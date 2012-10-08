@@ -28,20 +28,19 @@
           = link_to t('application.titles.brand_name'), root_path, class: "brand"
           .container.nav-collapse
             %ul.nav
+              %li
+                = link_to "https://github.com/mark-d-holmberg" do
+                  = image_tag("/images/favicon_github.png")
+                  %span.add-on GitHub
+              %li
+                = link_to articles_path do
+                  %i.icon-list-alt.icon-white
+                  %span.add-on Articles
               - if current_user
                 %li
                   = link_to users_path do
                     %i.icon-user.icon-white
                     %span.add-on Users
-                %li
-                  = link_to articles_path do
-                    %i.icon-list-alt.icon-white
-                    %span.add-on Articles
-              - else
-                %li
-                  = link_to "https://github.com/mark-d-holmberg" do
-                    = image_tag("/images/favicon_github.png")
-                    %span.add-on GitHub
             %ul.nav.pull-right
               - if current_user
                 %li
@@ -70,8 +69,12 @@
                   %i.icon-question-sign
                   %span.addon Nothing to show, Why?
             - else
-              %h3= t('application.titles.my_name')
-              %p= t('layout.sidebar.content')
+              - if content_for?(:sidebar)
+                = yield(:sidebar)
+              - else
+                - unless hide_explanation_sidebar?
+                  %h3= t('application.titles.my_name')
+                  %p= t('layout.sidebar.content')
       %footer
         %p= t('application.copyright', year: Time.now.year).html_safe
     /

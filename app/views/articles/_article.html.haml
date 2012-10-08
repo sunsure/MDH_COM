@@ -3,6 +3,9 @@
   %td= simple_format article.content
   %td= article.user.try(:name)
   %td= l(article.published_at, format: :short) if article.published_at?
-  %td
-    = link_to 'Edit', edit_article_path(article), class: "btn btn-warning"
-    = link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"
+  - if can? [:edit, :destroy], article
+    %td
+      - if can? :edit, article
+        = link_to 'Edit', edit_article_path(article), class: "btn btn-warning"
+      - if can? :destroy, article
+        = link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"

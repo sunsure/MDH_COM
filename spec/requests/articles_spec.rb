@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "Articles" do
   before(:each) do
-    @user = FactoryGirl.create(:user)
+    @user = FactoryGirl.create(:user_with_roles, with_roles: ["admin"])
     visit login_path
     fill_in "email", with: @user.email
     fill_in "password", with: @user.password
@@ -26,9 +26,9 @@ describe "Articles" do
     it "should have the right title" do
       visit article_path(@article)
       within("head title") do
-        page.should have_content("Article : #{@article.title}")
+        page.should have_content("#{@article.title}")
       end
-      page.should have_selector("h3", text: "Article : #{@article.title}")
+      page.should have_selector("h3", text: "#{@article.title}")
     end
   end
 

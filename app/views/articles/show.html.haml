@@ -2,20 +2,20 @@
 .page-header
   %h3=t '.title', article_title: @article.title
 
-%p
-  %b Title:
-  = @article.title
-%p
-  %b Content:
-  = @article.content
-%p
-  %b User:
-  = @article.user.try(:name)
-%p
-  %b Published at:
-  = l(@article.published_at, format: :short) if @article.published_at?
+%div#article_header
+  %h1#big_arrow= "&#8627".html_safe
+  %h3#author= @article.user.try(:name)
+  %h5#published_at= l(@article.published_at, format: :short) if @article.published_at?
+  %h5#updated_at= l(@article.updated_at, format: :short) if @article.updated_at?
 
-.form-actions
-  = link_to t('.back', default: t("helpers.links.back")), articles_path, class: 'btn'
-  = link_to t('.edit', default: t("helpers.links.edit")), edit_article_path(@article), class: 'btn'
-  = link_to t('.destroy', default: t("helpers.links.destroy")), article_path(@article), method: "delete", data: { confirm: t('.confirm', default: t("helpers.links.confirm", default: 'Are you sure?')) }, class: 'btn btn-danger'
+- content_for(:sidebar) do
+  - if can? :edit, @article
+    = link_to edit_article_path(@article), class: 'btn btn-warning btn-small btn-block' do
+      %i.icon-edit.icon-white
+      %span.addon= t('.edit', default: t("helpers.links.edit"))
+  - if can? :destroy, @article
+    = link_to article_path(@article), method: "delete", data: { confirm: t('.confirm', default: t("helpers.links.confirm", default: 'Are you sure?')) }, class: 'btn btn-danger btn-small btn-block' do
+      %i.icon-remove.icon-white
+      %span.addon= t('.destroy', default: t("helpers.links.destroy"))
+
+%section#content= to_markdown(@article.content)

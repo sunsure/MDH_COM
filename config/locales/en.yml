@@ -4,6 +4,15 @@
 en:
   activerecord:
     attributes:
+      article:
+        content: "Content"
+        created_at: "Created At"
+        publish: "Publish"
+        published_at: "Published At"
+        title: "Title"
+        updated_at: "Updated At"
+        user: "User"
+        user_id: "User"
       user:
         created_at: "Created At"
         email: "Email"
@@ -15,6 +24,7 @@ en:
         role_ids: "Roles"
     models:
       user: "User"
+      article: "Article"
 
   application:
     copyright: "&copy; Phoenixfire Productions %{year}"
@@ -70,7 +80,7 @@ en:
       new: "New Article"
       title: "Listing Articles"
     show:
-      title: "Article : %{article_title}"
+      title: "%{article_title}"
   my:
     dashboard:
       title: "My Dashboard"

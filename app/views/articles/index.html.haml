@@ -2,16 +2,21 @@
 .page-header
   %h3= t '.title'
 
+- content_for(:sidebar) do
+  - if can? :create, Article
+    = link_to new_article_path, class: "btn btn-success btn-small btn-block" do
+      %i.icon-list-alt.icon-white
+      %span.add-on= t('.new', default: t('helpers.links.new'))
+
 %table.table.table-striped
   %thead
     %tr
-      %th Title
-      %th Content
-      %th User
-      %th Published at
-      %th= t '.actions', default: t("helpers.actions")
+      %th= Article.human_attribute_name(:title)
+      %th= Article.human_attribute_name(:content)
+      %th= Article.human_attribute_name(:user)
+      %th= Article.human_attribute_name(:published_at)
+      - if can? [:edit, :destroy], Article
+        %th.span3= t '.actions', default: t("helpers.actions")
 
   - @articles.each do |article|
     = render article
-
-= link_to t('.new', default: t("helpers.links.new")), new_article_path, class: 'btn btn-primary'
