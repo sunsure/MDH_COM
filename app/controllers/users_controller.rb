@@ -83,9 +83,9 @@ class UsersController < ApplicationController
       :password,
       :password_confirmation,
     ]
-    #if current_user.is? :admin
-      #safe_attributes += [:role_ids]
-    #end
+    if current_user.is? :admin
+      safe_attributes += [:role_ids]
+    end
     params.require(:user).permit(*safe_attributes)
   end
 end

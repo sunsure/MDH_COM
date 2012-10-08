@@ -7,6 +7,8 @@ describe UsersController do
     # aren't allowed to destroy their own accounts
     @test_user = FactoryGirl.create(:user)
     login_as(@user)
+    # TODO: this is how to make an admin user in the tests
+    #@user = FactoryGirl.create(:user_with_roles, with_roles: ["admin"])
   end
 
   describe "GET index" do

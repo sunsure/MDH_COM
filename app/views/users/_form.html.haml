@@ -4,6 +4,8 @@
   = f.input :email
   = f.input :password
   = f.input :password_confirmation
+  -# TODO: restrict who can see the role_ids checkboxes
+  = f.input :role_ids, collection: Role.all, as: :check_boxes
   .form-actions
     = f.button :submit, class: 'btn-primary'
     = link_to t('.cancel', default: t("helpers.links.cancel")), users_path, class: 'btn'

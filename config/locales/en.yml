@@ -12,6 +12,7 @@ en:
         last_name: "Last Name"
         password: "Password"
         password_confirmation: "Password Confirmation"
+        role_ids: "Roles"
     models:
       user: "User"
 

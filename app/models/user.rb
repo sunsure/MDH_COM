@@ -1,5 +1,8 @@
 class User < ActiveRecord::Base
   has_secure_password
+
+  has_many :permissions
+  has_many :roles, through: :permissions
   has_many :articles
 
   validates :password,
@@ -23,6 +26,10 @@ class User < ActiveRecord::Base
 
   def name
     "#{first_name.presence} #{last_name.presence}"
+  end
+
+  def is?(role_key)
+    roles.get(role_key).present?
   end
 
   private
