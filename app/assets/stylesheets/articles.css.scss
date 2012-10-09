@@ -6,9 +6,6 @@
   bottom: 2em;
   height: 5em;
 }
-#article_title {
-  width: 35em;
-}
 
 #author {
   font-style: italic;
@@ -50,4 +47,15 @@ section#content {
 }
 #content > p {
   text-indent: 2em;
+}
+#article_partial {
+  height: 100px;
+  padding: 1em;
+  padding-bottom: 2.2em;
+}
+#article_content {
+  position: relative;
+  bottom: 5em;
+  height: 9em;
+  overflow: scroll;
 }

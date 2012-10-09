@@ -9,14 +9,5 @@
       %span.add-on= t('.new', default: t('helpers.links.new'))
 
 %table.table.table-striped
-  %thead
-    %tr
-      %th= Article.human_attribute_name(:title)
-      %th= Article.human_attribute_name(:content)
-      %th= Article.human_attribute_name(:user)
-      %th= Article.human_attribute_name(:published_at)
-      - if can? [:edit, :destroy], Article
-        %th.span3= t '.actions', default: t("helpers.actions")
-
   - @articles.each do |article|
     = render article
