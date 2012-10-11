@@ -14,7 +14,7 @@ class Article < ActiveRecord::Base
   private
 
   def set_published_at
-    if publish
+    if publish == "1"
       self.update_attribute(:published_at, Time.zone.now)
     end
   end

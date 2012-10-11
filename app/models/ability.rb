@@ -6,8 +6,9 @@ class Ability
     if user.is? :admin
       can :manage, :all
     else
-      cannot :manage, :all
-      can :read, Article
+      can :read, Article, Article.published do |article|
+        article.published_at <= Time.now
+      end
     end
     # Define abilities for the passed in user here. For example:
     #

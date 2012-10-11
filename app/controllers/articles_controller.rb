@@ -1,22 +1,22 @@
 class ArticlesController < ApplicationController
   skip_before_filter :authorize, only: [:index, :show]
   respond_to :html
-  authorize_resource except: [:index, :show]
+
+  load_and_authorize_resource only: [:index, :new]
+  load_resource only: :show
+  load_resource only: [:edit, :update, :destroy], through: :current_user
+  authorize_resource only: [:create, :edit, :update, :destroy, :show]
 
   def index
-    @articles = Article.all
   end
 
   def show
-    @article = Article.find(params[:id])
   end
 
   def new
-    @article = Article.new
   end
 
   def edit
-    @article = current_user.articles.find(params[:id])
   end
 
   def create
@@ -31,8 +31,6 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    @article = current_user.articles.find(params[:id])
-
     if @article.update_attributes(safe_params)
       redirect_to @article, notice: t('articles.controller.update.success')
     else
@@ -42,7 +40,6 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    @article = current_user.articles.find(params[:id])
     if @article.destroy
       flash[:notice] = t('articles.controller.destroy.success')
     else

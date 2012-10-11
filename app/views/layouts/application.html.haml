@@ -32,11 +32,12 @@
                 = link_to "https://github.com/mark-d-holmberg" do
                   = image_tag("/images/favicon_github.png")
                   %span.add-on GitHub
-              %li
-                = link_to articles_path do
-                  %i.icon-list-alt.icon-white
-                  %span.add-on Articles
-              - if current_user
+              - if can? :index, Article
+                %li
+                  = link_to articles_path do
+                    %i.icon-list-alt.icon-white
+                    %span.add-on Articles
+              - if can? :manage, User
                 %li
                   = link_to users_path do
                     %i.icon-user.icon-white
