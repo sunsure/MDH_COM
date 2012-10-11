@@ -1,17 +1,20 @@
 %tr
-  #article_partial
-    %h3#article_title= link_to article.title, article
-    .span3
-      %div#article_header
-        %h1#big_arrow= "&#8627".html_safe
-        %h3#author= article.user.try(:name)
-        %h5#published_at= l(article.published_at, format: :short) if article.published_at?
-        %h5#updated_at= l(article.updated_at, format: :short) if article.updated_at?
-    #article_content.span6
-      = simple_format article.content
-    #article_controls.span2.pull-right
-      - if can? [:edit, :destroy], article
-        - if can? :edit, article
-          = link_to 'Edit', edit_article_path(article), class: "btn btn-warning"
-        - if can? :destroy, article
-          = link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"
+  .article_partial
+    .row-fluid
+      %h3.art_title
+        = link_to article.title, article
+        %button.close &times;
+    .row-fluid
+      .span4
+        .art_header
+          %h1.big_arrow= "&#8627".html_safe
+          %h3.author= article.try(:user).try(:name)
+          %h5.published_at= l(article.published_at, format: :short) if article.published_at?
+          %h5.updated_at= l(article.updated_at, format: :short) if article.updated_at?
+        .art_controls
+          - if can? [:edit, :destroy], article
+            - if can? :edit, article
+              = link_to 'Edit', edit_article_path(article), class: "btn btn-warning btn-block"
+            - if can? :destroy, article
+              = link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-block"
+      .art_content.span7= simple_format article.content

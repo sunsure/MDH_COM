@@ -1,61 +1,66 @@
 // Place all the styles related to the Articles controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-#article_header {
-  position: relative;
-  bottom: 2em;
-  height: 5em;
+/* rounded corners SASS mixin */
+@mixin rounded-corners($radius) {
+  border-radius: $radius;
+  -moz-border-radius: $radius;
+  -webkit-border-radius: $radius;
 }
+.article_partial .close {
+  font-size: 1.5em;
+  margin-right: 1em;
+}
+.art_title {
+  clear: both;
+  text-indent: 1em;
+}
+.article_partial {
+  clear: both;
+  margin-top: 1em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  padding-left: 0.2em;
+  padding-right: 0.2em;
+  background-color: #EEE;
+  @include rounded-corners(10px);
+  border: 1px solid #C2C2C2;
 
-#author {
+}
+.art_header {
+}
+.big_arrow {
+  float: left;
+}
+.author {
   font-style: italic;
   color: #7A7A7A;
   margin-left: 2em;
 }
 
-#updated_at {
+.updated_at {
   &:before {
-    content: "Updated At: ";
+    content: "Updated: ";
   }
-  margin-left: 4em;
-  color: #CCC;
-  width: 20em;
-  position: relative;
-  bottom: 2.2em;
-}
-
-#published_at {
-  &:before {
-    content: "Published At: ";
-  }
-  margin-left: 4em;
-  color: #CCC;
-  width: 20em;
-  position: relative;
-  bottom: 1.3em;
-}
-
-#big_arrow {
-  float: left;
-}
-section#content {
   clear: both;
+  text-align: right;
+  line-height: 1em;
+  padding-right: 0.5em;
+  padding-bottom: 0.5em;
+  color: #BBB;
 }
-.page-header h3 {
-  margin: 0em;
-  line-height: 1.2em;
+
+.published_at {
+  &:before {
+    content: "Published: ";
+  }
+  clear: both;
+  text-align: right;
+  line-height: 1em;
+  padding-right: 0.5em;
+  color: #BBB;
 }
-#content > p {
-  text-indent: 2em;
-}
-#article_partial {
-  height: 100px;
+.art_controls {
+  clear: both;
   padding: 1em;
-  padding-bottom: 2.2em;
-}
-#article_content {
-  position: relative;
-  bottom: 5em;
-  height: 9em;
-  overflow: scroll;
 }
