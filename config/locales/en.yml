@@ -72,6 +72,9 @@ en:
       update:
         failure: "Failed to update article!"
         success: "Article was updated successfully."
+    article:
+      publish: "Publish"
+      unpublish: "Un-Publish"
     edit:
       title: "Editing Article : %{article_title}"
     new:
@@ -80,7 +83,9 @@ en:
       new: "New Article"
       title: "Listing Articles"
     show:
+      publish: "Publish"
       title: "%{article_title}"
+      unpublish: "Un-Publish"
   my:
     dashboard:
       title: "My Dashboard"

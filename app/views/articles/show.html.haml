@@ -7,6 +7,15 @@
     = link_to edit_article_path(@article), class: 'btn btn-warning btn-small btn-block' do
       %i.icon-edit.icon-white
       %span.addon= t('.edit', default: t("helpers.links.edit"))
+  - if can? :update, @article
+    - if @article.published_at.present?
+      = link_to article_path(@article, article: { published_at: nil }), method: :put, class: "btn btn-inverse btn-block" do
+        %i.icon-remove-circle.icon-white
+        %span.addon= t(".unpublish")
+    - else
+      = link_to article_path(@article, article: { publish: "1" }), method: :put, class: "btn btn-inverse btn-block" do
+        %i.icon-ok-sign.icon-white
+        %span.addon= t('.publish')
   - if can? :destroy, @article
     = link_to article_path(@article), method: "delete", data: { confirm: t('.confirm', default: t("helpers.links.confirm", default: 'Are you sure?')) }, class: 'btn btn-danger btn-small btn-block' do
       %i.icon-remove.icon-white
