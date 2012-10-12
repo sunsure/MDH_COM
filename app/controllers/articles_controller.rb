@@ -32,7 +32,7 @@ class ArticlesController < ApplicationController
 
   def update
     if @article.update_attributes(safe_params)
-      redirect_to @article, notice: t('articles.controller.update.success')
+      redirect_to articles_url, notice: t('articles.controller.update.success')
     else
       flash[:error] =  t('articles.controller.update.failure')
       render :edit
@@ -54,7 +54,8 @@ class ArticlesController < ApplicationController
     safe_attributes = [
       :content,
       :title,
-      :publish
+      :publish,
+      :published_at
     ]
     params.require(:article).permit(*safe_attributes)
   end

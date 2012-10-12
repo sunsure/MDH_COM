@@ -86,7 +86,7 @@ describe "Articles" do
         find(:css, "#article_publish").set(true)
         click_button "Update Article"
         page.should have_content("Article was updated successfully.")
-        current_path.should eq(article_path(@article))
+        current_path.should eq(articles_path)
       end
     end
 

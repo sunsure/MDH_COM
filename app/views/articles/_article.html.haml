@@ -15,6 +15,11 @@
           - if can? [:edit, :destroy], article
             - if can? :edit, article
               = link_to 'Edit', edit_article_path(article), class: "btn btn-warning btn-block"
+            - if can? :update, article
+              - if article.published_at.present?
+                = link_to 'Unpublish', article_path(article, article: { published_at: nil }), method: :put, class: "btn btn-inverse btn-block"
+              - else
+                = link_to "Publish", article_path(article, article: { publish: "1" }), method: :put, class: "btn btn-inverse btn-block"
             - if can? :destroy, article
               = link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-block"
       .art_content.span7= simple_format article.content
