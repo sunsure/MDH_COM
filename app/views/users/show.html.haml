@@ -5,17 +5,17 @@
 - content_for(:sidebar) do
   - if can? :edit, @user
     = link_to edit_user_path(@user), class: 'btn btn-warning btn-small btn-block' do
-      %i.icon-edit.icon-white
+      %i.icon-edit
       %span.addon= t('.edit', default: t("helpers.links.edit"))
   - if current_user == @user
     - if can? :destroy, @user
       = link_to "#", disabled: true, class: 'btn btn-danger btn-small btn-block pop', data: { placement: "left", title: t('.delete_user_title'), content: t('.delete_user_content') } do
-        %i.icon-remove.icon-white
+        %i.icon-remove
         %span.addon= t('.destroy', default: t("helpers.links.destroy"))
   - else
     - if can? :destroy, @user
       = link_to user_path(@user), method: :delete, data: { confirm: t('.confirm', default: "helpers.links.confirm") }, class: 'btn btn-danger btn-small btn-block' do
-        %i.icon-remove.icon-white
+        %i.icon-remove
         %span.addon= t('.destroy', default: t("helpers.links.destroy"))
 
 %p
@@ -30,3 +30,9 @@
   %strong= User.human_attribute_name(:email) + ':'
   %br
   = @user.email
+
+- unless @user.roles.blank?
+  %dl
+    %dt Roles
+    - @user.roles.each do |role|
+      %dd= role.name

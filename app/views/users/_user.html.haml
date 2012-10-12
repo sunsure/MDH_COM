@@ -6,15 +6,15 @@
   %td
     - if can? :edit, user
       = link_to edit_user_path(user), class: 'btn btn-mini btn-warning' do
-        %i.icon-edit.icon-white
+        %i.icon-edit
         %span.addon= t('.edit', default: t("helpers.links.edit"))
     - if current_user == user
       - if can? :destroy, user
         = link_to "#", disabled: true, class: 'btn btn-mini btn-danger pop', data: { title: t('.delete_user_title'), content: t('.delete_user_content') } do
-          %i.icon-remove.icon-white
+          %i.icon-remove
           %span.addon= t('.destroy', default: t("helpers.links.destroy"))
     - else
       - if can? :destroy, user
         = link_to user_path(user), method: :delete, data: { confirm: t('.confirm', default: t("helpers.links.confirm")) }, id: "user_destroy_#{user.id}", class: 'btn btn-mini btn-danger', id: "user_destroy_#{user.id}" do
-          %i.icon-remove.icon-white
+          %i.icon-remove
           %span.addon= t('.destroy', default: t("helpers.links.destroy"))

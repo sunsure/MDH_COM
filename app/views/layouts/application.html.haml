@@ -31,28 +31,32 @@
               %li
                 = link_to "https://github.com/mark-d-holmberg" do
                   = image_tag("/images/favicon_github.png")
-                  %span.add-on GitHub
+                  %span.addon GitHub
               - if can? :index, Article
                 %li
                   = link_to articles_path do
-                    %i.icon-list-alt.icon-white
-                    %span.add-on Articles
+                    %i.icon-list-alt
+                    %span.addon Articles
               - if can? :manage, User
                 %li
                   = link_to users_path do
-                    %i.icon-user.icon-white
-                    %span.add-on Users
+                    %i.icon-user
+                    %span.addon Users
             %ul.nav.pull-right
               - if current_user
                 %li
                   = link_to logout_path do
-                    %i.icon-off.icon-white
-                    %span.add-on Logout
+                    %i.icon-off
+                    %span.addon Logout
               - else
                 %li
+                  = link_to register_path do
+                    %i.icon-align-justify
+                    %span.addon Register
+                %li
                   = link_to login_path do
-                    %i.icon-off.icon-white
-                    %span.add-on Login
+                    %i.icon-off
+                    %span.addon Login
 
     .container-fluid
       .row-fluid
@@ -67,7 +71,7 @@
                 = yield(:sidebar)
               - else
                 = link_to "#", class: "btn btn-info btn-small btn-block" do
-                  %i.icon-question-sign
+                  %i.icon-question-sign.icon-white
                   %span.addon Nothing to show, Why?
             - else
               - if content_for?(:sidebar)

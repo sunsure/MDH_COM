@@ -9,6 +9,23 @@ describe UsersController do
     login_as(@user)
   end
 
+  describe "GET register" do
+    it "should return HTTP success" do
+      get :register
+      response.should be_success
+    end
+
+    it "should render the register template" do
+      get :register
+      response.should render_template(:register)
+    end
+
+    it "should setup @user as a new User instance" do
+      get :register
+      assigns(:user).should be_a_new(User)
+    end
+  end
+
   describe "GET index" do
     it "returns HTTP success" do
       get :index

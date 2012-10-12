@@ -4,6 +4,7 @@ Mdh::Application.routes.draw do
   get "/logout", to: "sessions#destroy", as: "logout"
   get "/unauthorized", to: "sessions#unauthorized", as: "unauthorized"
   get "/dashboard", to: "my#dashboard", as: "dashboard_path"
+  get "/register", to: "users#register", as: "register"
 
   resources :articles
   resources :users

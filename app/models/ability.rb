@@ -9,6 +9,7 @@ class Ability
       can :read, Article, Article.published do |article|
         article.published_at <= Time.now
       end
+      can :create, User, user: { role_ids: nil }
     end
     # Define abilities for the passed in user here. For example:
     #

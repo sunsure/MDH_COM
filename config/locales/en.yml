@@ -107,6 +107,8 @@ en:
       title: "Listing Users"
     new:
       title: "New User"
+    register:
+      title: "Register"
     show:
       delete_user_content: "You cannot destroy your own account."
       delete_user_title: "Destroy User"
