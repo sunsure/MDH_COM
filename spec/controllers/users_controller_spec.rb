@@ -2,13 +2,11 @@ require 'spec_helper'
 
 describe UsersController do
   before(:each) do
-    @user = FactoryGirl.create(:user)
+    @user = FactoryGirl.create(:user_with_roles, with_roles: ["admin"])
     # Note: we use the test_user because users
     # aren't allowed to destroy their own accounts
     @test_user = FactoryGirl.create(:user)
     login_as(@user)
-    # TODO: this is how to make an admin user in the tests
-    #@user = FactoryGirl.create(:user_with_roles, with_roles: ["admin"])
   end
 
   describe "GET index" do

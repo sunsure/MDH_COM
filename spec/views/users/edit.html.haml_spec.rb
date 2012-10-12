@@ -2,7 +2,9 @@ require 'spec_helper'
 
 describe "users/edit" do
   before(:each) do
-    assign(:user, FactoryGirl.create(:user))
+    @user = FactoryGirl.create(:user_with_roles, with_roles: ["admin"])
+    assign(:user, @user)
+    controller.stub!(:current_user, @user)
   end
 
   it "renders the edit user form" do

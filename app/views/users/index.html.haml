@@ -3,9 +3,10 @@
   %h3=t '.title'
 
 - content_for(:sidebar) do
-  = link_to new_user_path, class: "btn btn-success btn-small btn-block" do
-    %i.icon-user
-    %span.add-on= t('.new', default: t("helpers.links.new"))
+  - if can? :create, User
+    = link_to new_user_path, class: "btn btn-success btn-small btn-block" do
+      %i.icon-user
+      %span.add-on= t('.new', default: t("helpers.links.new"))
 
 %table.table.table-striped
   %thead

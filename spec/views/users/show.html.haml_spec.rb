@@ -2,8 +2,9 @@ require 'spec_helper'
 
 describe "users/show" do
   before(:each) do
-    @user = assign(:user, FactoryGirl.create(:user))
+    @user = FactoryGirl.create(:user_with_roles, with_roles: ["admin"])
     view.stub(:current_user, @user)
+    controller.stub!(:current_user, @user)
   end
 
   it "renders attributes in <p>" do
