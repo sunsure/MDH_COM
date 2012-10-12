@@ -86,8 +86,15 @@ en:
       title: "My Dashboard"
   users:
     controller:
+      create:
+        failure: "Failed to create user!"
+        success: "User was created successfully."
       destroy:
         prevent_self_destroy: "You cannot destroy your own account!"
+        success: "User was destroyed successfully."
+      update:
+        failure: "Failed to update user!"
+        success: "User was updated successfully."
     edit:
       title: "Editing User : %{name}"
     index:

@@ -19,16 +19,18 @@ class UsersController < ApplicationController
   def create
     @user = User.new(safe_params)
     if @user.save
-      redirect_to @user, notice: 'User was created successfully.'
+      redirect_to @user, notice: t('users.controller.create.success')
     else
+      flash[:error] = t('users.controller.create.failure')
       render :new
     end
   end
 
   def update
     if @user.update_attributes(safe_params)
-      redirect_to @user, notice: 'User was updated successfully.'
+      redirect_to @user, notice: t('users.controller.update.success')
     else
+      flash[:error] =  t('users.controller.update.failure')
       render :edit
     end
   end
@@ -36,6 +38,7 @@ class UsersController < ApplicationController
   def destroy
     unless @user == current_user
       @user.destroy
+      flash[:notice] = t('users.controller.destroy.success')
     else
       flash[:error] = t('users.controller.destroy.prevent_self_destroy')
     end
