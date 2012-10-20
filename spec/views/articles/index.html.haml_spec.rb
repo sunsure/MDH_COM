@@ -12,10 +12,10 @@ describe "articles/index" do
   it "renders a list of articles" do
     render
 
-    assert_select ".art_title a", text: @first.title
-    assert_select ".art_content", text: @first.content
+    assert_select ".art_title a", text: @first.title.titleize
+    assert_select ".art_excerpt", text: @first.excerpt
 
-    assert_select ".art_title a", text: @second.title
-    assert_select ".art_content", text: @second.content
+    assert_select ".art_title a", text: @second.title.titleize
+    assert_select ".art_excerpt", text: @second.excerpt
   end
 end

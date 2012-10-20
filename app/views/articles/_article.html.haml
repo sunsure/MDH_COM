@@ -1,8 +1,8 @@
 %tr
-  .article_partial
+  .article_partial.well
     .row-fluid
       %h3.art_title
-        = link_to article.title, article
+        = link_to article.title.titleize, article
         %button.close &times;
     .row-fluid
       .span4
@@ -29,4 +29,4 @@
             = link_to article_path(article), method: "delete", data: { confirm: t('.confirm', default: t("helpers.links.confirm", default: 'Are you sure?')) }, class: 'btn btn-danger btn-small btn-block' do
               %i.icon-remove
               %span.addon= t('.destroy', default: t("helpers.links.destroy"))
-      .art_content.span7= simple_format article.content
+      .lead.art_excerpt.span7= to_markdown(article.excerpt)

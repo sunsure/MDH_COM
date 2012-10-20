@@ -39,7 +39,6 @@ describe "Articles" do
           visit new_article_path
           fill_in "article_title", with: "How to be l33t"
           fill_in "article_content", with: "you gotta be me!"
-          find(:css, "#article_publish").set(true)
           click_button "Create Article"
           page.should have_content("Article was created successfully.")
           current_path.should eq(article_path(Article.last))
@@ -53,7 +52,6 @@ describe "Articles" do
           visit new_article_path
           fill_in "article_title", with: ""
           fill_in "article_content", with: "you gotta be me!"
-          find(:css, "#article_publish").set(true)
           click_button "Create Article"
           page.should have_content("can't be blank")
           page.should have_content("Failed to create article!")
@@ -66,7 +64,6 @@ describe "Articles" do
           visit new_article_path
           fill_in "article_title", with: "How to be l33t"
           fill_in "article_content", with: ""
-          find(:css, "#article_publish").set(true)
           click_button "Create Article"
           page.should have_content("can't be blank")
           page.should have_content("Failed to create article!")
@@ -83,7 +80,6 @@ describe "Articles" do
         visit edit_article_path(@article)
         fill_in "article_title", with: "How to be l33t"
         fill_in "article_content", with: "you gotta be me!"
-        find(:css, "#article_publish").set(true)
         click_button "Update Article"
         page.should have_content("Article was updated successfully.")
         current_path.should eq(articles_path)
@@ -95,7 +91,6 @@ describe "Articles" do
         visit edit_article_path(@article)
         fill_in "article_title", with: ""
         fill_in "article_content", with: "you gotta be me!"
-        find(:css, "#article_publish").set(true)
         click_button "Update Article"
         page.should have_content("can't be blank")
         page.should have_content("Failed to update article!")
@@ -106,7 +101,6 @@ describe "Articles" do
         visit edit_article_path(@article)
         fill_in "article_title", with: "How to be l33t"
         fill_in "article_content", with: ""
-        find(:css, "#article_publish").set(true)
         click_button "Update Article"
         page.should have_content("can't be blank")
         page.should have_content("Failed to update article!")

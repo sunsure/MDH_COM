@@ -23,19 +23,18 @@
   padding-bottom: 0.5em;
   padding-left: 0.2em;
   padding-right: 0.2em;
-  background-color: #EEE;
   @include rounded-corners(10px);
-  border: 1px solid #C2C2C2;
 
 }
 .art_header {
+  @include rounded-corners(10px);
+  background-color: #E9E9E9;
 }
 .big_arrow {
   float: left;
 }
 .author {
   font-style: italic;
-  color: #7A7A7A;
   margin-left: 2em;
 }
 
@@ -44,7 +43,7 @@
     content: "Updated: ";
   }
   clear: both;
-  text-align: right;
+  text-align: left;
   line-height: 1em;
   padding-right: 0.5em;
   padding-bottom: 0.5em;
@@ -56,7 +55,7 @@
     content: "Published: ";
   }
   clear: both;
-  text-align: right;
+  text-align: left;
   line-height: 1em;
   padding-right: 0.5em;
   color: #BBB;
@@ -70,5 +69,5 @@
 }
 
 .updated_at, .published_at {
-  margin-left: 2em;
+  margin-left: 3em;
 }

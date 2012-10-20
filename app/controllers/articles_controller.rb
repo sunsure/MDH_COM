@@ -53,9 +53,10 @@ class ArticlesController < ApplicationController
   def safe_params
     safe_attributes = [
       :content,
-      :title,
+      :excerpt,
       :publish,
-      :published_at
+      :published_at,
+      :title,
     ]
     params.require(:article).permit(*safe_attributes)
   end

@@ -28,6 +28,6 @@
     %h5.pull-left.published_at= l(@article.published_at, format: :short) if @article.published_at?
     %h5.pull-left.updated_at= l(@article.updated_at, format: :short) if @article.updated_at?
   .span8
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam faucibus quam sit amet nunc viverra sollicitudin. Integer iaculis arcu a dolor porta condimentum. Nullam viverra mollis ante, a semper orci varius sit amet. Vivamus porta sem vel diam condimentum sed euismod velit egestas. Vestibulum nec eros sed ante luctus rutrum id in est. Suspendisse at semper eros. Curabitur lacinia tristique euismod. Suspendisse tellus nunc, suscipit ac tempus et, vulputate vitae lacus. Nullam sit amet adipiscing velit. Suspendisse potenti. Nunc dignissim condimentum risus. Fusce ante ipsum, mollis in feugiat vel, aliquet eget diam. In interdum quam vel turpis tempus fringilla.
+    .well.lead.art_excerpt= to_markdown(@article.excerpt)
 .row-fluid
   .art_content.clearfix= to_markdown(@article.content)

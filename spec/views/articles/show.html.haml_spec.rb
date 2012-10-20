@@ -11,6 +11,7 @@ describe "articles/show" do
     render
 
     rendered.should match(@article.title)
+    rendered.should match(@article.excerpt)
     rendered.should match(@article.content)
   end
 end
