@@ -17,9 +17,7 @@ unless RUBY_PLATFORM =~ /darwin/i
   gem 'rb-inotify', '~> 0.8.8'
 end
 
-group :production do
-  gem 'activerecord-mysql-adapter'
-end
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
