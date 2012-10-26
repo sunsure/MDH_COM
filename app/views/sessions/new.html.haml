@@ -7,6 +7,10 @@
   .control-group
     .control-label= label_tag :password
     .controls= password_field_tag :password, nil
+  .control-group
+    .controls
+      = check_box_tag :remember_me, params[:remember_me]
+      = label_tag :remember_me, t('sessions.new.remember_me'), class: "label-inline"
   .form-actions
     = submit_tag "Login", class: "btn btn-primary"
 

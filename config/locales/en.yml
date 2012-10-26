@@ -89,6 +89,11 @@ en:
   my:
     dashboard:
       title: "My Dashboard"
+
+  sessions:
+    new:
+      remember_me: "Remember Me"
+
   users:
     controller:
       create:
