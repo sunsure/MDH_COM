@@ -17,6 +17,5 @@ describe SessionsController do
     it "routes to /logout #new" do
       get("/unauthorized").should route_to("sessions#unauthorized")
     end
-
   end
 end

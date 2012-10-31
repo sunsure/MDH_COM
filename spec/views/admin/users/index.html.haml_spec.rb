@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "users/index" do
+describe "admin/users/index" do
   before(:each) do
     @user = FactoryGirl.create(:user_with_roles, with_roles: ["admin"])
     @first = FactoryGirl.create(:user)

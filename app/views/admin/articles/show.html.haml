@@ -1,0 +1,33 @@
+- title t '.title', article_title: @article.title
+.page-header
+  %h3=t '.title', article_title: @article.title
+
+- content_for(:sidebar) do
+  - if can? :edit, @article
+    = link_to edit_article_path(@article), class: 'btn btn-warning btn-small btn-block' do
+      %i.icon-edit
+      %span.addon= t('.edit', default: t("helpers.links.edit"))
+  - if can? :update, @article
+    - if @article.published_at.present?
+      = link_to article_path(@article, article: { published_at: nil }), method: :put, class: "btn btn-inverse btn-block" do
+        %i.icon-remove-circle
+        %span.addon= t(".unpublish")
+    - else
+      = link_to article_path(@article, article: { publish: "1" }), method: :put, class: "btn btn-inverse btn-block" do
+        %i.icon-ok-sign
+        %span.addon= t('.publish')
+  - if can? :destroy, @article
+    = link_to article_path(@article), method: "delete", data: { confirm: t('.confirm', default: t("helpers.links.confirm", default: 'Are you sure?')) }, class: 'btn btn-danger btn-small btn-block' do
+      %i.icon-remove
+      %span.addon= t('.destroy', default: t("helpers.links.destroy"))
+
+.row-fluid
+  .art_header.span4
+    %h1.big_arrow= "&#8627".html_safe
+    %h3.author= @article.try(:user).try(:name)
+    %h5.pull-left.published_at= l(@article.published_at, format: :short) if @article.published_at?
+    %h5.pull-left.updated_at= l(@article.updated_at, format: :short) if @article.updated_at?
+  .span8
+    .well.lead.art_excerpt= to_markdown(@article.excerpt)
+.row-fluid
+  .art_content.clearfix= to_markdown(@article.content)

@@ -6,58 +6,6 @@ describe UsersController do
     # Note: we use the test_user because users
     # aren't allowed to destroy their own accounts
     @test_user = FactoryGirl.create(:user)
-    login_as(@user)
-  end
-
-  describe "GET register" do
-    it "should return HTTP success" do
-      get :register
-      response.should be_success
-    end
-
-    it "should render the register template" do
-      get :register
-      response.should render_template(:register)
-    end
-
-    it "should setup @user as a new User instance" do
-      get :register
-      assigns(:user).should be_a_new(User)
-    end
-  end
-
-  describe "GET index" do
-    it "returns HTTP success" do
-      get :index
-      response.should be_success
-    end
-
-    it "renders the index template" do
-      get :index
-      response.should render_template(:index)
-    end
-
-    it "assigns all users in the variable" do
-      get :index
-      assigns(:users).should eq(User.all)
-    end
-  end
-
-  describe "GET show" do
-    it "finds the right user" do
-      get :show, {id: @user.id}
-      assigns(:user).should eq(@user)
-    end
-
-    it "should render the show template" do
-      get :show, {id: @user.id}
-      response.should render_template(:show)
-    end
-
-    it "should return HTTP success" do
-      get :show, {id: @user.id}
-      response.should be_success
-    end
   end
 
   describe "GET :new" do
@@ -74,23 +22,6 @@ describe UsersController do
     it "should render the new template" do
       get :new
       response.should render_template(:new)
-    end
-  end
-
-  describe "GET :edit" do
-    it "should get the right user" do
-      get :edit, { id: @user.id }
-      assigns(:user).should eq(@user)
-    end
-
-    it "should return HTTP success" do
-      get :edit, { id: @user.id }
-      response.should be_success
-    end
-
-    it "should render the new template" do
-      get :edit, { id: @user.id }
-      response.should render_template(:edit)
     end
   end
 
@@ -121,7 +52,7 @@ describe UsersController do
 
       it "redirects to the created user" do
         post :create, {user: @attr}
-        response.should redirect_to(User.last)
+        response.should redirect_to(root_url)
       end
     end
 
@@ -147,58 +78,10 @@ describe UsersController do
     end
   end
 
-  describe "PUT update" do
-    describe "with valid params" do
-      before(:each) do
-        @attr =
-          {
-            first_name: "Mark",
-            last_name: "Holmberg",
-            email: "user@example.com",
-            password: "foobar",
-            password_confirmation: "foobar"
-          }
-      end
-
-      it "updates the requested user" do
-        put :update, {id: @user, user: {first_name: "mark"}}
-      end
-
-      it "assigns the requested user as @user" do
-        put :update, {id: @user.id, user: @attr}
-        assigns(:user).should eq(@user)
-      end
-
-      it "redirects to the user" do
-        put :update, {id: @user, user: @attr}
-        response.should redirect_to(@user)
-      end
-    end
-
-    describe "with invalid params" do
-      before(:each) do
-        @attr =
-          {
-            first_name: "",
-            email: "invalid_email",
-            password: "foobar",
-            password_confirmation: "",
-          }
-      end
-
-      it "assigns the user as @user" do
-        put :update, id: @user, user: @attr
-        assigns(:user).should eq(@user)
-      end
-
-      it "re-renders the 'edit' template" do
-        put :update, id: @user, user: @attr
-        response.should render_template("edit")
-      end
-    end
-  end
-
   describe "DELETE destroy" do
+    before(:each) do
+      login_as(@user)
+    end
     it "destroys the requested user" do
       expect {
         delete :destroy, {id: @test_user}

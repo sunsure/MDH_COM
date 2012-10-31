@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "users/show" do
+describe "admin/users/show" do
   before(:each) do
     @user = FactoryGirl.create(:user_with_roles, with_roles: ["admin"])
     view.stub(:current_user, @user)

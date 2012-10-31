@@ -1,0 +1,13 @@
+- title t('.title')
+.page-header
+  %h3= t '.title'
+
+- content_for(:sidebar) do
+  - if can? :create, Article
+    = link_to new_article_path, class: "btn btn-success btn-small btn-block" do
+      %i.icon-list-alt.icon-white
+      %span.addon= t('.new', default: t('helpers.links.new'))
+
+%table.table.table-striped
+  - @articles.each do |article|
+    = render article

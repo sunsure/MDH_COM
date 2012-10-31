@@ -1,48 +1,26 @@
 class UsersController < ApplicationController
-  load_and_authorize_resource except: [:create, :register]
+  skip_before_filter :authorize, only: [:new, :create]
+  load_and_authorize_resource except: [:new, :create]
   authorize_resource only: :create
-  skip_before_filter :authorize, only: [:register, :create]
-
-  respond_to :html, :js
-
-  def index
-  end
-
-  def show
-  end
+  respond_to :html
 
   def new
-  end
-
-  def register
-    # this is the public interface into registration
-    @user = User.new
-  end
-
-  def edit
+    if current_user
+      # don't let them register if they're already logged in
+      redirect_to dashboard_url, notice: t('users.controller.new.already_logged_in')
+    else
+      @user = User.new
+    end
   end
 
   def create
     @user = User.new(safe_params)
     if @user.save
-      if current_user
-        redirect_to @user, notice: t('users.controller.create.success')
-      else
-        cookies[:auth_token] = @user.auth_token # sign them in
-        redirect_to root_url, notice: "Thanks for registering!"
-      end
+      cookies[:auth_token] = @user.auth_token # sign them in
+      redirect_to root_url, notice: t('users.controller.create.success')
     else
       flash[:error] = t('users.controller.create.failure')
       render :new
-    end
-  end
-
-  def update
-    if @user.update_attributes(safe_params)
-      redirect_to @user, notice: t('users.controller.update.success')
-    else
-      flash[:error] =  t('users.controller.update.failure')
-      render :edit
     end
   end
 
@@ -66,9 +44,7 @@ class UsersController < ApplicationController
       :password,
       :password_confirmation,
     ]
-    if current_user && current_user.is?(:admin)
-      safe_attributes += [:role_ids]
-    end
     params.require(:user).permit(*safe_attributes)
   end
+
 end

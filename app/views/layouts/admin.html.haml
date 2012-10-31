@@ -37,6 +37,11 @@
                   = link_to articles_path do
                     %i.icon-list-alt
                     %span.addon Articles
+              - if can? :manage, User
+                %li
+                  = link_to users_path do
+                    %i.icon-user
+                    %span.addon Users
             %ul.nav.pull-right
               - if current_user
                 %li
