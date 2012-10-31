@@ -10,6 +10,7 @@ class Article < ActiveRecord::Base
 
   scope :draft, where(Article.arel_table[:published_at].eq(nil))
   scope :published, where(Article.arel_table[:published_at].not_eq(nil))
+  default_scope order("published_at DESC")
 
   private
 
