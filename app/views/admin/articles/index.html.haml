@@ -8,6 +8,10 @@
       %i.icon-list-alt.icon-white
       %span.addon= t('.new', default: t('helpers.links.new'))
 
+= paginate @articles
+
 %table.table.table-striped
   - @articles.each do |article|
     = render article
+
+= paginate @articles

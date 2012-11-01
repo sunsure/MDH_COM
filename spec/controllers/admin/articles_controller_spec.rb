@@ -4,8 +4,6 @@ describe Admin::ArticlesController do
   before(:each) do
     @user = FactoryGirl.create(:user_with_roles, with_roles: ["admin"])
     login_as(@user)
-
-    @article = FactoryGirl.create(:article, user_id: @user.id)
   end
 
   def valid_attributes
@@ -25,6 +23,10 @@ describe Admin::ArticlesController do
   end
 
   describe "GET index" do
+    before(:each) do
+      @article = FactoryGirl.create(:article, user_id: @user.id)
+    end
+
     it "returns HTTP success" do
       get :index
       response.should be_success
@@ -42,6 +44,9 @@ describe Admin::ArticlesController do
   end
 
   describe "GET show" do
+    before(:each) do
+      @article = FactoryGirl.create(:article, user_id: @user.id)
+    end
     it "finds the right article" do
       get :show, {id: @article.id}
       assigns(:article).should eq(@article)
@@ -76,6 +81,9 @@ describe Admin::ArticlesController do
   end
 
   describe "GET edit" do
+    before(:each) do
+      @article = FactoryGirl.create(:article, user_id: @user.id)
+    end
     it "should get the right article" do
       get :edit, { id: @article.id }
       assigns(:article).should eq(@article)
@@ -108,7 +116,7 @@ describe Admin::ArticlesController do
 
       it "redirects to the created article" do
         post :create, article: valid_attributes
-        response.should redirect_to(Article.last)
+        response.should redirect_to(Article.first)
       end
     end
 
@@ -126,6 +134,9 @@ describe Admin::ArticlesController do
   end
 
   describe "PUT update" do
+    before(:each) do
+      @article = FactoryGirl.create(:article, user_id: @user.id)
+    end
     describe "with valid params" do
       it "updates the requested article" do
         put :update, id: @article.to_param, article: valid_attributes
@@ -156,6 +167,9 @@ describe Admin::ArticlesController do
   end
 
   describe "DELETE destroy" do
+    before(:each) do
+      @article = FactoryGirl.create(:article, user_id: @user.id)
+    end
     it "destroys the requested article" do
       expect {
         delete :destroy, id: @article.to_param

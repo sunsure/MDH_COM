@@ -5,6 +5,7 @@ class ArticlesController < ApplicationController
 
 
   def index
+    @articles = @articles.page(params[:page]).per(params[:per_page])
   end
 
   def show

@@ -12,6 +12,8 @@ class Article < ActiveRecord::Base
   scope :published, where(Article.arel_table[:published_at].not_eq(nil))
   default_scope order("published_at DESC")
 
+  paginates_per 10
+
   private
 
   def set_published_at

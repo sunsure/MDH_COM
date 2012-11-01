@@ -8,6 +8,7 @@ class Admin::ArticlesController < ApplicationController
   authorize_resource only: [:create, :edit, :update, :destroy, :show]
 
   def index
+    @articles = @articles.page(params[:page]).per(params[:per_page])
     render layout: "admin"
   end
 

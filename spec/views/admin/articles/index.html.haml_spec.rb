@@ -4,7 +4,7 @@ describe "admin/articles/index" do
   before(:each) do
     @first = FactoryGirl.create(:article)
     @second = FactoryGirl.create(:article)
-    assign(:articles, [@first, @second])
+    assign(:articles, Kaminari.paginate_array([@first, @second]).page)
     @user = FactoryGirl.create(:user_with_roles, with_roles: ["admin"])
     controller.stub!(:current_user, @user)
   end
