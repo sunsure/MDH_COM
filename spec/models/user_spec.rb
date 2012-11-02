@@ -58,6 +58,12 @@ describe User do
       user = FactoryGirl.create(:user)
       user.auth_token.should_not be_nil
     end
+
+    it "should default them to commenter if no other roles" do
+      role = FactoryGirl.create(:role, key: :commenter, name: "Commenter")
+      user = FactoryGirl.create(:user)
+      user.roles.should include(Role.find_by_key(:commenter))
+    end
   end
 
   describe "concerning public methods" do
