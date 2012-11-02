@@ -18,7 +18,7 @@
 
 
   %body
-    .navbar.navbar-fixed-top
+    .navbar.navbar-fixed-top.navbar-inverse
       .navbar-inner
         .container-fluid
           %a.btn.btn-navbar(data-target=".nav-collapse" data-toggle="collapse")
@@ -30,28 +30,28 @@
             %ul.nav
               %li
                 = link_to "https://github.com/mark-d-holmberg" do
-                  = image_tag("/images/favicon_github.png")
+                  = image_tag("/images/favicon_github_white.png")
                   %span.addon GitHub
               - if can? :index, Article
                 %li
                   = link_to articles_path do
-                    %i.icon-list-alt
+                    %i.icon-list-alt.icon-white
                     %span.addon Articles
               - if can? :manage, User
                 %li
                   = link_to users_path do
-                    %i.icon-user
+                    %i.icon-user.icon-white
                     %span.addon Users
             %ul.nav.pull-right
               - if current_user
                 %li
                   = link_to logout_path do
-                    %i.icon-off
+                    %i.icon-off.icon-white
                     %span.addon Logout
               - else
                 %li
                   = link_to login_path do
-                    %i.icon-off
+                    %i.icon-off.icon-white
                     %span.addon Login
 
     .container-fluid
