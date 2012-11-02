@@ -14,6 +14,7 @@ describe "admin/articles/edit" do
       assert_select "input#article_title", name: "article[title]"
       assert_select "textarea#article_excerpt", name: "article[excerpt]"
       assert_select "textarea#article_content", name: "article[content]"
+      assert_select "input#article_permalink", name: "article[permalink]"
     end
   end
 end

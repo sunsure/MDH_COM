@@ -48,17 +48,17 @@ describe Admin::ArticlesController do
       @article = FactoryGirl.create(:article, user_id: @user.id)
     end
     it "finds the right article" do
-      get :show, {id: @article.id}
+      get :show, {id: @article.to_param}
       assigns(:article).should eq(@article)
     end
 
     it "should render the show template" do
-      get :show, {id: @article.id}
+      get :show, {id: @article.to_param}
       response.should render_template(:show)
     end
 
     it "should return HTTP success" do
-      get :show, {id: @article.id}
+      get :show, {id: @article.to_param}
       response.should be_success
     end
   end
@@ -85,17 +85,17 @@ describe Admin::ArticlesController do
       @article = FactoryGirl.create(:article, user_id: @user.id)
     end
     it "should get the right article" do
-      get :edit, { id: @article.id }
+      get :edit, { id: @article.to_param }
       assigns(:article).should eq(@article)
     end
 
     it "should return HTTP success" do
-      get :edit, { id: @article.id }
+      get :edit, { id: @article.to_param }
       response.should be_success
     end
 
-    it "should render the new template" do
-      get :edit, { id: @article.id }
+    it "should render the edit template" do
+      get :edit, { id: @article.to_param }
       response.should render_template(:edit)
     end
   end

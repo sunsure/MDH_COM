@@ -40,6 +40,8 @@ describe "Articles" do
           visit new_article_path
           fill_in "article_title", with: "How to be l33t"
           fill_in "article_content", with: "you gotta be me!"
+          fill_in "article_permalink", with: "this is my permalink"
+          fill_in "article_excerpt", with: "this is my excerpt"
           click_button "Create Article"
           page.should have_content("Article was created successfully.")
           current_path.should eq(article_path(Article.last))
@@ -53,6 +55,8 @@ describe "Articles" do
           visit new_article_path
           fill_in "article_title", with: ""
           fill_in "article_content", with: "you gotta be me!"
+          fill_in "article_permalink", with: "this is my permalink"
+          fill_in "article_excerpt", with: "this is my excerpt"
           click_button "Create Article"
           page.should have_content("can't be blank")
           page.should have_content("Failed to create article!")
@@ -65,6 +69,36 @@ describe "Articles" do
           visit new_article_path
           fill_in "article_title", with: "How to be l33t"
           fill_in "article_content", with: ""
+          fill_in "article_permalink", with: "this is my permalink"
+          fill_in "article_excerpt", with: "this is my excerpt"
+          click_button "Create Article"
+          page.should have_content("can't be blank")
+          page.should have_content("Failed to create article!")
+          current_path.should eq(articles_path)
+        end.should_not change(Article, :count).by(1)
+      end
+
+      it "should not create an article if permalink is blank" do
+        lambda do
+          visit new_article_path
+          fill_in "article_title", with: "How to be l33t"
+          fill_in "article_content", with: "you gotta be me!"
+          fill_in "article_permalink", with: ""
+          fill_in "article_excerpt", with: "this is my excerpt"
+          click_button "Create Article"
+          page.should have_content("can't be blank")
+          page.should have_content("Failed to create article!")
+          current_path.should eq(articles_path)
+        end.should_not change(Article, :count).by(1)
+      end
+
+      it "should not create an article if excerpt is blank" do
+        lambda do
+          visit new_article_path
+          fill_in "article_title", with: "How to be l33t"
+          fill_in "article_content", with: "you gotta be me!"
+          fill_in "article_permalink", with: "this is my permalink"
+          fill_in "article_excerpt", with: ""
           click_button "Create Article"
           page.should have_content("can't be blank")
           page.should have_content("Failed to create article!")
@@ -81,6 +115,8 @@ describe "Articles" do
         visit edit_article_path(@article)
         fill_in "article_title", with: "How to be l33t"
         fill_in "article_content", with: "you gotta be me!"
+        fill_in "article_permalink", with: "this is my permalink"
+        fill_in "article_excerpt", with: "this is my excerpt"
         click_button "Update Article"
         page.should have_content("Article was updated successfully.")
         current_path.should eq(articles_path)
@@ -92,6 +128,8 @@ describe "Articles" do
         visit edit_article_path(@article)
         fill_in "article_title", with: ""
         fill_in "article_content", with: "you gotta be me!"
+        fill_in "article_permalink", with: "this is my permalink"
+        fill_in "article_excerpt", with: "this is my excerpt"
         click_button "Update Article"
         page.should have_content("can't be blank")
         page.should have_content("Failed to update article!")
@@ -101,7 +139,33 @@ describe "Articles" do
       it "should not update the article if the content is blank" do
         visit edit_article_path(@article)
         fill_in "article_title", with: "How to be l33t"
+        fill_in "article_permalink", with: "this is my permalink"
         fill_in "article_content", with: ""
+        fill_in "article_excerpt", with: "this is my excerpt"
+        click_button "Update Article"
+        page.should have_content("can't be blank")
+        page.should have_content("Failed to update article!")
+        current_path.should eq(article_path(@article))
+      end
+
+      it "should not update the article if the permalink is blank" do
+        visit edit_article_path(@article)
+        fill_in "article_title", with: "How to be l33t"
+        fill_in "article_permalink", with: ""
+        fill_in "article_content", with: "you gotta be me!"
+        fill_in "article_excerpt", with: "this is my excerpt"
+        click_button "Update Article"
+        page.should have_content("can't be blank")
+        page.should have_content("Failed to update article!")
+        current_path.should eq(article_path(@article))
+      end
+
+      it "should not update the article if the excerpt is blank" do
+        visit edit_article_path(@article)
+        fill_in "article_title", with: "How to be l33t"
+        fill_in "article_permalink", with: "this is"
+        fill_in "article_content", with: "you gotta be me!"
+        fill_in "article_excerpt", with: ""
         click_button "Update Article"
         page.should have_content("can't be blank")
         page.should have_content("Failed to update article!")

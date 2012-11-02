@@ -13,6 +13,7 @@ describe "admin/articles/new" do
     assert_select "form", action: articles_path, method: "post" do
       assert_select "input#article_title", name: "article[title]"
       assert_select "textarea#article_excerpt", name: "article[excerpt]"
+      assert_select "input#article_permalink", name: "article[permalink]"
       assert_select "textarea#article_content", name: "article[content]"
     end
   end

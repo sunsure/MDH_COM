@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   skip_before_filter :authorize, only: [:index, :show]
-  load_and_authorize_resource only: [:index, :show]
+  load_and_authorize_resource only: [:index, :show], find_by: :permalink
   respond_to :html
 
 

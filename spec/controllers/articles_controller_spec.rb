@@ -31,17 +31,17 @@ describe ArticlesController do
 
   describe "GET show" do
     it "finds the right article" do
-      get :show, {id: @article.id}
+      get :show, {id: @article.to_param}
       assigns(:article).should eq(@article)
     end
 
     it "should render the show template" do
-      get :show, {id: @article.id}
+      get :show, {id: @article.to_param}
       response.should render_template(:show)
     end
 
     it "should return HTTP success" do
-      get :show, {id: @article.id}
+      get :show, {id: @article.to_param}
       response.should be_success
     end
   end

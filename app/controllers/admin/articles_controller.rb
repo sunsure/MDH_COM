@@ -2,9 +2,9 @@ class Admin::ArticlesController < ApplicationController
   skip_before_filter :authorize, only: [:index, :show]
   respond_to :html
 
-  load_and_authorize_resource only: [:index, :new]
-  load_resource only: :show
-  load_resource only: [:edit, :update, :destroy], through: :current_user
+  load_and_authorize_resource only: [:index, :new], find_by: :permalink
+  load_resource only: :show, find_by: :permalink
+  load_resource only: [:edit, :update, :destroy], through: :current_user, find_by: :permalink
   authorize_resource only: [:create, :edit, :update, :destroy, :show]
 
   def index
@@ -59,6 +59,7 @@ class Admin::ArticlesController < ApplicationController
     safe_attributes = [
       :content,
       :excerpt,
+      :permalink,
       :publish,
       :published_at,
       :title,
