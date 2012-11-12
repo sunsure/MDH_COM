@@ -5,6 +5,6 @@ FactoryGirl.define do
     article.content { Faker::Lorem.paragraph }
     article.user_id { |i| i.association(:user) }
     article.published_at { Time.zone.now }
-    article.permalink { Faker::Lorem.paragraph.split.sample.parameterize }
+    article.sequence(:permalink) { |n| "#{Faker::Lorem.paragraph.split.sample}-#{n}".parameterize }
   end
 end
