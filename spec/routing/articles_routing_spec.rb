@@ -14,6 +14,14 @@ describe ArticlesController do
       it "routes to #show" do
         get("#{url}/articles/1").should route_to("articles#show", id: "1")
       end
+
+      it "routes to the tags action" do
+        get("#{url}/articles/tags").should route_to("articles#tags")
+      end
+
+      it "routes to a specific tag" do
+        get("#{url}/articles/tags/foobar").should route_to("articles#tags", tag: "foobar")
+      end
     end
 
     describe "failure" do
@@ -44,6 +52,14 @@ describe ArticlesController do
 
       it "routes to #destroy" do
         delete("#{bad_url}/articles/1").should_not route_to("articles#destroy", id: "1")
+      end
+
+      it "routes to the tags action" do
+        get("#{bad_url}/articles/tags").should_not route_to("articles#tags")
+      end
+
+      it "routes to a specific tag" do
+        get("#{bad_url}/articles/tags/foobar").should_not route_to("articles#tags", tag: "foobar")
       end
     end
 

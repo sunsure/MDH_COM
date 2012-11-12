@@ -3,6 +3,7 @@
   = f.input :permalink
   = f.input :excerpt, as: :text, input_html: { rows: 10, class: "span9" }
   = f.input :content, as: :text, input_html: { rows: 25, class: "span9" }
+  = f.input :tag_list, hint: t('.tag_list_hint')
   .form-actions
     - if can?([:create, :update], @article)
       = f.button :submit, class: 'btn-primary'

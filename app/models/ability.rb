@@ -6,7 +6,7 @@ class Ability
     if user.is? :admin
       can :manage, :all
     else
-      can :read, Article, Article.published do |article|
+      can [:read, :tag_search], Article, Article.published do |article|
         article.published_at <= Time.now
       end
       can :create, User, user: { role_ids: nil }

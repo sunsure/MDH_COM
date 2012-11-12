@@ -71,3 +71,15 @@
 .updated_at, .published_at {
   margin-left: 3em;
 }
+
+.tag_small {
+  font-size: 0.8em;
+}
+.tag_medium {
+  font-size: 1.1em;
+  font-style: italic;
+}
+.tag_large {
+  font-size: 1.4em;
+  font-weight: bold;
+}

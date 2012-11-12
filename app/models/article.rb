@@ -3,6 +3,8 @@ class Article < ActiveRecord::Base
 
   attr_accessor :publish
 
+  acts_as_taggable
+
   validates :title, presence: true
   validates :content, presence: true
   validates :excerpt, presence: true

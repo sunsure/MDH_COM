@@ -12,6 +12,31 @@ describe ArticlesController do
     {}
   end
 
+  # TODO: test the search action
+
+  describe "GET tags" do
+    it "assigns all tagged articles as @articles" do
+      @tagged_article = FactoryGirl.create(:article, tag_list: "foo, bar, baz, qux")
+      get :tags, tag: "foo"
+      assigns(:articles).should eq([@tagged_article])
+    end
+
+    it "returns HTTP success" do
+      get :tags, tag: "foo"
+      response.should be_success
+    end
+
+    it "renders the index template" do
+      get :tags, tag: "foo"
+      response.should render_template("tags")
+    end
+
+    it "should redirect to root if no tag is specified" do
+      get :tags
+      response.should redirect_to(root_url)
+    end
+  end
+
   describe "GET index" do
     it "returns HTTP success" do
       get :index

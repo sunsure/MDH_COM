@@ -34,6 +34,14 @@ describe Admin::ArticlesController do
       it "routes to #destroy" do
         delete("#{url}/articles/1").should route_to("admin/articles#destroy", id: "1")
       end
+
+      it "routes to the tags action" do
+        get("#{url}/articles/tags").should route_to("admin/articles#tags")
+      end
+
+      it "routes to a specific tag" do
+        get("#{url}/articles/tags/foobar").should route_to("admin/articles#tags", tag: "foobar")
+      end
     end
 
     describe "failure" do
@@ -64,6 +72,14 @@ describe Admin::ArticlesController do
 
       it "routes to #destroy" do
         delete("#{bad_url}/articles/1").should_not route_to("admin/articles#destroy", id: "1")
+      end
+
+      it "routes to the tags action" do
+        get("#{bad_url}/articles/tags").should_not route_to("admin/articles#tags")
+      end
+
+      it "routes to a specific tag" do
+        get("#{bad_url}/articles/tags/foobar").should_not route_to("admin/articles#tags", tag: "foobar")
       end
     end
 

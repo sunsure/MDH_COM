@@ -1,5 +1,5 @@
 class Admin::ArticlesController < ApplicationController
-  skip_before_filter :authorize, only: [:index, :show]
+  skip_before_filter :authorize, only: [:index, :show, :tags]
   respond_to :html
 
   load_and_authorize_resource only: [:index, :new], find_by: :permalink
@@ -53,6 +53,15 @@ class Admin::ArticlesController < ApplicationController
     redirect_to articles_url
   end
 
+  def tags
+    authorize! :tag_search, Article
+    unless params[:tag].blank?
+      @articles = Article.tagged_with(params[:tag]).page(params[:page]).per(params[:per_page])
+    else
+      redirect_to root_path
+    end
+  end
+
   private
 
   def safe_params
@@ -63,6 +72,7 @@ class Admin::ArticlesController < ApplicationController
       :publish,
       :published_at,
       :title,
+      :tag_list,
     ]
     params.require(:article).permit(*safe_attributes)
   end

@@ -1,0 +1,9 @@
+%div.modal{tabindex: -1, id: "articleTagCloudModal", style: "display: none;"}
+  .modal-header
+    %button.close{ data: { dismiss: "modal" } } &times;
+    %h3= t(".tag_cloud")
+    %h6.weak#current_tag= t('.current_tag', tag: params[:tag].inspect )
+  .modal-body
+    %div#article_tag_cloud
+    - tag_cloud Article.tag_counts, %w[tag_small tag_medium tag_large] do |tag, css_class|
+      = link_to tag.name, article_tag_path(tag.name), class: css_class

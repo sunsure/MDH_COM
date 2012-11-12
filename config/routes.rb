@@ -9,7 +9,12 @@ Mdh::Application.routes.draw do
 
   constraints(subdomain: /admin/) do
     scope module: "admin" do
-      resources :articles
+      resources :articles do
+        collection do
+          match :tags, via: [:get], as: :admin_tags
+          match "tags/:tag", to: "articles#tags", via: [:get], as: :admin_tag
+        end
+      end
       resources :users
       root to: 'articles#index'
     end
@@ -18,7 +23,13 @@ Mdh::Application.routes.draw do
   match "/register", to: "users#new", as: "register", via: [:get]
   resources :users, only: [:create, :destroy]
 
-  resources :articles, only: [:index, :show]
+  resources :articles, only: [:index, :show] do
+    collection do
+      match :tags, via: [:get], as: :tags
+      match "tags/:tag", to: "articles#tags", via: [:get], as: :tag
+    end
+  end
+
   root to: 'articles#index'
 
   # The priority is based upon order of creation:

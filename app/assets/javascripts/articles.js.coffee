@@ -4,3 +4,5 @@
 jQuery ->
   $(".article_partial button.close").click ->
     $(this).closest(".article_partial").slideUp('slow')
+
+  $(".pop").popover()

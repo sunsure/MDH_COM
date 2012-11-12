@@ -1,0 +1,22 @@
+- title t '.title', tag: params[:tag].inspect
+.page-header
+  %h3= t '.title', tag: params[:tag].inspect
+
+= paginate @articles
+
+%table.table.table-striped
+  - @articles.each do |article|
+    = render article
+
+= paginate @articles
+
+- content_for(:sidebar) do
+  - if can? :tag_search, Article
+    = link_to "#", data: { toggle: "modal", target: "#articleTagCloudModal" }, class: "btn btn-success btn-small btn-block" do
+      %i.icon-tags.icon-white
+      %span.add-on= t('.view_tag_cloud')
+  = link_to "#", data: { placement: "left", title: t(".tag_cloud_pop_title"), content: t(".tag_cloud_pop_content") }, class: "pop btn btn-info btn-small btn-block" do
+    %i.icon-question-sign.icon-white
+    %span.add-on= t(".explain_tag_cloud")
+
+= render "modal"

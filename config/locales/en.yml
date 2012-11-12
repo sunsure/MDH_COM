@@ -9,6 +9,7 @@ en:
         created_at: "Created At"
         publish: "Publish"
         published_at: "Published At"
+        tag_list: "Tags"
         title: "Title"
         updated_at: "Updated At"
         user: "User"
@@ -68,10 +69,21 @@ en:
     index:
       new: "New Article"
       title: "Listing Articles"
+    modal:
+      add_tags_to_articles: "You can add tags to any article by editing them."
+      comma_separated: "Just separate any tags with commas."
+      current_tag: "Current Tag: %{tag}"
+      tag_cloud: "Tag Cloud"
     show:
       publish: "Publish"
       title: "%{article_title}"
       unpublish: "Un-Publish"
+    tags:
+      explain_tag_cloud: "What is a Tag Cloud?"
+      tag_cloud_pop_content: "A tag cloud is a collection of tags that are organized and styled by their frequency. Larger tags appear more often while smaller tags are more rare."
+      tag_cloud_pop_title: "What is a Tag Cloud?"
+      title: "Listing Articles, Tag: %{tag}"
+      view_tag_cloud: "View Tag Cloud"
 
   my:
     dashboard:
@@ -112,6 +124,8 @@ en:
         unpublish: "Un-Publish"
       edit:
         title: "Editing Article : %{article_title}"
+      form:
+        tag_list_hint: "Tags (separated by commas)"
       new:
         title: "New Article"
       index:
@@ -121,6 +135,12 @@ en:
         publish: "Publish"
         title: "%{article_title}"
         unpublish: "Un-Publish"
+      tags:
+        explain_tag_cloud: "What is a Tag Cloud?"
+        tag_cloud_pop_content: "A tag cloud is a collection of tags that are organized and styled by their frequency. Larger tags appear more often while smaller tags are more rare."
+        tag_cloud_pop_title: "What is a Tag Cloud?"
+        title: "Listing Articles, Tag: %{tag}"
+        view_tag_cloud: "View Tag Cloud"
     users:
       controller:
         new:
