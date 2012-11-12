@@ -1,14 +1,15 @@
 Mdh::Application.routes.draw do
 
-  get "/login", to: "sessions#new", as: "login"
-  get "/logout", to: "sessions#destroy", as: "logout"
-  get "/unauthorized", to: "sessions#unauthorized", as: "unauthorized"
-  get "/dashboard", to: "my#dashboard", as: "dashboard"
-
-  resources :sessions, only: [:new, :create, :destroy]
-
+  # Administrative side
   constraints(subdomain: /admin/) do
     scope module: "admin" do
+      match "/login", to: "sessions#new", as: :admin_login, via: [:get]
+      match "/logout", to: "sessions#destroy", as: :admin_logout, via: [:get]
+      match "/unauthorized", to: "sessions#unauthorized", as: :admin_unauthorized, via: [:get]
+      match "/dashboard", to: "my#dashboard", as: :admin_dashboard, via: [:get]
+
+      resources :sessions, only: [:new, :create, :destroy]
+
       resources :articles do
         collection do
           match :tags, via: [:get], as: :admin_tags
@@ -20,17 +21,26 @@ Mdh::Application.routes.draw do
     end
   end
 
-  match "/register", to: "users#new", as: "register", via: [:get]
-  resources :users, only: [:create, :destroy]
+  constraints(subdomain: /www/) do
+    match "/login", to: "sessions#new", as: "login", via: [:get]
+    match "/logout", to: "sessions#destroy", as: "logout", via: [:get]
+    match "/unauthorized", to: "sessions#unauthorized", as: "unauthorized", via: [:get]
+    match "/dashboard", to: "my#dashboard", as: "dashboard", via: [:get]
 
-  resources :articles, only: [:index, :show] do
-    collection do
-      match :tags, via: [:get], as: :tags
-      match "tags/:tag", to: "articles#tags", via: [:get], as: :tag
+    resources :sessions, only: [:new, :create, :destroy]
+
+    match "/register", to: "users#new", as: "register", via: [:get]
+    resources :users, only: [:create, :destroy]
+
+    resources :articles, only: [:index, :show] do
+      collection do
+        match :tags, via: [:get], as: :tags
+        match "tags/:tag", to: "articles#tags", via: [:get], as: :tag
+      end
     end
-  end
 
-  root to: 'articles#index'
+    root to: 'articles#index'
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
