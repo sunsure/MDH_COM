@@ -1,18 +1,21 @@
-%tr
-  .article_partial.well
-    .row-fluid
-      %h3.art_title
-        = link_to article.title, article
-        %button.close &times;
-      - unless article.tag_list.blank?
-        %dl
-          %dt.pull-left= Article.human_attribute_name(:tag_list)
-          %dd.pull-left= raw article.tag_list.map { |t| link_to t, tag_articles_path(t) }.join(", ")
-    .row-fluid
-      .span4
-        .art_header
-          %h1.big_arrow= "&#8627".html_safe
-          %h3.author= article.try(:user).try(:name)
-          %h5.published_at= l(article.published_at, format: :short) if article.published_at?
-          %h5.updated_at= l(article.updated_at, format: :short) if article.updated_at?
-      .lead.art_excerpt.span7= to_markdown(article.excerpt)
+%div.media{ class: muted(article, :published_at) }
+  = link_to article, class: "pull-left" do
+    = image_tag "arrow.png", class: "media-object"
+  %div.media-body
+    %h4.media-heading
+      = link_to article.title, article, class: muted(article, :published_at)
+      %button.close &times;
+    %div
+      %code.author= article.try(:user).try(:name)
+      - if article.published_at?
+        %section.inline.published_at= l(article.published_at, format: :short)
+      - if article.updated_at?
+        %section.inline.updated_at= l(article.updated_at, format: :short) if article.updated_at?
+      .excerpt= to_markdown(article.excerpt)
+    - unless article.tag_list.blank?
+      %ul.breadcrumb.tag-list
+        - article.tag_list.each do |tag|
+          %li
+            = link_to tag, tag_articles_path(tag), class: muted(article, :published_at)
+            - unless tag == article.tag_list.last
+              %span.divider /

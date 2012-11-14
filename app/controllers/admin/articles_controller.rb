@@ -56,8 +56,8 @@ class Admin::ArticlesController < ApplicationController
   def tags
     authorize! :tag_search, Article
     unless params[:tag].blank?
-      render layout: "admin"
       @articles = Article.tagged_with(params[:tag]).page(params[:page]).per(params[:per_page])
+      render layout: "admin"
     else
       redirect_to root_path
     end

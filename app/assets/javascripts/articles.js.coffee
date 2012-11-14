@@ -2,7 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 jQuery ->
-  $(".article_partial button.close").click ->
-    $(this).closest(".article_partial").slideUp('slow')
+  $("h4.media-heading button.close").click ->
+    $(this).closest(".media").slideUp('slow')
 
   $(".pop").popover()

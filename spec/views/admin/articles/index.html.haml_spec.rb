@@ -12,10 +12,10 @@ describe "admin/articles/index" do
   it "renders a list of articles" do
     render
 
-    assert_select ".art_title a", text: @first.title
-    assert_select ".art_excerpt", text: @first.excerpt
+    assert_select ".media-heading a", text: @first.title
+    assert_select ".excerpt", text: @first.excerpt
 
-    assert_select ".art_title a", text: @second.title
-    assert_select ".art_excerpt", text: @second.excerpt
+    assert_select ".media-heading a", text: @second.title
+    assert_select ".excerpt", text: @second.excerpt
   end
 end

@@ -5,29 +5,42 @@
 - content_for(:sidebar) do
   - if can? :edit, @article
     = link_to edit_article_path(@article), class: 'btn btn-warning btn-small btn-block' do
-      %i.icon-edit
+      %i.icon-edit.icon-white
       %span.addon= t('.edit', default: t("helpers.links.edit"))
   - if can? :update, @article
     - if @article.published_at.present?
       = link_to article_path(@article, article: { published_at: nil }), method: :put, class: "btn btn-inverse btn-block" do
-        %i.icon-remove-circle
+        %i.icon-remove-circle.icon-white
         %span.addon= t(".unpublish")
     - else
       = link_to article_path(@article, article: { publish: "1" }), method: :put, class: "btn btn-inverse btn-block" do
-        %i.icon-ok-sign
+        %i.icon-ok-sign.icon-white
         %span.addon= t('.publish')
   - if can? :destroy, @article
     = link_to article_path(@article), method: "delete", data: { confirm: t('.confirm', default: t("helpers.links.confirm", default: 'Are you sure?')) }, class: 'btn btn-danger btn-small btn-block' do
-      %i.icon-remove
+      %i.icon-remove.icon-white
       %span.addon= t('.destroy', default: t("helpers.links.destroy"))
 
-.row-fluid
-  .art_header.span4
-    %h1.big_arrow= "&#8627".html_safe
-    %h3.author= @article.try(:user).try(:name)
-    %h5.pull-left.published_at= l(@article.published_at, format: :short) if @article.published_at?
-    %h5.pull-left.updated_at= l(@article.updated_at, format: :short) if @article.updated_at?
-  .span8
-    .well.lead.art_excerpt= to_markdown(@article.excerpt)
-.row-fluid
-  .art_content.clearfix= to_markdown(@article.content)
+%div.media
+  = link_to @article, class: "pull-left" do
+    = image_tag "arrow.png", class: "media-object"
+  %div.media-body
+    %h4.media-heading
+      = link_to @article.title, articles_path
+    %div
+      %code.author= @article.try(:user).try(:name)
+      - if @article.published_at?
+        %section.inline.published_at= l(@article.published_at, format: :short)
+      - if @article.updated_at?
+        %section.inline.updated_at= l(@article.updated_at, format: :short) if @article.updated_at?
+    - unless @article.tag_list.blank?
+      %ul.breadcrumb.tag-list
+        - @article.tag_list.each do |tag|
+          %li
+            = link_to tag, tag_articles_path(tag)
+            - unless tag == @article.tag_list.last
+              %span.divider /
+  .row-fluid
+    .lead= to_markdown(@article.excerpt)
+  .row-fluid
+    .clearfix= to_markdown(@article.content)

@@ -2,13 +2,26 @@
 .page-header
   %h3=t '.title', article_title: @article.title
 
-.row-fluid
-  .art_header.span4
-    %h1.big_arrow= "&#8627".html_safe
-    %h3.author= @article.try(:user).try(:name)
-    %h5.pull-left.published_at= l(@article.published_at, format: :short) if @article.published_at?
-    %h5.pull-left.updated_at= l(@article.updated_at, format: :short) if @article.updated_at?
-  .span8
-    .well.lead.art_excerpt= to_markdown(@article.excerpt)
-.row-fluid
-  .art_content.clearfix= to_markdown(@article.content)
+%div.media
+  = link_to @article, class: "pull-left" do
+    = image_tag "arrow.png", class: "media-object"
+  %div.media-body
+    %h4.media-heading
+      = link_to @article.title, articles_path
+    %div
+      %code.author= @article.try(:user).try(:name)
+      - if @article.published_at?
+        %section.inline.published_at= l(@article.published_at, format: :short)
+      - if @article.updated_at?
+        %section.inline.updated_at= l(@article.updated_at, format: :short) if @article.updated_at?
+    - unless @article.tag_list.blank?
+      %ul.breadcrumb.tag-list
+        - @article.tag_list.each do |tag|
+          %li
+            = link_to tag, tag_articles_path(tag)
+            - unless tag == @article.tag_list.last
+              %span.divider /
+  .row-fluid
+    .lead= to_markdown(@article.excerpt)
+  .row-fluid
+    .clearfix= to_markdown(@article.content)

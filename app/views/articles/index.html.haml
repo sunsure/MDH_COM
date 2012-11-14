@@ -2,10 +2,18 @@
 .page-header
   %h3= t '.title'
 
+- if current_user
+  - content_for(:sidebar) do
+    = link_to '#', class: "btn btn-small btn-block" do
+      %i.icon-envelope
+      %span.addon Inbox
+    = link_to '#', class: "btn btn-small btn-block" do
+      %i.icon-user
+      %span.addon My Profile
+
 = paginate @articles
 
-%table.table.table-striped
-  - @articles.each do |article|
-    = render article
+- @articles.each do |article|
+  = render article
 
 = paginate @articles

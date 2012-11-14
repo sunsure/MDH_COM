@@ -2,76 +2,41 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 /* rounded corners SASS mixin */
-@mixin rounded-corners($radius) {
-  border-radius: $radius;
-  -moz-border-radius: $radius;
-  -webkit-border-radius: $radius;
-}
-.article_partial .close {
+.media-heading .close {
   font-size: 1.5em;
   margin-right: 1em;
   padding: 0.2em;
 }
-.art_title {
-  clear: both;
-  text-indent: 1em;
-}
-.article_partial {
-  clear: both;
-  margin-top: 1em;
-  padding-top: 0.5em;
-  padding-bottom: 0.5em;
-  padding-left: 0.2em;
-  padding-right: 0.2em;
-  @include rounded-corners(10px);
-
-}
-.art_header {
-  @include rounded-corners(10px);
-  background-color: #E9E9E9;
-}
-.big_arrow {
-  float: left;
-}
-.author {
-  font-style: italic;
-  margin-left: 2em;
-}
-
-.updated_at {
+ul.tag-list {
   &:before {
-    content: "Updated: ";
+    content: "Tags: ";
+    font-weight: bold;
   }
-  clear: both;
-  text-align: left;
-  line-height: 1em;
-  padding-right: 0.5em;
-  padding-bottom: 0.5em;
-  color: #BBB;
 }
-
+section.inline {
+  display: inline;
+  margin-left: 0.5em;
+}
 .published_at {
   &:before {
     content: "Published: ";
+    font-weight: bold;
   }
-  clear: both;
-  text-align: left;
-  line-height: 1em;
-  padding-right: 0.5em;
-  color: #BBB;
 }
-.art_controls {
-  clear: both;
-  padding: 1em;
+.updated_at {
+  &:before {
+    content: "Updated: ";
+    font-weight: bold;
+  }
 }
-.art_content {
-  margin-top: 1em;
+.excerpt {
+  margin-top: 0.5em;
 }
-
-.updated_at, .published_at {
-  margin-left: 3em;
+code.author {
+  &:before {
+    content: "By: "
+  }
 }
-
 .tag_small {
   font-size: 0.8em;
 }
@@ -82,4 +47,7 @@
 .tag_large {
   font-size: 1.4em;
   font-weight: bold;
+}
+.breadcrumb.tag-list {
+  margin-top: 0.5em;
 }

@@ -7,11 +7,16 @@
     = link_to new_article_path, class: "btn btn-success btn-small btn-block" do
       %i.icon-list-alt.icon-white
       %span.addon= t('.new', default: t('helpers.links.new'))
+    = link_to '#', class: "btn btn-small btn-block" do
+      %i.icon-envelope
+      %span.addon Inbox
+    = link_to '#', class: "btn btn-small btn-block" do
+      %i.icon-user
+      %span.addon My Profile
 
 = paginate @articles
 
-%table.table.table-striped
-  - @articles.each do |article|
-    = render article
+- @articles.each do |article|
+  = render article
 
 = paginate @articles

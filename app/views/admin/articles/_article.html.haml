@@ -1,36 +1,46 @@
-%tr
-  .article_partial.well
-    .row-fluid
-      %h3.art_title
-        = link_to article.title, article
-        %button.close &times;
-      - unless article.tag_list.blank?
-        %dl
-          %dt.pull-left= Article.human_attribute_name(:tag_list)
-          %dd.pull-left= raw article.tag_list.map { |t| link_to t, tag_articles_path(t) }.join(", ")
-    .row-fluid
-      .span4
-        .art_header
-          %h1.big_arrow= "&#8627".html_safe
-          %h3.author= article.try(:user).try(:name)
-          %h5.published_at= l(article.published_at, format: :short) if article.published_at?
-          %h5.updated_at= l(article.updated_at, format: :short) if article.updated_at?
-        .art_controls
-          - if can? :edit, article
-            = link_to edit_article_path(article), class: 'btn btn-warning btn-small btn-block' do
-              %i.icon-edit
-              %span.addon= t('.edit', default: t("helpers.links.edit"))
+
+%div.media{ class: muted(article, :published_at) }
+  = link_to '#', class: "pull-left" do
+    = image_tag "arrow.png", class: "media-object"
+  %div.media-body
+    %h4.media-heading
+      = link_to article.title, article, class: muted(article, :published_at)
+      %button.close &times;
+    %div
+      %code.author= article.try(:user).try(:name)
+      - if article.published_at?
+        %section.inline.published_at= l(article.published_at, format: :short)
+      - if article.updated_at?
+        %section.inline.updated_at= l(article.updated_at, format: :short)
+      = to_markdown(article.excerpt)
+    - if can? :manage, article
+      .btn-group.dropup
+        = link_to edit_article_path(article), class: "btn" do
+          %i.icon-edit
+          = t('.edit', default: t("helpers.links.edit"))
+        %a.btn.dropdown-toggle{ :"data-toggle" => "dropdown" }
+          %span.caret
+        %ul.dropdown-menu
           - if can? :update, article
             - if article.published_at.present?
-              = link_to article_path(article, article: { published_at: nil }), method: :put, class: "btn btn-inverse btn-block" do
-                %i.icon-remove-circle.icon-white
-                %span.addon= t(".unpublish")
+              %li
+                = link_to article_path(article, article: { published_at: nil }), method: :put do
+                  %i.icon-remove-circle
+                  = t(".unpublish")
             - else
-              = link_to article_path(article, article: { publish: "1" }), method: :put, class: "btn btn-inverse btn-block" do
-                %i.icon-ok-sign.icon-white
-                %span.addon= t('.publish')
+              %li
+                = link_to article_path(article, article: { publish: "1" }), method: :put do
+                  %i.icon-ok-sign
+                  = t('.publish')
           - if can? :destroy, article
-            = link_to article_path(article), method: "delete", data: { confirm: t('.confirm', default: t("helpers.links.confirm", default: 'Are you sure?')) }, class: 'btn btn-danger btn-small btn-block' do
-              %i.icon-remove
-              %span.addon= t('.destroy', default: t("helpers.links.destroy"))
-      .lead.art_excerpt.span7= to_markdown(article.excerpt)
+            %li
+              = link_to article_path(article), method: "delete", data: { confirm: t('.confirm', default: t("helpers.links.confirm", default: 'Are you sure?')) } do
+                %i.icon-remove
+                = t('.destroy', default: t("helpers.links.destroy"))
+    - unless article.tag_list.blank?
+      %ul.breadcrumb.tag-list
+        - article.tag_list.each do |tag|
+          %li
+            = link_to tag, tag_articles_path(tag), class: muted(article, :published_at)
+            - unless tag == article.tag_list.last
+              %span.divider /
