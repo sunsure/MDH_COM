@@ -59,6 +59,10 @@ en:
       short: "%d %b %Y, %l:%M%p"
 
   layout:
+    explanation:
+      content: "The Sidebar Actions automatically change depending on what you're trying to do in the application. Right now it's blank because there are no actions to take."
+      nothing_to_show: "Nothing to show. Why?"
+      title: "Sidebar: Actions"
     sidebar:
       content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin facilisis, neque nec consequat convallis, ipsum eros feugiat nisi, ut dignissim elit leo quis est. Nulla elit arcu, hendrerit sed varius et, commodo sit amet risus. Maecenas convallis nulla vel tellus placerat malesuada id quis lorem. Maecenas et rhoncus augue. Donec consequat ligula eget eros elementum eu porttitor ante commodo. Duis eu lectus tortor, sed gravida mi. Etiam placerat euismod varius. Nulla tristique scelerisque mattis. Aenean tristique, libero vitae lobortis vulputate, odio est tincidunt lorem, quis imperdiet justo quam ac dolor."
 
@@ -66,6 +70,8 @@ en:
     article:
       publish: "Publish"
       unpublish: "Un-Publish"
+    calendar:
+      title: "Calendar"
     index:
       new: "New Article"
       title: "Listing Articles"
@@ -122,6 +128,8 @@ en:
       article:
         publish: "Publish"
         unpublish: "Un-Publish"
+      calendar:
+        title: "Calendar"
       edit:
         title: "Editing Article : %{article_title}"
       form:

@@ -8,7 +8,8 @@ namespace :db do
         excerpt: Faker::Lorem.paragraph,
         content: Faker::Lorem.paragraph,
         user_id: User.first.id,
-        published_at: Time.zone.now
+        published_at: Time.zone.now,
+        permalink: "#{Faker::Lorem.paragraph.split.sample}-#{n}".parameterize
       )
     end
   end

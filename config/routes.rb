@@ -12,6 +12,7 @@ Mdh::Application.routes.draw do
 
       resources :articles do
         collection do
+          match :calendar, via: [:get], as: :admin_calendar
           match :tags, via: [:get], as: :admin_tags
           match "tags/:tag", to: "articles#tags", via: [:get], as: :admin_tag
         end
@@ -34,6 +35,7 @@ Mdh::Application.routes.draw do
 
     resources :articles, only: [:index, :show] do
       collection do
+        match :calendar, via: [:get]
         match :tags, via: [:get], as: :tags
         match "tags/:tag", to: "articles#tags", via: [:get], as: :tag
       end

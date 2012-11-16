@@ -7,6 +7,10 @@ describe Admin::ArticlesController do
 
     describe "success" do
       # The Admin controller
+      it "routes to #calendar" do
+        get("#{url}/articles/calendar").should route_to("admin/articles#calendar")
+      end
+
       it "routes to #index" do
         get("#{url}/articles").should route_to("admin/articles#index")
       end
@@ -46,6 +50,10 @@ describe Admin::ArticlesController do
 
     describe "failure" do
       # The regular controller shouldn't route to the Admin controller
+      it "routes to #calendar" do
+        get("#{bad_url}/articles/calendar").should_not route_to("admin/articles#calendar")
+      end
+
       it "routes to #index" do
         get("#{bad_url}/articles").should_not route_to("admin/articles#index")
       end

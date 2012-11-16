@@ -14,6 +14,25 @@ describe ArticlesController do
 
   # TODO: test the search action
 
+  describe "GET calendar" do
+    it "should get the correct articles by date" do
+      get :calendar
+      assigns(:articles).should eq(Article.published)
+      assigns(:articles_by_date).should eq(Article.published.group_by { |a| a.published_at.to_date })
+      assigns(:date).should eq(Date.today)
+    end
+
+    it "should return HTTP success" do
+      get :calendar
+      response.should be_success
+    end
+
+    it "should render the calendar template" do
+      get :calendar
+      response.should render_template("calendar")
+    end
+  end
+
   describe "GET tags" do
     it "assigns all tagged articles as @articles" do
       @tagged_article = FactoryGirl.create(:article, tag_list: "foo, bar, baz, qux")

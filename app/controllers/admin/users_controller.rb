@@ -3,21 +3,18 @@ class Admin::UsersController < ApplicationController
   authorize_resource only: :create
 
   respond_to :html, :js
+  layout "admin"
 
   def index
-    render layout: "admin"
   end
 
   def show
-    render layout: "admin"
   end
 
   def new
-    render layout: "admin"
   end
 
   def edit
-    render layout: "admin"
   end
 
   def create

@@ -3,8 +3,8 @@
   %div
     %h3.inline= t '.title'
     .calendar-widget.inline
-      = link_to calendar_articles_path do
-        %i.icon-calendar
+      = link_to articles_path do
+        %i.icon-list
 
 - content_for(:sidebar) do
   - if can? :create, Article
@@ -18,9 +18,14 @@
       %i.icon-user
       %span.addon My Profile
 
-= paginate @articles
-
-- @articles.each do |article|
-  = render article
-
-= paginate @articles
+%div#articles
+  %h2#month
+    = link_to "<", date: @date.prev_month
+    = @date.strftime("%B %Y")
+    = link_to ">", date: @date.next_month
+  = calendar @date do |date|
+    = date.day
+    - if @articles_by_date[date]
+      %ul
+      - @articles_by_date[date].each do |article|
+        %li= link_to article.title, article

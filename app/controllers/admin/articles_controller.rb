@@ -1,27 +1,31 @@
 class Admin::ArticlesController < ApplicationController
-  skip_before_filter :authorize, only: [:index, :show, :tags]
+  skip_before_filter :authorize, only: [:index, :show, :tags, :calendar]
   respond_to :html
 
   load_and_authorize_resource only: [:index, :new], find_by: :permalink
-  load_resource only: :show, find_by: :permalink
+  load_resource only: [:show, :calendar], find_by: :permalink
   load_resource only: [:edit, :update, :destroy], through: :current_user, find_by: :permalink
   authorize_resource only: [:create, :edit, :update, :destroy, :show]
+  layout "admin"
+
+  def calendar
+    authorize! :calendar, Article
+    @articles = @articles.published
+    @articles_by_date = @articles.group_by { |article| article.published_at.to_date }
+    @date = params[:date] ? Date.parse(params[:date]) : Date.today
+  end
 
   def index
     @articles = @articles.page(params[:page]).per(params[:per_page])
-    render layout: "admin"
   end
 
   def show
-    render layout: "admin"
   end
 
   def new
-    render layout: "admin"
   end
 
   def edit
-    render layout: "admin"
   end
 
   def create
@@ -57,7 +61,6 @@ class Admin::ArticlesController < ApplicationController
     authorize! :tag_search, Article
     unless params[:tag].blank?
       @articles = Article.tagged_with(params[:tag]).page(params[:page]).per(params[:per_page])
-      render layout: "admin"
     else
       redirect_to root_path
     end

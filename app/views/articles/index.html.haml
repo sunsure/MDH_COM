@@ -1,6 +1,10 @@
 - title t('.title')
 .page-header
-  %h3= t '.title'
+  %div
+    %h3.inline= t '.title'
+    .calendar-widget.inline
+      = link_to calendar_articles_path do
+        %i.icon-calendar
 
 - if current_user
   - content_for(:sidebar) do

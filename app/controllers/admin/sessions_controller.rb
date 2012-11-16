@@ -1,8 +1,8 @@
 class Admin::SessionsController < ApplicationController
   skip_before_filter :authorize
+  layout "admin"
 
   def new
-    render layout: "admin"
   end
 
   def create
