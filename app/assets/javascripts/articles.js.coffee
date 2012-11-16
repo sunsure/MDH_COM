@@ -6,3 +6,4 @@ jQuery ->
     $(this).closest(".media").slideUp('slow')
 
   $(".pop").popover()
+  $(".datepicker").datepicker(format: 'yyyy-mm-dd')
