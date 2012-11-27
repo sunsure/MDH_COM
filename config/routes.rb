@@ -3,6 +3,11 @@ Mdh::Application.routes.draw do
   # Administrative side
   constraints(subdomain: /admin/) do
     scope module: "admin" do
+      # Enable MailView, but only on admin side in dev environment
+      if Rails.env.development?
+        mount MailPreview => 'mail_view'
+      end
+
       match "/login", to: "sessions#new", as: :admin_login, via: [:get]
       match "/logout", to: "sessions#destroy", as: :admin_logout, via: [:get]
       match "/unauthorized", to: "sessions#unauthorized", as: :admin_unauthorized, via: [:get]
