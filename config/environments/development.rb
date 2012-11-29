@@ -40,4 +40,6 @@ Mdh::Application.configure do
 
   # Default host for the mailers
   config.action_mailer.default_url_options = { :host => "www.lvh.me:3000" }
+
+  config.action_mailer.delivery_method = :smtp
 end

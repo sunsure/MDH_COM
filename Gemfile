@@ -16,6 +16,7 @@ gem 'twitter-bootstrap-rails', git: 'git://github.com/seyhunak/twitter-bootstrap
 gem 'kaminari'
 gem 'acts-as-taggable-on'
 gem 'pygments.rb'
+gem 'exception_notification'
 
 unless RUBY_PLATFORM =~ /darwin/i
   gem 'rb-inotify', '~> 0.8.8'

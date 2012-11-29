@@ -53,6 +53,11 @@ Mdh::Application.configure do
 
   # TODO: setup the default action mailer host
   # config.action_mailer.default_url_options = { :host => "markholmberg.com" }
+  config.middleware.use ExceptionNotifier,
+    sender_address: 'noreply@markholmberg.com',
+    exception_recipients: 'mark.d.holmberg@gmail.com'
+
+  config.action_mailer.delivery_method = :smtp
 
   # Enable threaded mode
   # config.threadsafe!
