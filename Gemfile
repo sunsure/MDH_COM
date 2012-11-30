@@ -17,6 +17,7 @@ gem 'kaminari'
 gem 'acts-as-taggable-on'
 gem 'pygments.rb'
 gem 'exception_notification'
+gem 'recaptcha', :require => 'recaptcha/rails'
 
 unless RUBY_PLATFORM =~ /darwin/i
   gem 'rb-inotify', '~> 0.8.8'

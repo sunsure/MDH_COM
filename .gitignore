@@ -16,3 +16,4 @@
 config/database.yml
 .rbenv-version
 config/initializers/smtp.rb
+config/initializers/recaptcha.rb
