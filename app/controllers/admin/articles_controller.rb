@@ -16,6 +16,7 @@ class Admin::ArticlesController < ApplicationController
   end
 
   def index
+    handle_published
     @articles = @articles.page(params[:page]).per(params[:per_page])
   end
 
@@ -67,6 +68,17 @@ class Admin::ArticlesController < ApplicationController
   end
 
   private
+
+  def handle_published
+    if params[:published].present?
+      case params[:published]
+      when 'true'
+        @articles = @articles.published
+      when 'false'
+        @articles = @articles.draft
+      end
+    end
+  end
 
   def safe_params
     safe_attributes = [

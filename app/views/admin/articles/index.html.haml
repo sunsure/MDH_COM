@@ -18,9 +18,16 @@
       %i.icon-user
       %span.addon My Profile
 
+#admin_article_controls.btn-toolbar
+  .btn-group
+    = link_to t(".show_all"), articles_url, class: "btn #{active(:published, nil, {missing: :true})}"
+    = link_to t(".show_published"), params.merge(published: :true), class: "btn #{active(:published, 'true')}"
+    = link_to t(".show_drafts"), params.merge(published: :false), class: "btn #{active(:published, 'false')}"
+
 = paginate @articles
 
 - @articles.each do |article|
-  = render article
+  - current_cycle = cycle("odd", "even")
+  = render article, current_cycle: current_cycle
 
 = paginate @articles

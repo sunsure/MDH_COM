@@ -1,4 +1,4 @@
-%div.media{ class: muted(article, :published_at) }
+%div.media{ class: "#{muted(article, :published_at)} #{current_cycle}" }
   = link_to article, class: "pull-left" do
     = image_tag "arrow.png", class: "media-object"
   %div.media-body

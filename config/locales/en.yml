@@ -142,6 +142,9 @@ en:
       index:
         calendar_view: 'Calendar View'
         new: "New Article"
+        show_all: 'Show All'
+        show_drafts: 'Show Drafts'
+        show_published: 'Show Published'
         title: "Listing Articles"
       show:
         publish: "Publish"
