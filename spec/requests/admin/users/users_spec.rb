@@ -13,7 +13,7 @@ describe "Users" do
   describe "visiting the index" do
     it "should have a header" do
       visit users_path
-      page.should have_selector('h3', content: "Listing Users")
+      page.should have_selector('h3', text: "Listing Users")
     end
 
     it "should have a new user button" do
@@ -28,9 +28,7 @@ describe "Users" do
   describe "showing a user" do
     it "should have the right title" do
       visit user_path(@user)
-      within("head title") do
-        page.should have_content("User : #{@user.name}")
-      end
+      page.should have_selector("head title", text: "User : #{@user.name}", count: 1)
       page.should have_selector("h3", text: "User : #{@user.name}")
     end
   end
