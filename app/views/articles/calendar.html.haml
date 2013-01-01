@@ -3,7 +3,7 @@
   %div
     %h3.inline= t '.title'
     .calendar-widget.inline
-      = link_to articles_path do
+      = link_to articles_path, rel: 'tooltip', title: t('.list_view') do
         %i.icon-list
 
 - content_for(:sidebar) do

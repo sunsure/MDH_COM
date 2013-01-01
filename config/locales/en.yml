@@ -71,8 +71,10 @@ en:
       publish: "Publish"
       unpublish: "Un-Publish"
     calendar:
+      list_view: 'List View'
       title: "Calendar"
     index:
+      calendar_view: 'Calendar View'
       new: "New Article"
       title: "Listing Articles"
     modal:
@@ -129,6 +131,7 @@ en:
         publish: "Publish"
         unpublish: "Un-Publish"
       calendar:
+        list_view: 'List View'
         title: "Calendar"
       edit:
         title: "Editing Article : %{article_title}"
@@ -137,6 +140,7 @@ en:
       new:
         title: "New Article"
       index:
+        calendar_view: 'Calendar View'
         new: "New Article"
         title: "Listing Articles"
       show:
