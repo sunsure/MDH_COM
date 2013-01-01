@@ -1,5 +1,4 @@
 class Admin::ArticlesController < ApplicationController
-  skip_before_filter :authorize, only: [:index, :show, :tags, :calendar]
   respond_to :html
 
   load_and_authorize_resource only: [:index, :new], find_by: :permalink
