@@ -83,6 +83,9 @@ en:
       current_tag: "Current Tag: %{tag}"
       tag_cloud: "Tag Cloud"
     show:
+      comments: 'Comments'
+      leave_comments: 'Leave your comments below.'
+      login_or_register: 'Login or register to comment on this article.'
       publish: "Publish"
       title: "%{article_title}"
       unpublish: "Un-Publish"

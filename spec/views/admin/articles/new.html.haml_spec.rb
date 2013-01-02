@@ -3,8 +3,7 @@ require 'spec_helper'
 describe "admin/articles/new" do
   before(:each) do
     assign(:article, FactoryGirl.create(:article))
-    @user = FactoryGirl.create(:user_with_roles, with_roles: ["admin"])
-    controller.stub!(:current_user, @user)
+    stub_current_user(:can_can_controller)
   end
 
   it "renders new article form" do

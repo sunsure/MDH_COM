@@ -2,9 +2,7 @@ require 'spec_helper'
 
 describe "admin/users/new" do
   before(:each) do
-    @user = FactoryGirl.create(:user_with_roles, with_roles: ["admin"])
-    assign(:user, @user)
-    controller.stub!(:current_user, @user)
+    stub_current_user(:can_can_controller)
   end
 
   it "renders new user form" do

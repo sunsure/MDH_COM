@@ -25,3 +25,14 @@
     .lead= to_markdown(@article.excerpt)
   .row-fluid
     .clearfix= to_markdown(@article.content)
+
+  %fieldset#article_comments
+    %legend= t('.comments')
+    %p
+      - if current_user
+        = t(".leave_comments")
+        = form_tag article_path(@article), method: :get do
+          = text_area_tag 'comment[content]'
+          = submit_tag 'Comment', class: 'btn btn-success'
+      - else
+        = t(".login_or_register")

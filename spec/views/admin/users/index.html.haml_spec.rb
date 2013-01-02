@@ -2,12 +2,10 @@ require 'spec_helper'
 
 describe "admin/users/index" do
   before(:each) do
-    @user = FactoryGirl.create(:user_with_roles, with_roles: ["admin"])
     @first = FactoryGirl.create(:user)
     @second = FactoryGirl.create(:user)
     assign(:users, [@first, @second])
-    view.stub(:current_user, @user)
-    controller.stub!(:current_user, @user)
+    stub_current_user(:both)
   end
 
   it "renders a list of users" do

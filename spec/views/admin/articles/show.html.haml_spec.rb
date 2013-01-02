@@ -3,8 +3,7 @@ require 'spec_helper'
 describe "admin/articles/show" do
   before(:each) do
     @article = assign(:article, FactoryGirl.create(:article))
-    @user = FactoryGirl.create(:user_with_roles, with_roles: ["admin"])
-    controller.stub!(:current_user, @user)
+    stub_current_user(:can_can_controller)
   end
 
   it "renders attributes in <p>" do
