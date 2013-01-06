@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121112191409) do
+ActiveRecord::Schema.define(:version => 20130105035940) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -26,6 +26,19 @@ ActiveRecord::Schema.define(:version => 20121112191409) do
 
   add_index "articles", ["permalink"], :name => "index_articles_on_permalink"
   add_index "articles", ["user_id"], :name => "index_articles_on_user_id"
+
+  create_table "comments", :force => true do |t|
+    t.integer  "article_id"
+    t.integer  "user_id"
+    t.string   "ancestry"
+    t.text     "content"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "comments", ["ancestry"], :name => "index_comments_on_ancestry"
+  add_index "comments", ["article_id"], :name => "index_comments_on_article_id"
+  add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
 
   create_table "permissions", :force => true do |t|
     t.integer  "role_id"

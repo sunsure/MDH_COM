@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   has_many :permissions
   has_many :roles, through: :permissions
   has_many :articles
+  has_many :comments
+  has_many :comments, through: :articles
 
   validates :password,
     on: :create,

@@ -1,0 +1,2 @@
+$("div#my_comment_content_<%= @comment.id %>").slideUp().after('<%= j render("form") %>');
+$("div#comment_<%= @comment.id %> div#comment_actions").slideUp();

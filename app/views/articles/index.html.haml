@@ -18,7 +18,6 @@
 = paginate @articles
 
 - @articles.each do |article|
-  - current_cycle = cycle("odd", "even")
-  = render article, current_cycle: current_cycle
+  = render article
 
 = paginate @articles

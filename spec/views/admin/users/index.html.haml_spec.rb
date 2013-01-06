@@ -5,7 +5,7 @@ describe "admin/users/index" do
     @first = FactoryGirl.create(:user)
     @second = FactoryGirl.create(:user)
     assign(:users, [@first, @second])
-    stub_current_user(:both)
+    stub_current_user([:view, :can_can_controller])
   end
 
   it "renders a list of users" do

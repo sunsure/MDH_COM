@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "users/new" do
   before(:each) do
-    stub_current_user(:can_can_controller)
+    stub_current_user([:can_can_controller])
   end
 
   it "renders new user form" do

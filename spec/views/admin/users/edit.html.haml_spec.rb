@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "admin/users/edit" do
   before(:each) do
-    stub_current_user(:can_can_controller)
+    stub_current_user([:can_can_controller])
   end
 
   it "renders the edit user form" do

@@ -45,21 +45,19 @@ def login_as(user)
   request.cookies[:auth_token] = user.try(:auth_token)
 end
 
-def stub_current_user(spec_type, options={})
-  @user = FactoryGirl.create(:user_with_roles, with_roles: ["admin"])
-  case spec_type
-  when :view
-    if options[:as_nil].present?
-      view.stub(:current_user, nil)
-    else
-      view.stub(:current_user, @user).and_return(@user)
-    end
-  when :can_can_controller
-    controller.stub!(:current_user, @user).and_return(@user)
-  when :both
+def stub_current_user(spec_type=[], options={})
+  if options[:as_nil].present?
+    @user = nil
+  else
+    @user = FactoryGirl.create(:user_with_roles, with_roles: ["admin"])
+  end
+  if spec_type.include?(:view)
     view.stub(:current_user, @user).and_return(@user)
+  end
+  if spec_type.include?(:can_can_controller)
     controller.stub!(:current_user, @user).and_return(@user)
   end
+  # Add more stubs here as needed
 end
 
 # TODO: add rspec matcher for accepts_nested_attributes_for

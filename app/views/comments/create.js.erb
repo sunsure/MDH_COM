@@ -1,0 +1,3 @@
+$('form#new_comment').remove();
+$('#new_comment_link').slideDown();
+$('#comments').prepend('<%= j render(@comment) %>');

@@ -1,0 +1,18 @@
+%div.media.media-article{ id: "comment_#{comment.id}" }
+  = link_to '#', class: "pull-left" do
+    = image_tag "arrow.png", class: "media-object"
+  %div.media-body
+    %h4.media-heading
+      = comment.user.try(:email)
+      .pull-right= link_to 'Report', '#', class: 'btn btn-mini btn-danger'
+    %code.author= comment.user.try(:name)
+    - if comment.updated_at?
+      %section.inline.updated_at= l(comment.updated_at, format: :short)
+    - if comment.created_at?
+      %section.inline.created_at= l(comment.created_at, format: :short) if comment.created_at?
+    %div.media{ id: "my_comment_content_#{comment.id}" }= to_markdown(comment.content)
+    %div#comment_actions
+      - if can? :edit, comment
+        = link_to "Edit", edit_article_comment_path(@article, comment), remote: true, class: 'btn btn-warning'
+      = link_to "Like", '#', class: 'btn btn-primary'
+      = link_to 'Reply', '#', class: 'btn btn-success'

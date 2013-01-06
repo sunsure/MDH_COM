@@ -26,13 +26,15 @@
   .row-fluid
     .clearfix= to_markdown(@article.content)
 
-  %fieldset#article_comments
+  %fieldset
     %legend= t('.comments')
-    %p
+    %div
       - if current_user
-        = t(".leave_comments")
-        = form_tag article_path(@article), method: :get do
-          = text_area_tag 'comment[content]'
-          = submit_tag 'Comment', class: 'btn btn-success'
+        - if can? :create, Comment
+          %p= t(".leave_comments")
+          = link_to "Add Comment", new_article_comment_path(@article), id: 'new_comment_link', remote: true
       - else
-        = t(".login_or_register")
+        %p= t(".login_or_register")
+    #comments
+      - @comments.each do |comment|
+        = render comment

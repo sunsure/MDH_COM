@@ -1,0 +1,4 @@
+<% if @comment.persisted? %>
+  $("form#edit_comment_<%= @comment.id %>").remove();
+  $("div#comment_<%= @comment.id %>").slideDown().replaceWith('<%= j render(@comment) %>');
+<% end %>

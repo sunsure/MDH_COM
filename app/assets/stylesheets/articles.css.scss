@@ -1,10 +1,17 @@
 // Place all the styles related to the Articles controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+/* rounded corners SASS mixin */
+@mixin rounded-corners($radius) {
+  border-radius: $radius;
+  -moz-border-radius: $radius;
+  -webkit-border-radius: $radius;
+}
+
 .inline { display: inline; }
 .media-heading .close {
   font-size: 1.5em;
-  margin-right: 1em;
   padding: 0.2em;
 }
 ul.tag-list {
@@ -26,6 +33,12 @@ section.inline {
 .updated_at {
   &:before {
     content: "Updated: ";
+    font-weight: bold;
+  }
+}
+.created_at {
+  &:before {
+    content: "Created: ";
     font-weight: bold;
   }
 }
@@ -52,6 +65,8 @@ code.author {
   margin-top: 0.5em;
 }
 // table like alternate coloring
-.even.media {
+.media-article {
   background-color: #EEE;
+  @include rounded-corners(1em);
+  border: 1px solid #D5D5D5;
 }

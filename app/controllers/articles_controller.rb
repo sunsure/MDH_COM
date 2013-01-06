@@ -17,10 +17,7 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    if request.get? && params[:comment].present?
-      flash[:notice] = 'Stubbed'
-      redirect_to @article
-    end
+    @comments = @article.comments.includes(:user)
   end
 
   def tags

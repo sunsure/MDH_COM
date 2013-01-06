@@ -5,7 +5,7 @@ describe "admin/articles/index" do
     @first = FactoryGirl.create(:article)
     @second = FactoryGirl.create(:article)
     assign(:articles, Kaminari.paginate_array([@first, @second]).page)
-    stub_current_user(:can_can_controller)
+    stub_current_user([:can_can_controller])
   end
 
   it "renders a list of articles" do

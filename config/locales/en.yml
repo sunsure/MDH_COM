@@ -96,6 +96,10 @@ en:
       title: "Listing Articles, Tag: %{tag}"
       view_tag_cloud: "View Tag Cloud"
 
+  comments:
+    form:
+      comment: 'Comment'
+
   my:
     dashboard:
       title: "My Dashboard"
