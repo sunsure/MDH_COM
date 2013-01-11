@@ -3,7 +3,7 @@
     = image_tag "arrow.png", class: "media-object"
   %div.media-body
     %h4.media-heading
-      = link_to article.title, article, class: muted(article, :published_at)
+      = link_to article.title, admin_article_path(article), class: muted(article, :published_at)
       %button.close &times;
     %div
       %code.author= article.try(:user).try(:name)
@@ -14,7 +14,7 @@
       = to_markdown(article.excerpt)
     - if can? :manage, article
       .btn-group.dropup
-        = link_to edit_article_path(article), class: "btn" do
+        = link_to edit_admin_article_path(article), class: "btn" do
           %i.icon-edit
           = t('.edit', default: t("helpers.links.edit"))
         %a.btn.dropdown-toggle{ :"data-toggle" => "dropdown" }
@@ -23,23 +23,23 @@
           - if can? :update, article
             - if article.published_at.present?
               %li
-                = link_to article_path(article, article: { published_at: nil }), method: :put do
+                = link_to admin_article_path(article, article: { published_at: nil }), method: :put do
                   %i.icon-remove-circle
                   = t(".unpublish")
             - else
               %li
-                = link_to article_path(article, article: { publish: "1" }), method: :put do
+                = link_to admin_article_path(article, article: { publish: "1" }), method: :put do
                   %i.icon-ok-sign
                   = t('.publish')
           - if can? :destroy, article
             %li
-              = link_to article_path(article), method: "delete", data: { confirm: t('.confirm', default: t("helpers.links.confirm", default: 'Are you sure?')) } do
+              = link_to admin_article_path(article), method: "delete", data: { confirm: t('.confirm', default: t("helpers.links.confirm", default: 'Are you sure?')) } do
                 %i.icon-remove
                 = t('.destroy', default: t("helpers.links.destroy"))
     - unless article.tag_list.blank?
       %ul.breadcrumb.tag-list
         - article.tag_list.each do |tag|
           %li
-            = link_to tag, tag_articles_path(tag), class: muted(article, :published_at)
+            = link_to tag, tag_admin_articles_path(tag), class: muted(article, :published_at)
             - unless tag == article.tag_list.last
               %span.divider /

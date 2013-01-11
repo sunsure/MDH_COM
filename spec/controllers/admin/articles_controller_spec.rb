@@ -160,7 +160,7 @@ describe Admin::ArticlesController do
 
       it "redirects to the created article" do
         post :create, article: valid_attributes
-        response.should redirect_to(Article.first)
+        response.should redirect_to(admin_article_path(Article.first))
       end
     end
 
@@ -193,7 +193,7 @@ describe Admin::ArticlesController do
 
       it "redirects to the articles index" do
         put :update, id: @article.to_param, article: valid_attributes
-        response.should redirect_to(articles_path)
+        response.should redirect_to(admin_articles_path)
       end
     end
 
@@ -222,7 +222,7 @@ describe Admin::ArticlesController do
 
     it "redirects to the articles list" do
       delete :destroy, id: @article.to_param
-      response.should redirect_to(articles_url)
+      response.should redirect_to(admin_articles_url)
     end
   end
 

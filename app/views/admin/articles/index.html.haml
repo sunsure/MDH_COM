@@ -3,12 +3,13 @@
   %div
     %h3.inline= t '.title'
     .calendar-widget.inline
-      = link_to calendar_articles_path, rel: 'tooltip', title: t('.calendar_view') do
+      = link_to calendar_admin_articles_path, rel: 'tooltip', title: t('.calendar_view') do
         %i.icon-calendar
+        (calendar)
 
 - content_for(:sidebar) do
   - if can? :create, Article
-    = link_to new_article_path, class: "btn btn-success btn-small btn-block" do
+    = link_to new_admin_article_path, class: "btn btn-success btn-small btn-block" do
       %i.icon-list-alt.icon-white
       %span.addon= t('.new', default: t('helpers.links.new'))
     = link_to '#', class: "btn btn-small btn-block" do
@@ -20,7 +21,7 @@
 
 #admin_article_controls.btn-toolbar
   .btn-group
-    = link_to t(".show_all"), articles_url, class: "btn #{active(:published, nil, {missing: :true})}"
+    = link_to t(".show_all"), admin_articles_path, class: "btn #{active(:published, nil, {missing: :true})}"
     = link_to t(".show_published"), params.merge(published: :true), class: "btn #{active(:published, 'true')}"
     = link_to t(".show_drafts"), params.merge(published: :false), class: "btn #{active(:published, 'false')}"
 

@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe Admin::UsersController do
   describe "routing" do
-    let(:url)     { "http://admin.example.com" }
+    let(:url)     { "http://www.example.com/admin" }
     let(:bad_url) { "http://www.example.com" }
 
     describe "success" do

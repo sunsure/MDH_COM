@@ -25,7 +25,7 @@
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
-          = link_to t('application.titles.brand_name'), root_path, class: "brand"
+          = link_to t('application.titles.brand_name'), admin_root_path, class: "brand"
           .container.nav-collapse
             %ul.nav
               %li
@@ -34,12 +34,12 @@
                   %span.addon GitHub
               - if can? :index, Article
                 %li
-                  = link_to articles_path do
+                  = link_to admin_articles_path do
                     %i.icon-list-alt.icon-white
                     %span.addon Articles
               - if can? :manage, User
                 %li
-                  = link_to users_path do
+                  = link_to admin_users_path do
                     %i.icon-user.icon-white
                     %span.addon Users
             %ul.nav.pull-right
@@ -57,7 +57,7 @@
     .container-fluid
       .row-fluid
         .span9
-          = bootstrap_flash
+          .bootstrap-flash= bootstrap_flash
           = yield
         .span3
           %div.well.sidebar-nav

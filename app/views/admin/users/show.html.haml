@@ -4,7 +4,7 @@
 
 - content_for(:sidebar) do
   - if can? :edit, @user
-    = link_to edit_user_path(@user), class: 'btn btn-warning btn-small btn-block' do
+    = link_to edit_admin_user_path(@user), class: 'btn btn-warning btn-small btn-block' do
       %i.icon-edit
       %span.addon= t('.edit', default: t("helpers.links.edit"))
   - if current_user == @user
@@ -14,7 +14,7 @@
         %span.addon= t('.destroy', default: t("helpers.links.destroy"))
   - else
     - if can? :destroy, @user
-      = link_to user_path(@user), method: :delete, data: { confirm: t('.confirm', default: t("helpers.links.confirm")) }, class: 'btn btn-danger btn-small btn-block' do
+      = link_to admin_user_path(@user), method: :delete, data: { confirm: t('.confirm', default: t("helpers.links.confirm")) }, class: 'btn btn-danger btn-small btn-block' do
         %i.icon-remove
         %span.addon= t('.destroy', default: t("helpers.links.destroy"))
 

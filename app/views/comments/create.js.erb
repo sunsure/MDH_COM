@@ -1,3 +1,8 @@
-$('form#new_comment').remove();
-$('#new_comment_link').slideDown();
-$('#comments').prepend('<%= j render(@comment) %>');
+<% if @comment.persisted? %>
+  $('form#new_comment').remove();
+  $('#new_comment_link').slideDown();
+  $('#comments').prepend('<%= j render(@comment) %>');
+  $(".bootstrap-flash").html('<%= j render("shared/flash_messages") %>');
+<% else %>
+  $(".bootstrap-flash").html('<%= j render("shared/flash_messages") %>');
+<% end %>

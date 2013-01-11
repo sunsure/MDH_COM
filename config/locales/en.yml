@@ -97,6 +97,10 @@ en:
       view_tag_cloud: "View Tag Cloud"
 
   comments:
+    controller:
+      create:
+        success: 'Thanks for the comment!'
+        failure: "Sorry, we weren't able to save your comment."
     form:
       comment: 'Comment'
 
@@ -163,12 +167,17 @@ en:
         tag_cloud_pop_title: "What is a Tag Cloud?"
         title: "Listing Articles, Tag: %{tag}"
         view_tag_cloud: "View Tag Cloud"
+
+    comments:
+      controller:
+        destroy:
+          success: 'Comment has been destroyed successfully.'
     users:
       controller:
         new:
           already_logged_in: "You are already logged in!"
         create:
-          failure: "Failed to craete user!"
+          failure: "Failed to create user!"
           success: "User was created successfully."
         destroy:
           prevent_self_destroy: "You cannot destroy your own account!"

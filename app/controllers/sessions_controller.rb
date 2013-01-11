@@ -12,7 +12,11 @@ class SessionsController < ApplicationController
       else
         cookies[:auth_token] = user.auth_token
       end
-      redirect_to root_path, notice: t("application.notices.authorization.success")
+      if user.is?(:admin)
+        redirect_to admin_root_url, notice: t("application.notices.authorization.success")
+      else
+        redirect_to root_url, notice: t("application.notices.authorization.success")
+      end
     else
       # no user found or bad credentials
       flash[:error] = t("application.errors.authorization.failure")

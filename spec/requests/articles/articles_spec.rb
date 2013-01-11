@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe "Articles" do
   before(:each) do
-    Capybara.app_host = 'http://www.lvh.me:3000'
     @user = FactoryGirl.create(:user)
     visit login_path
     fill_in "email", with: @user.email

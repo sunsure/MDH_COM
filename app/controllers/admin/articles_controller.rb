@@ -1,11 +1,10 @@
-class Admin::ArticlesController < ApplicationController
+class Admin::ArticlesController < AdminController
   respond_to :html
 
   load_and_authorize_resource only: [:index, :new], find_by: :permalink
   load_resource only: [:show, :calendar], find_by: :permalink
   load_resource only: [:edit, :update, :destroy], through: :current_user, find_by: :permalink
   authorize_resource only: [:create, :edit, :update, :destroy, :show]
-  layout "admin"
 
   def calendar
     authorize! :calendar, Article
@@ -20,6 +19,7 @@ class Admin::ArticlesController < ApplicationController
   end
 
   def show
+    @comments = @article.comments.includes(:user)
   end
 
   def new
@@ -32,7 +32,7 @@ class Admin::ArticlesController < ApplicationController
     @article = current_user.articles.new(safe_params)
 
     if @article.save
-      redirect_to @article, notice: t('admin.articles.controller.create.success')
+      redirect_to admin_article_path(@article), notice: t('admin.articles.controller.create.success')
     else
       flash[:error] = t('admin.articles.controller.create.failure')
       render :new
@@ -41,7 +41,7 @@ class Admin::ArticlesController < ApplicationController
 
   def update
     if @article.update_attributes(safe_params)
-      redirect_to articles_url, notice: t('admin.articles.controller.update.success')
+      redirect_to admin_articles_url, notice: t('admin.articles.controller.update.success')
     else
       flash[:error] =  t('admin.articles.controller.update.failure')
       render :edit
@@ -54,7 +54,7 @@ class Admin::ArticlesController < ApplicationController
     else
       flash[:notice] = t('admin.articles.controller.destroy.failure')
     end
-    redirect_to articles_url
+    redirect_to admin_articles_url
   end
 
   def tags

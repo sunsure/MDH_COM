@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe "Articles" do
   before(:each) do
-    Capybara.app_host = 'http://admin.lvh.me:3000'
     @user = FactoryGirl.create(:user_with_roles, with_roles: ["admin"])
     visit login_path
     fill_in "email", with: @user.email
@@ -13,19 +12,19 @@ describe "Articles" do
 
   describe "visiting the index" do
     it "should have a header" do
-      visit articles_path
+      visit admin_articles_path
       page.should have_selector('h3', text: "Listing Articles")
     end
 
     it "should have a new article button" do
-      visit articles_path
-      page.find_link('New Article')[:href].should == new_article_path
+      visit admin_articles_path
+      page.find_link('New Article')[:href].should == new_admin_article_path
     end
   end
 
   describe "showing an article" do
     it "should have the right title" do
-      visit article_path(@article)
+      visit admin_article_path(@article)
       page.should have_selector("head title", text: @article.title, count: 1)
       page.should have_selector("h3", text: "#{@article.title}")
     end
@@ -35,14 +34,14 @@ describe "Articles" do
     describe "with valid parameters" do
       it "creates a new article successfully" do
         lambda do
-          visit new_article_path
+          visit new_admin_article_path
           fill_in "article_title", with: "How to be l33t"
           fill_in "article_content", with: "you gotta be me!"
           fill_in "article_permalink", with: "this is my permalink"
           fill_in "article_excerpt", with: "this is my excerpt"
           click_button "Create Article"
           page.should have_content("Article was created successfully.")
-          current_path.should eq(article_path(Article.last))
+          current_path.should eq(admin_article_path(Article.last))
         end.should change(Article, :count).by(1)
       end
     end
@@ -50,7 +49,7 @@ describe "Articles" do
     describe "with invalid parameters" do
       it "should not create an article if title is blank" do
         lambda do
-          visit new_article_path
+          visit new_admin_article_path
           fill_in "article_title", with: ""
           fill_in "article_content", with: "you gotta be me!"
           fill_in "article_permalink", with: "this is my permalink"
@@ -58,13 +57,13 @@ describe "Articles" do
           click_button "Create Article"
           page.should have_content("can't be blank")
           page.should have_content("Failed to create article!")
-          current_path.should eq(articles_path)
+          current_path.should eq(admin_articles_path)
         end.should_not change(Article, :count).by(1)
       end
 
       it "should not create an article if content is blank" do
         lambda do
-          visit new_article_path
+          visit new_admin_article_path
           fill_in "article_title", with: "How to be l33t"
           fill_in "article_content", with: ""
           fill_in "article_permalink", with: "this is my permalink"
@@ -72,13 +71,13 @@ describe "Articles" do
           click_button "Create Article"
           page.should have_content("can't be blank")
           page.should have_content("Failed to create article!")
-          current_path.should eq(articles_path)
+          current_path.should eq(admin_articles_path)
         end.should_not change(Article, :count).by(1)
       end
 
       it "should not create an article if permalink is blank" do
         lambda do
-          visit new_article_path
+          visit new_admin_article_path
           fill_in "article_title", with: "How to be l33t"
           fill_in "article_content", with: "you gotta be me!"
           fill_in "article_permalink", with: ""
@@ -86,13 +85,13 @@ describe "Articles" do
           click_button "Create Article"
           page.should have_content("can't be blank")
           page.should have_content("Failed to create article!")
-          current_path.should eq(articles_path)
+          current_path.should eq(admin_articles_path)
         end.should_not change(Article, :count).by(1)
       end
 
       it "should not create an article if excerpt is blank" do
         lambda do
-          visit new_article_path
+          visit new_admin_article_path
           fill_in "article_title", with: "How to be l33t"
           fill_in "article_content", with: "you gotta be me!"
           fill_in "article_permalink", with: "this is my permalink"
@@ -100,7 +99,7 @@ describe "Articles" do
           click_button "Create Article"
           page.should have_content("can't be blank")
           page.should have_content("Failed to create article!")
-          current_path.should eq(articles_path)
+          current_path.should eq(admin_articles_path)
         end.should_not change(Article, :count).by(1)
       end
 
@@ -110,20 +109,20 @@ describe "Articles" do
   describe "UPDATE an exisitng article" do
     describe "with valid parameters" do
       it "should update the article" do
-        visit edit_article_path(@article)
+        visit edit_admin_article_path(@article)
         fill_in "article_title", with: "How to be l33t"
         fill_in "article_content", with: "you gotta be me!"
         fill_in "article_permalink", with: "this is my permalink"
         fill_in "article_excerpt", with: "this is my excerpt"
         click_button "Update Article"
         page.should have_content("Article was updated successfully.")
-        current_path.should eq(articles_path)
+        current_path.should eq(admin_articles_path)
       end
     end
 
     describe "with invalid parameters" do
       it "should not update the article if the title is blank" do
-        visit edit_article_path(@article)
+        visit edit_admin_article_path(@article)
         fill_in "article_title", with: ""
         fill_in "article_content", with: "you gotta be me!"
         fill_in "article_permalink", with: "this is my permalink"
@@ -131,11 +130,11 @@ describe "Articles" do
         click_button "Update Article"
         page.should have_content("can't be blank")
         page.should have_content("Failed to update article!")
-        current_path.should eq(article_path(@article))
+        current_path.should eq(admin_article_path(@article))
       end
 
       it "should not update the article if the content is blank" do
-        visit edit_article_path(@article)
+        visit edit_admin_article_path(@article)
         fill_in "article_title", with: "How to be l33t"
         fill_in "article_permalink", with: "this is my permalink"
         fill_in "article_content", with: ""
@@ -143,11 +142,11 @@ describe "Articles" do
         click_button "Update Article"
         page.should have_content("can't be blank")
         page.should have_content("Failed to update article!")
-        current_path.should eq(article_path(@article))
+        current_path.should eq(admin_article_path(@article))
       end
 
       it "should not update the article if the permalink is blank" do
-        visit edit_article_path(@article)
+        visit edit_admin_article_path(@article)
         fill_in "article_title", with: "How to be l33t"
         fill_in "article_permalink", with: ""
         fill_in "article_content", with: "you gotta be me!"
@@ -155,11 +154,11 @@ describe "Articles" do
         click_button "Update Article"
         page.should have_content("can't be blank")
         page.should have_content("Failed to update article!")
-        current_path.should eq(article_path(@article))
+        current_path.should eq(admin_article_path(@article))
       end
 
       it "should not update the article if the excerpt is blank" do
-        visit edit_article_path(@article)
+        visit edit_admin_article_path(@article)
         fill_in "article_title", with: "How to be l33t"
         fill_in "article_permalink", with: "this is"
         fill_in "article_content", with: "you gotta be me!"
@@ -167,7 +166,7 @@ describe "Articles" do
         click_button "Update Article"
         page.should have_content("can't be blank")
         page.should have_content("Failed to update article!")
-        current_path.should eq(article_path(@article))
+        current_path.should eq(admin_article_path(@article))
       end
     end
   end
@@ -175,7 +174,7 @@ describe "Articles" do
   describe "DESTROY'ing a article" do
     it "should destroy the specified article" do
       lambda do
-        visit articles_path
+        visit admin_articles_path
         click_link "Destroy"
       end.should change(Article, :count).by(-1)
     end

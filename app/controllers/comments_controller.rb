@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
   load_and_authorize_resource :article, find_by: :permalink
   load_and_authorize_resource :comment, through: :article, except: [:create]
   authorize_resource :comment, only: [:create]
-  respond_to :js
+  respond_to :js#, :html
 
   def new
   end
@@ -12,17 +12,16 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @comment = @article.comments.create!(safe_params.merge!(user: current_user))
+    @comment = @article.comments.new(safe_params.merge!(user: current_user))
+    if @comment.save
+      flash.now[:notice] = t('comments.controller.create.success')
+    else
+      flash.now[:error] = t('comments.controller.create.failure')
+    end
   end
 
   def update
     @comment.update_attributes(safe_params)
-  end
-
-  def destroy
-    @comment.destroy
-
-    redirect_to articles_url
   end
 
   private

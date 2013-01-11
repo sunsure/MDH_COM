@@ -3,7 +3,7 @@ require "spec_helper"
 describe ArticlesController do
   describe "routing" do
     let(:url) { "http://www.example.com" }
-    let(:bad_url) { "http://admin.example.com" }
+    let(:bad_url) { "http://www.example.com/admin" }
 
     describe "success" do
       # The regular controller

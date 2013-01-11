@@ -1,9 +1,8 @@
-class Admin::UsersController < ApplicationController
+class Admin::UsersController < AdminController
   load_and_authorize_resource except: [:create]
   authorize_resource only: :create
 
   respond_to :html, :js
-  layout "admin"
 
   def index
   end
@@ -20,7 +19,7 @@ class Admin::UsersController < ApplicationController
   def create
     @user = User.new(safe_params)
     if @user.save
-      redirect_to @user, notice: t('admin.users.controller.create.success')
+      redirect_to admin_user_path(@user), notice: t('admin.users.controller.create.success')
     else
       flash[:error] = t('admin.users.controller.create.failure')
       render :new
@@ -29,7 +28,7 @@ class Admin::UsersController < ApplicationController
 
   def update
     if @user.update_attributes(safe_params)
-      redirect_to @user, notice: t('admin.users.controller.update.success')
+      redirect_to admin_user_path(@user), notice: t('admin.users.controller.update.success')
     else
       flash[:error] =  t('admin.users.controller.update.failure')
       render :edit
@@ -43,7 +42,7 @@ class Admin::UsersController < ApplicationController
     else
       flash[:error] = t('admin.users.controller.destroy.prevent_self_destroy')
     end
-    redirect_to users_url
+    redirect_to admin_users_url
   end
 
   private

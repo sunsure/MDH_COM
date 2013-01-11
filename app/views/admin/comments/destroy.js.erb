@@ -1,0 +1,2 @@
+$("div#comment_<%= @comment.id %>").slideUp().remove();
+  $(".bootstrap-flash").html('<%= j render("shared/flash_messages") %>');

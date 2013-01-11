@@ -1,54 +1,45 @@
 Mdh::Application.routes.draw do
 
+  # Catch All
+  match "/login", to: "sessions#new", as: "login", via: [:get]
+  match "/logout", to: "sessions#destroy", as: "logout", via: [:get]
+  match "/unauthorized", to: "sessions#unauthorized", as: "unauthorized", via: [:get]
+  match "/dashboard", to: "my#dashboard", as: "dashboard", via: [:get]
+
+  resources :sessions, only: [:new, :create, :destroy]
+
   # Administrative side
-  constraints(subdomain: /admin/) do
-    scope module: "admin" do
-      # Enable MailView, but only on admin side in dev environment
-      if Rails.env.development?
-        mount MailPreview => 'mail_view'
-      end
-
-      match "/login", to: "sessions#new", as: :admin_login, via: [:get]
-      match "/logout", to: "sessions#destroy", as: :admin_logout, via: [:get]
-      match "/unauthorized", to: "sessions#unauthorized", as: :admin_unauthorized, via: [:get]
-      match "/dashboard", to: "my#dashboard", as: :admin_dashboard, via: [:get]
-
-      resources :sessions, only: [:new, :create, :destroy]
-
-      resources :articles do
-        collection do
-          match :calendar, via: [:get], as: :admin_calendar
-          match :tags, via: [:get], as: :admin_tags
-          match "tags/:tag", to: "articles#tags", via: [:get], as: :admin_tag
-        end
-      end
-      resources :users
-      root to: 'articles#index'
+  namespace :admin do
+    # Enable MailView, but only on admin side in dev environment
+    if Rails.env.development?
+      mount MailPreview => 'mail_view'
     end
-  end
 
-  constraints(subdomain: /www/) do
-    match "/login", to: "sessions#new", as: "login", via: [:get]
-    match "/logout", to: "sessions#destroy", as: "logout", via: [:get]
-    match "/unauthorized", to: "sessions#unauthorized", as: "unauthorized", via: [:get]
-    match "/dashboard", to: "my#dashboard", as: "dashboard", via: [:get]
-
-    resources :sessions, only: [:new, :create, :destroy]
-
-    match "/register", to: "users#new", as: "register", via: [:get]
-    resources :users, only: [:create, :destroy]
-
-    resources :articles, only: [:index, :show] do
-      resources :comments, except: [:index, :show]
+    resources :articles do
+      resources :comments, only: [:destroy]
       collection do
         match :calendar, via: [:get]
-        match :tags, via: [:get], as: :tags
+        match :tags, via: [:get]
         match "tags/:tag", to: "articles#tags", via: [:get], as: :tag
       end
     end
-
+    resources :users
     root to: 'articles#index'
   end
+
+  match "/register", to: "users#new", as: "register", via: [:get]
+  resources :users, only: [:create, :destroy]
+
+  resources :articles, only: [:index, :show] do
+    resources :comments, except: [:index, :show]
+    collection do
+      match :calendar, via: [:get]
+      match :tags, via: [:get], as: :tags
+      match "tags/:tag", to: "articles#tags", via: [:get], as: :tag
+    end
+  end
+
+  root to: 'articles#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

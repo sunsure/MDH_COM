@@ -4,7 +4,7 @@
 
 - content_for(:sidebar) do
   - if can? :create, User
-    = link_to new_user_path, class: "btn btn-success btn-small btn-block" do
+    = link_to new_admin_user_path, class: "btn btn-success btn-small btn-block" do
       %i.icon-user.icon-white
       %span.addon= t('.new', default: t("helpers.links.new"))
 

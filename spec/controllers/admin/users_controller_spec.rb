@@ -121,7 +121,7 @@ describe Admin::UsersController do
 
       it "redirects to the created user" do
         post :create, {user: @attr}
-        response.should redirect_to(User.last)
+        response.should redirect_to(admin_user_path(User.last))
       end
     end
 
@@ -171,7 +171,7 @@ describe Admin::UsersController do
 
       it "redirects to the user" do
         put :update, {id: @user, user: @attr}
-        response.should redirect_to(@user)
+        response.should redirect_to(admin_user_path(@user))
       end
     end
 
@@ -207,13 +207,13 @@ describe Admin::UsersController do
 
     it "redirects to the user list" do
       delete :destroy, {id: @test_user}
-      response.should redirect_to(users_url)
+      response.should redirect_to(admin_users_url)
     end
 
     it "prevents them from destroying their own account" do
       lambda do
         delete :destroy, {id: @user}
-        response.should redirect_to(users_url)
+        response.should redirect_to(admin_users_url)
         flash[:error].should_not be_nil
         flash[:error].should eq("You cannot destroy your own account!")
       end.should_not change(User, :count).by(-1)

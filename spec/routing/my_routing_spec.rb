@@ -4,7 +4,7 @@ describe MyController do
 
   describe "routing" do
     let(:url) { "http://www.example.com" }
-    let(:bad_url) { "http://admin.example.com" }
+    let(:bad_url) { "http://www.example.com/admin" }
 
     describe "success" do
       it "routes to my#dashboard" do
