@@ -9,27 +9,26 @@ body {
 @iconSpritePath: asset-path('twitter/bootstrap/glyphicons-halflings.png');
 @iconWhiteSpritePath: asset-path('twitter/bootstrap/glyphicons-halflings-white.png');
 
-// Set the Font Awesome (Font Awesome is default. You can disable by commenting below lines)
-// Note: If you use asset_path() here, your compiled boostrap_and_overrides.css will not
-//       have the proper paths. So for now we use the absolute path.
-// @fontAwesomeEotPath: '/assets/fontawesome-webfont.eot';
-// @fontAwesomeWoffPath: '/assets/fontawesome-webfont.woff';
-// @fontAwesomeTtfPath: '/assets/fontawesome-webfont.ttf';
-// @fontAwesomeSvgPath: '/assets/fontawesome-webfont.svg';
+[class^="icon-"],
+[class*=" icon-"] {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  .ie7-restore-right-whitespace();
+  line-height: 14px;
+  vertical-align: text-top;
+  background-image: url(@iconSpritePath);
+  background-position: 14px 14px;
+  background-repeat: no-repeat;
 
-// Font Awesome
-// @import "fontawesome";
+}
+.icon-white {
+  background-image: url(@iconWhiteSpritePath);
+}
 
-// Your custom LESS stylesheets goes here
-//
-// Since bootstrap was imported above you have access to its mixins which
-// you may use and inherit here
-//
-// If you'd like to override bootstrap's own variables, you can do so here as well
-// See http://twitter.github.com/bootstrap/customize.html#variables for their names and documentation
-//
-// Example:
-// @linkColor: #ff0000;
+// Glyphicons
+@import "twitter/bootstrap/sprites.less";
+
 .navbar-inverse .brand, .navbar-inverse .nav > li > a {
   color: #777;
 }
