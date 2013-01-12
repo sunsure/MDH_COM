@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory(:comment) do |comment|
     comment.content { Faker::Lorem.paragraph }
-    comment.article { FactoryGirl.create(:article) }
+    comment.association :article
   end
 end
