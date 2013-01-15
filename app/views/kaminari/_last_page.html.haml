@@ -7,3 +7,5 @@
 -#    remote:        data-remote
 %li.last
   = link_to_unless current_page.last?, raw(t 'views.pagination.last'), url, {:remote => remote}
+- if content_for? :kaminari_per_page
+  %li.page= yield :kaminari_per_page

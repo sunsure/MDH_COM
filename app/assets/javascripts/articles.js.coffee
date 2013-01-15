@@ -11,3 +11,5 @@ jQuery ->
   $("form#calendar-datepicker input#date").on "changeDate", (e) ->
     $(this).parent("form").submit()
 
+  $("form select#article_per_page").change ->
+    $(this).parent("form").submit();
