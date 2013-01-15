@@ -70,3 +70,9 @@ code.author {
   @include rounded-corners(1em);
   border: 1px solid #D5D5D5;
 }
+
+// datepicker on calendar view
+#date {
+  width: 6em;
+  text-align: center;
+}

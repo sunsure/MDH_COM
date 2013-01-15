@@ -21,8 +21,10 @@
 
 %div#articles
   %h2#month
+    %div= @date.strftime("%B %Y")
     = link_to "<", date: @date.prev_month
-    = @date.strftime("%B %Y")
+    = form_tag nil, method: :get, id: 'calendar-datepicker', class: 'inline' do
+      = text_field_tag :date, @date, class: 'datepicker'
     = link_to ">", date: @date.next_month
   = calendar @date do |date|
     = date.day

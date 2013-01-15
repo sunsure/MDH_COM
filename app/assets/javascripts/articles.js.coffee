@@ -7,3 +7,7 @@ jQuery ->
 
   $(".pop").popover()
   $(".datepicker").datepicker(format: 'yyyy-mm-dd')
+
+  $("form#calendar-datepicker input#date").on "changeDate", (e) ->
+    $(this).parent("form").submit()
+
