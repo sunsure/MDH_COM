@@ -143,6 +143,7 @@ en:
         unpublish: "Un-Publish"
       calendar:
         list_view: 'List View'
+        new: 'New Article'
         title: "Calendar"
       edit:
         title: "Editing Article : %{article_title}"
@@ -172,6 +173,7 @@ en:
       controller:
         destroy:
           success: 'Comment has been destroyed successfully.'
+          failure: 'Failed to remove that comment!'
     users:
       controller:
         new:

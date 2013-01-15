@@ -1,2 +1,4 @@
-$("div#comment_<%= @comment.id %>").slideUp().remove();
-  $(".bootstrap-flash").html('<%= j render("shared/flash_messages") %>');
+<% if @comment.destroyed? %>
+  $("div#comment_<%= @comment.id %>").slideUp().remove();
+<% end %>
+$(".bootstrap-flash").html('<%= j render("shared/flash_messages") %>');

@@ -10,6 +10,24 @@ describe "Articles" do
     @article = FactoryGirl.create(:article, user: @user)
   end
 
+
+  describe "visiting the calendar view" do
+    it "should have a header" do
+      visit calendar_admin_articles_path
+      page.should have_selector('h3', text: 'Calendar')
+    end
+
+    it "should have a link to create a new article" do
+      visit calendar_admin_articles_path
+      page.find_link('New Article')[:href].should == new_admin_article_path
+    end
+
+    it "should have a link to list view" do
+      visit calendar_admin_articles_path
+      page.find_link('list')[:href].should == admin_articles_path
+    end
+  end
+
   describe "visiting the index" do
     it "should have a header" do
       visit admin_articles_path
