@@ -134,7 +134,8 @@ describe "Articles" do
         fill_in "article_excerpt", with: "this is my excerpt"
         click_button "Update Article"
         page.should have_content("Article was updated successfully.")
-        current_path.should eq(admin_articles_path)
+        @article.should == Article.last
+        current_path.should eq(admin_article_path(Article.last))
       end
     end
 
@@ -190,6 +191,13 @@ describe "Articles" do
   end
 
   describe "DESTROY'ing a article" do
+    it "should destroy the specified article (ajax)", format: :js do
+      lambda do
+        visit admin_articles_path
+        click_link "Destroy"
+      end.should change(Article, :count).by(-1)
+    end
+
     it "should destroy the specified article" do
       lambda do
         visit admin_articles_path

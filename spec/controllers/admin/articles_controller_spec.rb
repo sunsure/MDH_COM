@@ -191,9 +191,9 @@ describe Admin::ArticlesController do
         assigns(:article).should eq(@article)
       end
 
-      it "redirects to the articles index" do
+      it "redirects to the article" do
         put :update, id: @article.to_param, article: valid_attributes
-        response.should redirect_to(admin_articles_path)
+        response.should redirect_to(admin_article_path(Article.first))
       end
     end
 

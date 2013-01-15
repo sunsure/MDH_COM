@@ -1,5 +1,5 @@
 class Admin::ArticlesController < AdminController
-  respond_to :html
+  respond_to :html, :js
 
   load_and_authorize_resource only: [:index, :new], find_by: :permalink
   load_resource only: [:show, :calendar], find_by: :permalink
@@ -41,7 +41,7 @@ class Admin::ArticlesController < AdminController
 
   def update
     if @article.update_attributes(safe_params)
-      redirect_to admin_articles_url, notice: t('admin.articles.controller.update.success')
+      redirect_to admin_article_path(@article), notice: t('admin.articles.controller.update.success')
     else
       flash[:error] =  t('admin.articles.controller.update.failure')
       render :edit
@@ -54,7 +54,12 @@ class Admin::ArticlesController < AdminController
     else
       flash[:notice] = t('admin.articles.controller.destroy.failure')
     end
-    redirect_to admin_articles_url
+
+    # do stuff depending on the request type
+    respond_to do |format|
+      format.html { redirect_to admin_articles_url }
+      format.js
+    end
   end
 
   def tags
