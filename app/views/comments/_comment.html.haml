@@ -3,19 +3,22 @@
     = image_tag "arrow.png", class: "media-object"
   %div.media-body
     %h4.media-heading
-      = comment.user.try(:email)
+      = comment.title
       .pull-right= link_to 'Report', '#', class: 'btn btn-mini btn-danger'
     %code.author= comment.user.try(:name)
+    = comment.user.try(:email)
     - if comment.updated_at?
       %section.inline.updated_at= l(comment.updated_at, format: :short)
     - if comment.created_at?
       %section.inline.created_at= l(comment.created_at, format: :short) if comment.created_at?
     %div.media{ id: "my_comment_content_#{comment.id}" }= to_markdown(comment.content)
-    %div#comment_actions
+    %div{ id: "comment_actions_#{comment.id}" }
       .btn-group
         = link_to "Like", '#', class: 'btn btn-small btn-primary'
-        = link_to 'Reply', '#', class: 'btn btn-small btn-success'
+        = link_to 'Reply', reply_article_comment_path(@article.to_param, comment.id), remote: true, class: 'btn btn-small btn-success'
         - if can? :edit, comment
-          = link_to "Edit", edit_article_comment_path(@article, comment), remote: true, class: 'btn btn-small btn-warning'
+          = link_to "Edit", edit_article_comment_path(@article.to_param, comment.id), remote: true, class: 'btn btn-small btn-warning'
         - if can? :destroy, comment
-          = link_to "Destroy", admin_article_comment_path(@article, comment), class: 'btn btn-small btn-danger', data: { remote: true, method: 'delete', confirm: t('.confirm', default: t("helpers.links.confirm", default: 'Are you sure?')) }
+          = link_to "Destroy", admin_article_comment_path(@article.to_param, comment.id), class: 'btn btn-small btn-danger', data: { remote: true, method: 'delete', confirm: t('.confirm', default: t("helpers.links.confirm", default: 'Are you sure?')) }
+    - comment.children.each do |child_comment|
+      = render "comments/comment", comment: child_comment

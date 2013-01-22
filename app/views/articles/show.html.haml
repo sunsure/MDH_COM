@@ -36,5 +36,6 @@
       - else
         %p= t(".login_or_register")
     #comments
-      - @comments.each do |comment|
-        = render comment
+      - if @root_comments.present?
+        - @root_comments.each do |root_comment|
+          = render "comments/comment", comment: root_comment

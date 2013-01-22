@@ -23,7 +23,25 @@ describe CommentsController do
       end
 
       it "routes to #destroy" do
-        delete("#{url}/articles/1/comments/1").should route_to("comments#destroy", article_id: "1", id: "1")
+        delete("#{url}/articles/1/comments/1").should_not route_to("comments#destroy", article_id: "1", id: "1")
+      end
+
+
+      describe "concerning the leet way to do replies" do
+        # We'll set the parent_id by the comment ID in the URL
+        it "routes to #new_reply" do
+          get("#{url}/articles/1/comments/1/reply").should route_to("comments#new_reply", article_id: "1", id: "1")
+        end
+
+        it "routes to #reply" do
+          post("#{url}/articles/1/comments/1/reply").should route_to("comments#reply", article_id: "1", id: "1")
+        end
+      end
+
+      describe "concerning ADMIN routes" do
+        it "should route to #destroy" do
+          delete("#{bad_url}/articles/1/comments/1").should route_to("admin/comments#destroy", article_id: "1", id: "1")
+        end
       end
     end
 
@@ -44,9 +62,6 @@ describe CommentsController do
         put("#{bad_url}/articles/1/comments/1").should_not route_to("comments#update", article_id: "1", id: "1")
       end
 
-      it "should not route to #destroy" do
-        delete("#{bad_url}/articles/1/comments/1").should_not route_to("comments#destroy", article_id: "1", id: "1")
-      end
     end
 
   end

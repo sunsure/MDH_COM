@@ -20,6 +20,45 @@ describe CommentsController do
     {}
   end
 
+
+  describe "GET reply to an existing comment" do
+    before(:each) do
+      @parent_comment = FactoryGirl.create(:comment, article_id: @article.id)
+    end
+    it "assigns a new comment as @comment" do
+      get :reply, article_id: @article.to_param, id: @parent_comment.id, comment: { parent_id: @parent_comment.id }, format: :js
+      assigns(:comment).should be_a(Comment)
+      response.should be_success
+    end
+  end
+
+  describe "POST reply" do
+    before(:each) do
+      @comment = FactoryGirl.create(:comment, article_id: @article.id)
+    end
+
+    describe "with valid params" do
+      it "creates a new nested Comment" do
+        expect {
+          post :reply, comment: valid_attributes, article_id: @article.to_param, id: @comment.id, format: :js
+        }.to change(Comment, :count).by(1)
+      end
+
+      it "assigns a newly replied comment as @comment" do
+        post :reply, comment: valid_attributes, id: @comment.id, article_id: @article.to_param, format: :js
+        assigns(:comment).should be_a(Comment)
+        assigns(:comment).should be_persisted
+      end
+    end
+
+    describe "with invalid params" do
+      it "assigns a newly created but unsaved comment as @comment" do
+        post :reply, id: @comment.id, article_id: @article.to_param, comment: invalid_attributes, format: :js
+        assigns(:comment).should be_a_new(Comment)
+      end
+    end
+  end
+
   describe "GET new" do
     it "assigns a new comment as @comment" do
       get :new, article_id: @article.to_param, format: :js
@@ -51,10 +90,6 @@ describe CommentsController do
         post :create, comment: valid_attributes, article_id: @article.to_param, format: :js
         assigns(:comment).should be_a(Comment)
         assigns(:comment).should be_persisted
-      end
-
-      it "redirects to the Article the comment belongs to" do
-        post :create, comment: valid_attributes, article_id: @article.to_param, format: :js
       end
     end
 

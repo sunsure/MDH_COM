@@ -1,4 +1,7 @@
-<% if @comment.persisted? %>
-  $("form#edit_comment_<%= @comment.id %>").remove();
+<% if @comment.valid? %>
+  $("form#edit_comment_<%= @comment.id %>").removeWithFlair();
   $("div#comment_<%= @comment.id %>").slideDown().replaceWith('<%= j render(@comment) %>');
+<% else %>
+  $('form#edit_comment').replaceWith('<%= j render("form", form_id: "edit_comment") %>');
 <% end %>
+$(".bootstrap-flash").html('<%= j render("shared/flash_messages") %>');

@@ -101,7 +101,14 @@ en:
       create:
         success: 'Thanks for the comment!'
         failure: "Sorry, we weren't able to save your comment."
+      reply:
+        success: 'Thanks for the reply!'
+        failure: "Sorry, we weren't able to save your reply."
+      update:
+        success: 'Thanks for editing your comment!'
+        failure: "Sorry, we weren't able to update your comment."
     form:
+      cancel: 'Cancel'
       comment: 'Comment'
 
   my:

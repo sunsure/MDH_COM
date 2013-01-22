@@ -18,6 +18,8 @@ describe "Comments" do
       page.should have_content(comment.content)
       page.find_link('Destroy')[:href].should == admin_article_comment_path(@article.to_param, comment)
       page.find_link('Destroy').click
+      # wait for the ajax to remove it
+      sleep 1
       page.should_not have_content(comment.content)
       page.should have_content("Comment has been destroyed successfully.")
     end

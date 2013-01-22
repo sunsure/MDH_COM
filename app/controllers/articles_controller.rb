@@ -17,7 +17,7 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    @comments = @article.comments.includes(:user)
+    @root_comments = @article.comments.includes(:user).roots
   end
 
   def tags

@@ -1,0 +1,2 @@
+$('#new_comment_link').slideUp();
+$("div#comment_actions_<%= @parent_comment.id %>").slideUp().after('<%= j render("form", form_id: "reply_comment", url: reply_article_comment_path(@article, @parent_comment)) %>');

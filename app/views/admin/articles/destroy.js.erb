@@ -1,4 +1,4 @@
 <% if @article.destroyed? %>
-  $("div.media#article_<%= @article.permalink %>").slideUp().remove();
+  $("div.media#article_<%= @article.permalink %>").removeWithFlair();
 <% end %>
 $(".bootstrap-flash").html('<%= j render("shared/flash_messages") %>');

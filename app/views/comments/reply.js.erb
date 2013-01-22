@@ -1,0 +1,8 @@
+<% if @comment.persisted? %>
+  $('#new_comment_link').slideDown();
+  $('form#reply_comment').removeWithFlair();
+  $("div#comment_actions_<%= @parent_comment.id %>").slideDown().append('<%= j render(@comment) %>');
+<% else %>
+  $('form#reply_comment').replaceWith('<%= j render("form", form_id: "reply_comment", url: reply_article_comment_path(@article, @parent_comment)) %>');
+<% end %>
+$(".bootstrap-flash").html('<%= j render("shared/flash_messages") %>');

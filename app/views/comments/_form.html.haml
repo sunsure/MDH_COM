@@ -1,4 +1,10 @@
-= simple_form_for [@article, @comment], remote: true, id: 'new_comment' do |f|
+- url ||= nil
+- form_id ||= nil
+= simple_form_for [@article, @comment], url: url, remote: true, html: { id: form_id } do |f|
+  = f.input :title
   = f.input :content, label: false, input_html: { rows: 4 }
   .form-actions
     = f.button :submit, t(".comment"), class: 'btn btn-success'
+    = link_to 'Cancel', '#', class: 'btn', id: "cancel_#{form_id}_link"
+    - if content_for?(:comment_cancel_link)
+      = yield(:comment_cancel_link)

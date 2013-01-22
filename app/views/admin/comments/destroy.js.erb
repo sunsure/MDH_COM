@@ -1,4 +1,4 @@
 <% if @comment.destroyed? %>
-  $("div#comment_<%= @comment.id %>").slideUp().remove();
+  $("div#comment_<%= @comment.id %>").removeWithFlair();
 <% end %>
 $(".bootstrap-flash").html('<%= j render("shared/flash_messages") %>');

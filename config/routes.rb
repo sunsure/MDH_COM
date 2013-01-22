@@ -31,7 +31,12 @@ Mdh::Application.routes.draw do
   resources :users, only: [:create, :destroy]
 
   resources :articles, only: [:index, :show] do
-    resources :comments, except: [:index, :show]
+    resources :comments, except: [:index, :show, :destroy] do
+      member do
+        match :reply, to: "comments#new_reply", via: [:get]
+        match :reply, to: "comments#reply", via: [:post]
+      end
+    end
     collection do
       match :calendar, via: [:get]
       match :tags, via: [:get], as: :tags

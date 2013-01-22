@@ -1,8 +1,8 @@
 <% if @comment.persisted? %>
-  $('form#new_comment').remove();
+  $('form#new_comment').removeWithFlair();
   $('#new_comment_link').slideDown();
   $('#comments').prepend('<%= j render(@comment) %>');
-  $(".bootstrap-flash").html('<%= j render("shared/flash_messages") %>');
 <% else %>
-  $(".bootstrap-flash").html('<%= j render("shared/flash_messages") %>');
+  $('form#new_comment').replaceWith('<%= j render("form", form_id: "new_comment") %>');
 <% end %>
+$(".bootstrap-flash").html('<%= j render("shared/flash_messages") %>');
