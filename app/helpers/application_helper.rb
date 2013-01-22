@@ -14,8 +14,8 @@ module ApplicationHelper
     content_for(:title) { h(page_title.to_s) }
   end
 
-  def hide_explanation_sidebar?
-    @hide_explanation_sidebar
+  def show_sidebar_carousel?
+    @show_sidebar_carousel
   end
 
   def to_markdown(text)

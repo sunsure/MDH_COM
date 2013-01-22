@@ -1,0 +1,23 @@
+-# carousel test
+%div#myCarousel.carousel.slide
+  %div.carousel-inner
+    %div.active.item
+      = image_tag "carousel_1.png"
+      %div.carousel-caption
+        %h4 First Thumbnail label
+        %p
+          Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+    %div.item
+      = image_tag "carousel_2.png"
+      %div.carousel-caption
+        %h4 Second Thumbnail label
+        %p
+          Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+    %div.item
+      = image_tag "carousel_3.png"
+      %div.carousel-caption
+        %h4 Third Thumbnail label
+        %p
+          Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+  = link_to "&lsaquo;".html_safe, '#myCarousel', class: "carousel-control left", data: { slide: "prev" }
+  = link_to "&rsaquo;".html_safe, '#myCarousel', class: "carousel-control right", data: { slide: "next" }

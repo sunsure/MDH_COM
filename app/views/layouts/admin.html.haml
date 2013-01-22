@@ -14,7 +14,7 @@
     %link(href="images/apple-touch-icon-114x114.png" rel="apple-touch-icon-precomposed" sizes="114x114")
     %link(href="images/apple-touch-icon-72x72.png" rel="apple-touch-icon-precomposed" sizes="72x72")
     %link(href="images/apple-touch-icon.png" rel="apple-touch-icon-precomposed")
-    %link(href="/images/favicon.ico" rel="shortcut icon")
+    %link(href="/images/favicon.png" rel="shortcut icon")
 
 
   %body
@@ -69,22 +69,7 @@
           .bootstrap-flash= bootstrap_flash
           = yield
         .span3
-          %div.well.sidebar-nav
-            - if current_user
-              .nav-header= t("helpers.actions")
-              - if content_for?(:sidebar)
-                = yield(:sidebar)
-              - else
-                = link_to "#", data: { placement: "bottom", title: t("layout.explanation.title"), content: t("layout.explanation.content") }, class: "pop btn btn-info btn-small btn-block" do
-                  %i.icon-question-sign.icon-white
-                  %span.addon= t("layout.explanation.nothing_to_show")
-            - else
-              - if content_for?(:sidebar)
-                = yield(:sidebar)
-              - else
-                - unless hide_explanation_sidebar?
-                  %h3= t('application.titles.my_name')
-                  %p= t('layout.sidebar.content')
+          = render "shared/sidebar"
       %footer
         %p= t('application.copyright', year: Time.now.year).html_safe
     /
