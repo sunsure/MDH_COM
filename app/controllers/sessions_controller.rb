@@ -13,9 +13,21 @@ class SessionsController < ApplicationController
         cookies[:auth_token] = user.auth_token
       end
       if user.is?(:admin)
-        redirect_to admin_root_url, notice: t("application.notices.authorization.success")
+        if session[:redirect_to].present?
+          # go back where we tried to go to
+          redirect_to session[:redirect_to]
+        else
+          # if we didn't try to go anywhere, then go to admin
+          redirect_to admin_root_url, notice: t("application.notices.authorization.success")
+        end
       else
-        redirect_to root_url, notice: t("application.notices.authorization.success")
+        if session[:redirect_to].present?
+          # normal user trying to go somewhere but required login
+          redirect_to session[:redirect_to]
+        else
+          # otherwise just go home
+          redirect_to root_url, notice: t("application.notices.authorization.success")
+        end
       end
     else
       # no user found or bad credentials

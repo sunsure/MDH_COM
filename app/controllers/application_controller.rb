@@ -18,6 +18,7 @@ class ApplicationController < ActionController::Base
 
   def authorize
     if current_user.nil?
+      session[:redirect_to] = request.url
       flash[:notice] = t("application.errors.authorization.please_authenticate")
       redirect_to login_url
     end
