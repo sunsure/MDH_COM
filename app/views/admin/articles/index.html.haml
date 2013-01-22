@@ -5,7 +5,7 @@
     .calendar-widget.inline
       = link_to calendar_admin_articles_path, rel: 'tooltip', title: t('.calendar_view') do
         %i.icon-calendar
-        (calendar)
+        = t(".calendar")
 
 - content_for :kaminari_per_page do
   = form_tag nil, class: "inline", method: :get do
@@ -18,10 +18,10 @@
       %span.addon= t('.new', default: t('helpers.links.new'))
     = link_to '#', class: "btn btn-small btn-block" do
       %i.icon-envelope
-      %span.addon Inbox
+      %span.addon= t("my.inbox")
     = link_to '#', class: "btn btn-small btn-block" do
       %i.icon-user
-      %span.addon My Profile
+      %span.addon= t("my.my_profile")
 
 #admin_article_controls.btn-toolbar
   .btn-group

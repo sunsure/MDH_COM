@@ -32,7 +32,7 @@
       - if current_user
         - if can? :create, Comment
           %p= t(".leave_comments")
-          = link_to "Add Comment", new_article_comment_path(@article), id: 'new_comment_link', remote: true
+          = link_to t(".add_comment"), new_article_comment_path(@article), id: 'new_comment_link', remote: true
       - else
         %p= t(".login_or_register")
     #comments

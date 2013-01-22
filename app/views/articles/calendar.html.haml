@@ -5,15 +5,15 @@
     .calendar-widget.inline
       = link_to articles_path, rel: 'tooltip', title: t('.list_view') do
         %i.icon-list
-        (list)
+        = t(".list")
 
 - content_for(:sidebar) do
   = link_to '#', class: "btn btn-small btn-block" do
     %i.icon-envelope
-    %span.addon Inbox
+    %span.addon= t("my.inbox")
   = link_to '#', class: "btn btn-small btn-block" do
     %i.icon-user
-    %span.addon My Profile
+    %span.addon= t("my.my_profile")
 
 %div#articles
   %h2#month

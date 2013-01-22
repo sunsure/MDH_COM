@@ -31,17 +31,17 @@
               %li
                 = link_to "https://github.com/mark-d-holmberg" do
                   = image_tag("/images/favicon_github_white.png")
-                  %span.addon GitHub
+                  %span.addon= t("layout.navbar.github")
               - if can? :index, Article
                 %li
                   = link_to admin_articles_path do
                     %i.icon-list-alt.icon-white
-                    %span.addon Articles
+                    %span.addon= t("layout.navbar.articles")
               - if can? :manage, User
                 %li
                   = link_to admin_users_path do
                     %i.icon-user.icon-white
-                    %span.addon Users
+                    %span.addon= t("layout.navbar.users")
             %ul.nav.pull-right
               - if current_user
                 %li
@@ -50,18 +50,18 @@
                     = current_user.name
                     %span.caret
                   %ul.dropdown-menu
-                    %li= link_to "Edit Profile", "#"
-                    %li= link_to "Change Password", "#"
+                    %li= link_to t("layout.navbar.edit_profile"), "#"
+                    %li= link_to t("layout.navbar.change_password"), "#"
                     %li.divider
                     %li
                       = link_to logout_path do
                         %i.icon-off
-                        %span.addon Logout
+                        %span.addon= t("layout.navbar.logout")
               - else
                 %li
                   = link_to login_path do
                     %i.icon-off.icon-white
-                    %span.addon Login
+                    %span.addon= t("layout.navbar.login")
 
     .container-fluid
       .row-fluid
@@ -71,7 +71,7 @@
         .span3
           %div.well.sidebar-nav
             - if current_user
-              .nav-header Actions
+              .nav-header= t("helpers.actions")
               - if content_for?(:sidebar)
                 = yield(:sidebar)
               - else

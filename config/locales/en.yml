@@ -63,6 +63,15 @@ en:
       content: "The Sidebar Actions automatically change depending on what you're trying to do in the application. Right now it's blank because there are no actions to take."
       nothing_to_show: "Nothing to show. Why?"
       title: "Sidebar: Actions"
+    navbar:
+      articles: 'Articles'
+      change_password: 'Change Password'
+      edit_profile: 'Edit Profile'
+      github: 'GitHub'
+      login: 'Login'
+      logout: 'Logout'
+      register: 'Register'
+      users: 'Users'
     sidebar:
       content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin facilisis, neque nec consequat convallis, ipsum eros feugiat nisi, ut dignissim elit leo quis est. Nulla elit arcu, hendrerit sed varius et, commodo sit amet risus. Maecenas convallis nulla vel tellus placerat malesuada id quis lorem. Maecenas et rhoncus augue. Donec consequat ligula eget eros elementum eu porttitor ante commodo. Duis eu lectus tortor, sed gravida mi. Etiam placerat euismod varius. Nulla tristique scelerisque mattis. Aenean tristique, libero vitae lobortis vulputate, odio est tincidunt lorem, quis imperdiet justo quam ac dolor."
 
@@ -71,9 +80,11 @@ en:
       publish: "Publish"
       unpublish: "Un-Publish"
     calendar:
+      list: '(list)'
       list_view: 'List View'
       title: "Calendar"
     index:
+      calendar: "(calendar)"
       calendar_view: 'Calendar View'
       new: "New Article"
       title: "Listing Articles"
@@ -83,6 +94,7 @@ en:
       current_tag: "Current Tag: %{tag}"
       tag_cloud: "Tag Cloud"
     show:
+      add_comment: 'Add Comment'
       comments: 'Comments'
       leave_comments: 'Leave your comments below.'
       login_or_register: 'Login or register to comment on this article.'
@@ -97,6 +109,12 @@ en:
       view_tag_cloud: "View Tag Cloud"
 
   comments:
+    comment:
+      destroy: 'Destroy'
+      edit: 'Edit'
+      like: 'Like'
+      reply: 'Reply'
+      report: 'Report'
     controller:
       create:
         success: 'Thanks for the comment!'
@@ -112,12 +130,16 @@ en:
       comment: 'Comment'
 
   my:
+    inbox: 'Inbox'
+    my_profile: 'My Profile'
     dashboard:
       title: "My Dashboard"
 
   sessions:
     new:
+      login: 'Login'
       remember_me: "Remember Me"
+      title: 'Login'
 
   users:
     controller:
@@ -149,6 +171,7 @@ en:
         publish: "Publish"
         unpublish: "Un-Publish"
       calendar:
+        list: '(list)'
         list_view: 'List View'
         new: 'New Article'
         title: "Calendar"
@@ -159,6 +182,7 @@ en:
       new:
         title: "New Article"
       index:
+        calendar: "(calendar)"
         calendar_view: 'Calendar View'
         new: "New Article"
         show_all: 'Show All'
@@ -166,6 +190,9 @@ en:
         show_published: 'Show Published'
         title: "Listing Articles"
       show:
+        add_comment: "Add Comment"
+        comments: 'Comments'
+        leave_comments: 'Leave your comments below.'
         publish: "Publish"
         title: "%{article_title}"
         unpublish: "Un-Publish"
