@@ -1,3 +1,15 @@
 - title t('.title')
-%h1=t '.title'
-%p This is your dashboard
+.page-header
+  %div
+    %h3.inline= t '.title'
+
+- @dashboard_boxes.in_groups_of(4, false) do |row|
+  .row-fluid
+    - row.each do |box|
+      - if can? box[:permission].first, box[:permission].last
+        .span3.well.dashboard-box
+          %h3.dashboard-box-title
+            = link_to box[:link] do
+              %i{ class: box[:icon] }
+              = box[:title]
+          .dashboard-box-content= box[:content]

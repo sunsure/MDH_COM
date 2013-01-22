@@ -3,8 +3,8 @@ Mdh::Application.routes.draw do
   # Catch All
   match "/login", to: "sessions#new", as: "login", via: [:get]
   match "/logout", to: "sessions#destroy", as: "logout", via: [:get]
+  match "/register", to: "users#new", as: "register", via: [:get]
   match "/unauthorized", to: "sessions#unauthorized", as: "unauthorized", via: [:get]
-  match "/dashboard", to: "my#dashboard", as: "dashboard", via: [:get]
 
   resources :sessions, only: [:new, :create, :destroy]
 
@@ -27,8 +27,14 @@ Mdh::Application.routes.draw do
     root to: 'articles#index'
   end
 
-  match "/register", to: "users#new", as: "register", via: [:get]
   resources :users, only: [:create, :destroy]
+
+  resource :my, only: [:dashboard, :comments, :inbox] do
+    match :comments, to: "my#comments", via: [:get]
+    match :dashboard, to: "my#dashboard", via: [:get]
+    match :inbox, to: "my#inbox", via: [:get]
+    resource :profile, only: [:edit, :update]
+  end
 
   resources :articles, only: [:index, :show] do
     resources :comments, except: [:index, :show, :destroy] do

@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   def new
     if current_user
       # don't let them register if they're already logged in
-      redirect_to dashboard_url, notice: t('users.controller.new.already_logged_in')
+      redirect_to dashboard_my_url, notice: t('users.controller.new.already_logged_in')
     else
       @user = User.new
     end
