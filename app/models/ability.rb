@@ -10,7 +10,10 @@ class Ability
     can :create, User, user: { role_ids: nil }
     can :confirm, User, confirm_token: user.confirm_token
     if user.is? :commenter
-      can [:create, :edit, :update, :new_reply, :reply], Comment, user_id: user.id
+      # they can reply to and report any comment
+      can [:like, :new_reply, :reply, :report], Comment
+      # but they can only edit their own
+      can [:create, :edit, :update], Comment, user_id: user.id
     end
     if user.is? :admin
       can :manage, :all

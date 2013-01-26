@@ -55,5 +55,5 @@
       - else
         %p= t(".login_or_register")
     #comments
-      - @comments.each do |comment|
+      - @root_comments.each do |comment|
         = render "comments/comment", comment: comment

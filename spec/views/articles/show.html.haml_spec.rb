@@ -5,7 +5,7 @@ describe "articles/show" do
     before(:each) do
       @article = assign(:article, FactoryGirl.create(:article))
       @comment = assign(:comment, FactoryGirl.create(:comment))
-      @comments = assign(:comments, [FactoryGirl.create(:comment)])
+      @root_comments = assign(:root_comments, [FactoryGirl.create(:comment)])
       stub_current_user([:view, :can_can_controller])
     end
 
@@ -25,7 +25,7 @@ describe "articles/show" do
   describe "with a logged out user" do
     before(:each) do
       @article = assign(:article, FactoryGirl.create(:article))
-      @comments = assign(:comments, [FactoryGirl.create(:comment)])
+      @root_comments = assign(:root_comments, [FactoryGirl.create(:comment)])
       stub_current_user([:view, :can_can_controller], {as_nil: true})
     end
 

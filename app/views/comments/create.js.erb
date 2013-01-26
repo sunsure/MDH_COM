@@ -1,7 +1,7 @@
 <% if @comment.persisted? %>
   $('form#new_comment').removeWithFlair();
   $('#new_comment_link').slideDown();
-  $('#comments').prepend('<%= j render(@comment) %>');
+  $('#comments').append('<%= j render(@comment) %>');
 <% else %>
   $('form#new_comment').replaceWith('<%= j render("form", form_id: "new_comment") %>');
 <% end %>

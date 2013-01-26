@@ -19,7 +19,7 @@ class Admin::ArticlesController < AdminController
   end
 
   def show
-    @comments = @article.comments.includes(:user)
+    @root_comments = @article.comments.includes(:user).roots
   end
 
   def new

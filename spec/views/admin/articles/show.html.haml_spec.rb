@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "admin/articles/show" do
   before(:each) do
     @article = assign(:article, FactoryGirl.create(:article))
-    @comments = assign(:comments, [])
+    @root_comments = assign(:root_comments, [])
     stub_current_user([:can_can_controller, :view])
   end
 
