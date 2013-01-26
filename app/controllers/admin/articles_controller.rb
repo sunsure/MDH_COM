@@ -32,7 +32,7 @@ class Admin::ArticlesController < AdminController
     @article = current_user.articles.new(safe_params)
 
     if @article.save
-      redirect_to admin_article_path(@article), notice: t('admin.articles.controller.create.success')
+      redirect_to admin_article_url(@article), notice: t('admin.articles.controller.create.success')
     else
       flash[:error] = t('admin.articles.controller.create.failure')
       render :new
@@ -41,7 +41,7 @@ class Admin::ArticlesController < AdminController
 
   def update
     if @article.update_attributes(safe_params)
-      redirect_to admin_article_path(@article), notice: t('admin.articles.controller.update.success')
+      redirect_to admin_article_url(@article), notice: t('admin.articles.controller.update.success')
     else
       flash[:error] =  t('admin.articles.controller.update.failure')
       render :edit
@@ -67,7 +67,7 @@ class Admin::ArticlesController < AdminController
     unless params[:tag].blank?
       @articles = Article.tagged_with(params[:tag]).page(params[:page]).per(params[:per_page])
     else
-      redirect_to root_path
+      redirect_to root_url
     end
   end
 

@@ -1,0 +1,18 @@
+<%= t(".dear", user_name: @user.name) %>
+
+<%= t(".intro") %>
+
+<%= t(".unlock_features") %>
+
+<%= t(".wont_resell") %>
+
+<%= t(".prevent_spammers") %>
+
+<%= t(".follow") %>
+
+<%= link_to t(".confirm_my_account"), edit_confirm_url(@user.confirm_token) %>
+
+<%= t(".thanks") %>
+
+<%= t(".my_name") %>
+<%= t(".admin_email") %>

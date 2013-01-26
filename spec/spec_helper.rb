@@ -47,6 +47,26 @@ def login_as(user)
   request.cookies[:auth_token] = user.try(:auth_token)
 end
 
+def simulate_login(user, confirmed, options={})
+  user.update_attribute(:confirmed_at, Time.zone.now)
+  if confirmed
+    user.update_attribute(:confirm_token, nil)
+  end
+  visit login_path
+  fill_in "email", with: user.email
+
+  if options[:failure]
+    fill_in "password", with: "this is not my password"
+  else
+    fill_in "password", with: user.password
+  end
+
+  if options[:remember_me]
+    find(:css, "#remember_me").set(true)
+  end
+  click_button "Login"
+end
+
 def stub_current_user(spec_type=[], options={})
   if options[:as_nil].present?
     @user = nil

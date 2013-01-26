@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Comment do
-  describe "concernins validations and factories" do
+  describe "concerning validations and factories" do
     it "should have a valid factory" do
       FactoryGirl.build(:comment).should be_valid
     end
@@ -30,6 +30,15 @@ describe Comment do
         FactoryGirl.build(:comment, content: '', title: "Foobar").should_not be_valid
       end
     end
+  end
 
+  describe "concerning PUBLIC methods" do
+    before(:each) do
+      @comment = FactoryGirl.create(:comment)
+    end
+
+    it "knows the user_name" do
+      @comment.user_name.should eq(@comment.user.name)
+    end
   end
 end

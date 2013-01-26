@@ -1,0 +1,22 @@
+%div{ style: "text-align: justify; width: 40%;"}
+  %p= t(".dear", user_name: @user.name)
+
+  %div{ style: "margin-left: 1em;"}
+    %p= t(".intro")
+
+    %p= t(".unlock_features")
+
+    %p= t(".wont_resell")
+
+    %p= t(".prevent_spammers")
+
+    %p= t(".follow")
+
+    %p= link_to t(".confirm_my_account"), edit_confirm_url(@user.confirm_token)
+
+    %p= t(".thanks")
+
+  %p
+    %ul{ style: "list-style-type: none; padding-left: 0em;"}
+      %li= t(".my_name")
+      %li= t(".admin_email")

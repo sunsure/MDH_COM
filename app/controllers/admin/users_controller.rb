@@ -19,7 +19,7 @@ class Admin::UsersController < AdminController
   def create
     @user = User.new(safe_params)
     if @user.save
-      redirect_to admin_user_path(@user), notice: t('admin.users.controller.create.success')
+      redirect_to admin_user_url(@user), notice: t('admin.users.controller.create.success')
     else
       flash[:error] = t('admin.users.controller.create.failure')
       render :new
@@ -28,7 +28,7 @@ class Admin::UsersController < AdminController
 
   def update
     if @user.update_attributes(safe_params)
-      redirect_to admin_user_path(@user), notice: t('admin.users.controller.update.success')
+      redirect_to admin_user_url(@user), notice: t('admin.users.controller.update.success')
     else
       flash[:error] =  t('admin.users.controller.update.failure')
       render :edit

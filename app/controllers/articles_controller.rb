@@ -25,7 +25,7 @@ class ArticlesController < ApplicationController
     unless params[:tag].blank?
       @articles = Article.tagged_with(params[:tag]).page(params[:page]).per(params[:per_page])
     else
-      redirect_to root_path
+      redirect_to root_url
     end
   end
 

@@ -15,11 +15,15 @@ describe SessionsController do
       end
 
       it "routes to sessions#create" do
-        post("#{url}/sessions").should route_to("sessions#create")
+        post("#{url}/login").should route_to("sessions#create")
       end
 
       it "routes /unauthorized to sessions#unauthorized" do
         get("#{url}/unauthorized").should route_to("sessions#unauthorized")
+      end
+
+      it "routes /confirm_account to sessions#confirm_account" do
+        get("#{url}/confirm_account/12345").should route_to("sessions#confirm_account", auth_token: "12345")
       end
     end
 
@@ -33,11 +37,15 @@ describe SessionsController do
       end
 
       it "does not route to admin/sessions#create" do
-        post("#{bad_url}/sessions").should_not route_to("sessions#create")
+        post("#{bad_url}/login").should_not route_to("sessions#create")
       end
 
       it "does not route /unauthorized to admin/sessions#unauthorized" do
         get("#{bad_url}/unauthorized").should_not route_to("sessions#unauthorized")
+      end
+
+      it "does not route /confirm_account to admin/sessions#confirm_account" do
+        get("#{bad_url}/confirm_account").should_not route_to("sessions#confirm_account")
       end
     end
 

@@ -11,10 +11,24 @@ describe "Users" do
           fill_in "user_email", with: "user@example.com"
           fill_in "user_password", with: "foobar"
           fill_in "user_password_confirmation", with: "foobar"
-          click_button "Create User"
+          click_button "Create Account"
           page.should have_content("Thanks for registering.")
           current_path.should eq(root_path)
         end.should change(User, :count).by(1)
+      end
+
+      it "should send a confirmation email" do
+        expect {
+          visit register_url
+          fill_in "user_first_name", with: "Mark"
+          fill_in "user_last_name", with: "Holmberg"
+          fill_in "user_email", with: "user@example.com"
+          fill_in "user_password", with: "foobar"
+          fill_in "user_password_confirmation", with: "foobar"
+          click_button "Create Account"
+          page.should have_content("Thanks for registering.")
+          current_path.should eq(root_path)
+        }.to change(ActionMailer::Base.deliveries, :count).by(1)
       end
     end
 
@@ -27,7 +41,7 @@ describe "Users" do
           fill_in "user_email", with: ""
           fill_in "user_password", with: "foobar"
           fill_in "user_password_confirmation", with: "foobar"
-          click_button "Create User"
+          click_button "Create Account"
           page.should have_content("can't be blank")
           current_path.should eq(users_path)
         end.should_not change(User, :count).by(1)
@@ -41,7 +55,7 @@ describe "Users" do
           fill_in "user_email", with: "user@example.com"
           fill_in "user_password", with: ""
           fill_in "user_password_confirmation", with: "foobar"
-          click_button "Create User"
+          click_button "Create Account"
           page.should have_content("doesn't match confirmation")
           current_path.should eq(users_path)
         end.should_not change(User, :count).by(1)
@@ -55,7 +69,7 @@ describe "Users" do
           fill_in "user_email", with: "user@example.com"
           fill_in "user_password", with: "foobar"
           fill_in "user_password_confirmation", with: ""
-          click_button "Create User"
+          click_button "Create Account"
           page.should have_content("doesn't match confirmation")
           page.should have_content("can't be blank")
           current_path.should eq(users_path)

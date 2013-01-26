@@ -1,12 +1,13 @@
 Mdh::Application.routes.draw do
-
-  # Catch All
-  match "/login", to: "sessions#new", as: "login", via: [:get]
-  match "/logout", to: "sessions#destroy", as: "logout", via: [:get]
-  match "/register", to: "users#new", as: "register", via: [:get]
-  match "/unauthorized", to: "sessions#unauthorized", as: "unauthorized", via: [:get]
-
-  resources :sessions, only: [:new, :create, :destroy]
+  # The priority is based upon order of creation:
+  # first created -> highest priority.
+  scope module: "sessions" do
+    match :new, as: :login, via: [:get], path: "/login"
+    match :create, via: [:post], path: "/login"
+    match :destroy, as: :logout, via: [:get], path: "/logout"
+    match :unauthorized, as: :unauthorized, via: [:get], path: "/unauthorized"
+    match :confirm_account, as: :confirm_account, via: [:get], path: "/confirm_account/:auth_token"
+  end
 
   # Administrative side
   namespace :admin do
@@ -27,12 +28,21 @@ Mdh::Application.routes.draw do
     root to: 'articles#index'
   end
 
+  scope module: "users" do
+    match :new, via: [:get], as: :register, path: "/register"
+  end
   resources :users, only: [:create, :destroy]
 
-  resource :my, only: [:dashboard, :comments, :inbox] do
-    match :comments, to: "my#comments", via: [:get]
-    match :dashboard, to: "my#dashboard", via: [:get]
-    match :inbox, to: "my#inbox", via: [:get]
+  # Make sure not to move these two around...order matters!
+  scope module: "users/confirm" do
+    match :create, via: [:post], as: :confirm_create, path: "/confirm"
+  end
+  resources :confirm, only: [:edit, :update], to: "users/confirm"
+
+  resource :my, only: [:dashboard, :comments, :inbox], to: "my" do
+    match :comments, via: [:get]
+    match :dashboard, via: [:get]
+    match :inbox,via: [:get]
     resource :profile, only: [:edit, :update]
   end
 
@@ -50,8 +60,6 @@ Mdh::Application.routes.draw do
     end
   end
 
+  # Root path
   root to: 'articles#index'
-
-  # The priority is based upon order of creation:
-  # first created -> highest priority.
 end

@@ -1,6 +1,16 @@
 require 'spec_helper'
 
 describe Article do
+  describe "concerning PUBLIC methods" do
+    before(:each) do
+      @article = FactoryGirl.create(:article)
+    end
+
+    it "to_param should be the permalink" do
+      @article.to_param.should eq(@article.permalink)
+    end
+  end
+
   describe "concerning validations and factories" do
     it "should have a valid factory" do
       FactoryGirl.build(:article).should be_valid

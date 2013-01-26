@@ -1,0 +1,15 @@
+- title t '.title'
+.page-header
+  %h1=t '.title'
+
+%p= t(".explanation")
+
+= form_tag confirm_path(@user.confirm_token), method: :put, class: "form-horizontal" do
+  .control-group
+    .control-label
+      = label_tag "user[email]", t(".email_address")
+    .controls
+      = text_field_tag "user[email]", @user.email, disabled: true
+  .form-actions
+    = submit_tag t(".submit"), class: 'btn btn-primary'
+

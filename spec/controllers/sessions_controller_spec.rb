@@ -17,7 +17,8 @@ describe SessionsController do
 
   describe "POST 'create' with remember me" do
     it "should set the permanent cookies if remember set" do
-      @user = FactoryGirl.create(:user)
+      @user = FactoryGirl.create(:user, confirmed_at: Time.zone.now)
+      @user.update_attribute(:confirm_token, nil)
       @attr = {
         email: @user.email,
         password: @user.password,
@@ -39,8 +40,9 @@ describe SessionsController do
 
   describe "POST 'create'" do
     before(:each) do
-     @user = FactoryGirl.create(:user)
+     @user = FactoryGirl.create(:user, confirmed_at: Time.zone.now)
      @attr = { email: @user.email, password: @user.password }
+     @user.update_attribute(:confirm_token, nil)
     end
 
     it "lets a valid user login" do

@@ -53,20 +53,38 @@ describe User do
     end
   end
 
-  describe "concerning private methods" do
+  describe "concerning PRIVATE methods" do
     it "should generate an auth token" do
       user = FactoryGirl.create(:user)
       user.auth_token.should_not be_nil
+    end
+
+    it "should generate a confirm token" do
+      user = FactoryGirl.create(:user)
+      user.confirm_token.should_not be_nil
+    end
+
+    it "should send a confirmation email" do
+      expect {
+        user = FactoryGirl.create(:user)
+      }.to change(ActionMailer::Base.deliveries, :count).by(1)
     end
 
     it "should default them to commenter if no other roles" do
       role = FactoryGirl.create(:role, key: :commenter, name: "Commenter")
       user = FactoryGirl.create(:user)
       user.roles.should include(Role.find_by_key(:commenter))
+      user.is?(:commenter).should eq(true)
     end
   end
 
-  describe "concerning public methods" do
+  describe "concerning PUBLIC methods" do
+    it "is? should return the right value" do
+      user = FactoryGirl.create(:user_with_roles, with_roles: ["admin"])
+      user.roles.should eq([Role.find_by_key(:admin)])
+      user.is?(:admin).should eq(true)
+      user.is?(:commenter).should eq(false)
+    end
     it "should return the right name" do
       u = FactoryGirl.create(:user)
       u.name.should match "#{u.first_name} #{u.last_name}"

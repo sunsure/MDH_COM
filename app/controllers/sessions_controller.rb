@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   skip_before_filter :authorize
+  before_filter :require_confirmation, only: [:create]
 
   def new
   end
@@ -32,7 +33,7 @@ class SessionsController < ApplicationController
     else
       # no user found or bad credentials
       flash[:error] = t("application.errors.authorization.failure")
-      redirect_to login_path
+      redirect_to login_url
     end
   end
 
@@ -43,6 +44,23 @@ class SessionsController < ApplicationController
   end
 
   def unauthorized
+  end
+
+  def confirm_account
+    @user = User.find_by_auth_token!(params[:auth_token])
+  end
+
+  private
+
+  def require_confirmation
+    # Make sure they've been confirmed
+    user = User.find_by_email(params[:email].to_s.downcase)
+    if user && user.authenticate(params[:password])
+      unless user.confirmed?
+        flash.now[:error] = t("sessions.controller.require_confirmation.failure")
+        redirect_to confirm_account_url(user.auth_token) and return
+      end
+    end
   end
 
 end

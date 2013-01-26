@@ -147,12 +147,46 @@ en:
       title: "My Dashboard"
 
   sessions:
+    controller:
+      require_confirmation:
+        failure: "You must confirm your account before you can login!"
+    confirm_account:
+      not_confirmed_yet: "You have not yet confirmed your account email. Before you can login, you must confirm that the email address you provided while registering is correct. You should have received an email with instructions on how to confirm your account. If you haven't received an email, you may want to check your spam folder. Failing that, you can resend the account confirmation email below."
+      submit: "Resend Confirmation"
+      title: "Account Confirmation"
+      why_this_page: "Why am I seeing this page?"
     new:
       login: 'Login'
       remember_me: "Remember Me"
       title: 'Login'
 
+  user_mailer:
+    confirmation:
+      admin_email: "admin@example.com"
+      confirm_my_account: "Confirm My Account"
+      dear: "Dear %{user_name}"
+      follow: "You can confirm your email address by following the link below:"
+      intro: "I'd like to thank you for registering an account with my blog, MarkHolmberg.com. Please take a moment now to confirm your email address."
+      my_name: "Mark Holmberg"
+      prevent_spammers: "We only use it to prevent spammers from disrupting the site."
+      subject: "MDH.com Account Confirmation"
+      thanks: "Thanks for registering."
+      unlock_features: "Once confirmed, you'll be able to login and enjoy more features that the site has to offer, such as being able to post comments on articles."
+      wont_resell: "We promise not to sell your email address to any third parties."
   users:
+    confirm:
+      controller:
+        create:
+          success: "Confirmation email has been sent."
+          failure: "Something went wrong while trying to resend the confirmation email."
+        update:
+          success: "Thanks for confirming your email."
+          failure: "Something went wrong while trying to confirm your email."
+      edit:
+        email_address: "Email Address"
+        explanation: "Please confirm your account by clicking the button below."
+        submit: "Confirm"
+        title: "Confirm Email"
     controller:
       new:
         already_logged_in: "You are already logged in!"
@@ -162,6 +196,8 @@ en:
       destroy:
         prevent_self_destroy: "You cannot destroy your own account!"
         success: "User was destroyed successfully."
+    form:
+      submit: "Create Account"
     new:
       title: "Register"
 

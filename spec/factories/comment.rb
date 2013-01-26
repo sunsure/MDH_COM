@@ -3,5 +3,6 @@ FactoryGirl.define do
     comment.content { Faker::Lorem.paragraph }
     comment.title { Faker::Lorem.sentence(1) }
     comment.association :article
+    comment.association :user
   end
 end

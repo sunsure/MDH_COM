@@ -4,10 +4,7 @@ describe "Comments" do
   before(:each) do
     @user = FactoryGirl.create(:user_with_roles, with_roles: ["admin"])
     @article = FactoryGirl.create(:article, user: @user)
-    visit login_path
-    fill_in "email", with: @user.email
-    fill_in "password", with: @user.password
-    click_button "Login"
+    simulate_login(@user, true)
   end
 
   describe "visiting an existing article" do

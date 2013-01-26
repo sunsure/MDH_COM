@@ -1,0 +1,4 @@
+<% if @result %>
+  $("form#resend_confirmation_form").removeWithFlair();
+<% end %>
+$(".bootstrap-flash").html('<%= j render("shared/flash_messages") %>');

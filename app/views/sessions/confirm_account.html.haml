@@ -1,0 +1,12 @@
+- title t '.title'
+.page-header
+  %h1=t '.title'
+
+%p.lead= t(".why_this_page")
+
+%p= t(".not_confirmed_yet")
+
+%p
+  = form_tag confirm_create_path, remote: true, method: :post, id: "resend_confirmation_form", class: "form-horizontal" do
+    = hidden_field_tag :auth_token, params[:auth_token]
+    = submit_tag t(".submit"), class: 'btn btn-primary'
