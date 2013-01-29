@@ -41,4 +41,27 @@ describe Comment do
       @comment.user_name.should eq(@comment.user.name)
     end
   end
+
+  describe "concerning optimization tricks" do
+    before(:each) do
+      @article = FactoryGirl.create(:article)
+    end
+
+    it "should update the counter cache when creating a new comment" do
+      @article.comments_count.should eq(0)
+      @comment = FactoryGirl.build(:comment, article: @article)
+      @comment.article.should eq(@article)
+      @comment.save
+      @article.reload.comments_count.should eq(1)
+    end
+
+    it "should update the counter cache when deleting a comment" do
+      @comment = FactoryGirl.build(:comment, article: @article)
+      @comment.save
+      @article.reload.comments_count.should eq(1)
+      @comment.article.should eq(@article)
+      @comment.destroy
+      @article.reload.comments_count.should eq(0)
+    end
+  end
 end

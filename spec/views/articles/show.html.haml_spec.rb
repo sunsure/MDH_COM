@@ -16,7 +16,7 @@ describe "articles/show" do
       rendered.should match(@article.excerpt)
       rendered.should match(@article.content)
 
-      assert_select "fieldset legend", text: "Comments"
+      assert_select "fieldset legend", text: "#{@article.comments.count} Comments"
       assert_select "fieldset p", text: "Leave your comments below."
       assert_select "a#new_comment_link", text: "Add Comment"
     end

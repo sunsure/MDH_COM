@@ -1,4 +1,5 @@
 <% if @comment.destroyed? %>
   $("div#comment_<%= @comment.id %>").removeWithFlair();
+  $("#article_comments_legend").html("<%= pluralize(@comment.article.comments.length, 'comment').titleize %>")
 <% end %>
 $(".bootstrap-flash").html('<%= j render("shared/flash_messages") %>');

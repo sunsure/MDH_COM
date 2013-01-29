@@ -3,6 +3,7 @@
   $('form#reply_comment').removeWithFlair();
   $("div#comment_actions_<%= @parent_comment.id %>").slideDown();
   $("div#last_reply_comment_<%= @parent_comment.id %>").before('<%= j render(@comment) %>');
+  $("#article_comments_legend").html("<%= pluralize(@comment.article.comments.length, 'comment').titleize %>")
 <% else %>
   $('form#reply_comment').replaceWith('<%= j render("form", form_id: "reply_comment", url: reply_article_comment_path(@article, @parent_comment)) %>');
 <% end %>

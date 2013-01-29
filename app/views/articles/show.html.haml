@@ -27,7 +27,9 @@
     .clearfix= to_markdown(@article.content)
 
   %fieldset
-    %legend= t('.comments')
+    %legend
+      %i.icon-comment
+      %span.inline#article_comments_legend= pluralize(@article.comments.size, 'comment').titleize
     %div
       - if current_user
         - if can? :create, Comment

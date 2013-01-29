@@ -2,6 +2,7 @@
   $('form#new_comment').removeWithFlair();
   $('#new_comment_link').slideDown();
   $('#comments').append('<%= j render(@comment) %>');
+  $("#article_comments_legend").html("<%= pluralize(@comment.article.comments.length, 'comment').titleize %>")
 <% else %>
   $('form#new_comment').replaceWith('<%= j render("form", form_id: "new_comment") %>');
 <% end %>

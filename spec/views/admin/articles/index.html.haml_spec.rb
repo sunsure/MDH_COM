@@ -12,9 +12,11 @@ describe "admin/articles/index" do
     render
 
     assert_select ".media-heading a", text: @first.title
+    assert_select ".media-heading div.comments_count", text: "0 comments"
     assert_select ".excerpt", text: @first.excerpt
 
     assert_select ".media-heading a", text: @second.title
+    assert_select ".media-heading div.comments_count", text: "0 comments"
     assert_select ".excerpt", text: @second.excerpt
   end
 end

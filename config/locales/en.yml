@@ -95,7 +95,6 @@ en:
       tag_cloud: "Tag Cloud"
     show:
       add_comment: 'Add Comment'
-      comments: 'Comments'
       leave_comments: 'Leave your comments below.'
       login_or_register: 'Login or register to comment on this article.'
       publish: "Publish"
@@ -238,7 +237,6 @@ en:
         title: "Listing Articles"
       show:
         add_comment: "Add Comment"
-        comments: 'Comments'
         leave_comments: 'Leave your comments below.'
         publish: "Publish"
         title: "%{article_title}"

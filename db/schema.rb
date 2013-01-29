@@ -11,17 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130122213511) do
+ActiveRecord::Schema.define(:version => 20130129012649) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
     t.text     "content"
     t.integer  "user_id"
     t.datetime "published_at"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
     t.text     "excerpt"
     t.string   "permalink"
+    t.integer  "comments_count", :default => 0
   end
 
   add_index "articles", ["permalink"], :name => "index_articles_on_permalink"
