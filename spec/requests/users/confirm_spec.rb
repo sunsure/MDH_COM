@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "users/confirm" do
   before(:each) do
-    @user = FactoryGirl.create(:user)
+    @user = FactoryGirl.create(:user, email: "user@notexample.com")
   end
 
   describe "with a VALID user confirm should" do

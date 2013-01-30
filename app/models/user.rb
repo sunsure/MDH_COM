@@ -48,6 +48,7 @@ class User < ActiveRecord::Base
 
   # Not private so we can call it again to resend the confirmation
   def send_confirmation_email
+    return false if /\w@(example)\.com/.match(self.email)
     UserMailer.confirmation(self).deliver unless confirmed?
   end
 

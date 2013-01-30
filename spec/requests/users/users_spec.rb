@@ -22,7 +22,7 @@ describe "Users" do
           visit register_url
           fill_in "user_first_name", with: "Mark"
           fill_in "user_last_name", with: "Holmberg"
-          fill_in "user_email", with: "user@example.com"
+          fill_in "user_email", with: "user@notexample.com"
           fill_in "user_password", with: "foobar"
           fill_in "user_password_confirmation", with: "foobar"
           click_button "Create Account"

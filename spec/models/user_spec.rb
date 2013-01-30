@@ -66,8 +66,14 @@ describe User do
 
     it "should send a confirmation email" do
       expect {
-        user = FactoryGirl.create(:user)
+        user = FactoryGirl.create(:user, email: "user@notexample.com")
       }.to change(ActionMailer::Base.deliveries, :count).by(1)
+    end
+
+    it "should NOT send an email if its example.com" do
+      expect {
+        user = FactoryGirl.create(:user)
+      }.to_not change(ActionMailer::Base.deliveries, :count).by(1)
     end
 
     it "should default them to commenter if no other roles" do
