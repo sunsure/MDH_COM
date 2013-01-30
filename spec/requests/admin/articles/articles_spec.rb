@@ -56,7 +56,7 @@ describe "Articles" do
           fill_in "article_excerpt", with: "this is my excerpt"
           click_button "Create Article"
           page.should have_content("Article was created successfully.")
-          current_path.should eq(admin_article_path(Article.last))
+          current_path.should eq(admin_article_path(Article.first))
         end.should change(Article, :count).by(1)
       end
     end
