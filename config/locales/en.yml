@@ -56,7 +56,7 @@ en:
 
   time:
     formats:
-      short: "%d %b %Y, %l:%M%p"
+      short: "%d %b %Y,%l:%M%p"
 
   layout:
     explanation:
