@@ -52,6 +52,33 @@ class User < ActiveRecord::Base
     UserMailer.confirmation(self).deliver unless confirmed?
   end
 
+  def send_password_reset_email
+    self.generate_password_reset_token
+    UserMailer.reset_password(self).deliver unless password_reset_expired?
+  end
+
+  def generate_password_reset_token
+    generate_token(:password_reset_token)
+    save!
+  end
+
+  def password_reset_expired?
+    # Don't send the email if the token or time is blank
+    return true if password_reset_token.blank?
+    return true if password_reset_sent_at.blank?
+
+    # Don't send the email if it's been 2 hours since they requested it
+    return true if password_reset_sent_at < (Time.zone.now - 2.hours)
+
+    # Don't send to example.com
+    return true if /\w@(example)\.com/.match(self.email)
+  end
+
+  def destroy_password_reset
+    # they used up their password reset request
+    self.update_attributes(password_reset_sent_at: nil, password_reset_token: nil)
+  end
+
   private
 
   def generate_auth_token

@@ -1,0 +1,9 @@
+- title t(".title")
+.page-header
+  %h3=t '.title'
+
+= simple_form_for @user, url: password_reset_path(@user.password_reset_token), method: :put, html: { id: "reset_password", class: 'form-horizontal' } do |f|
+  = f.input :password
+  = f.input :password_confirmation
+  .form-actions
+    = f.button :submit, t(".submit"), class: 'btn btn-primary'

@@ -28,6 +28,13 @@ Mdh::Application.routes.draw do
     root to: 'articles#index'
   end
 
+  scope module: "password_resets" do
+    match :new, via: [:get], as: :new_password_reset, path: "/reset/password/new"
+    match :edit, via: [:get], as: :edit_password_reset, path: "/reset/password/:id/edit"
+    match :create, via: [:post], as: :password_resets, path: "/reset/password"
+    match :update, via: [:put], as: :password_reset, path: "/reset/password/:id"
+  end
+
   scope module: "users" do
     match :new, via: [:get], as: :register, path: "/register"
   end

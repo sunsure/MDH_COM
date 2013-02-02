@@ -145,6 +145,21 @@ en:
     dashboard:
       title: "My Dashboard"
 
+  password_resets:
+    controller:
+      create:
+        success: "Instructions for resetting your password have been emailed to you."
+      update:
+        expired: "Password reset request has expired!"
+        success: "Your password has been updated successfully."
+    edit:
+      submit: "Reset Password"
+      title: "Change Password"
+    new:
+      instructions: "Enter your email address below and you will receive an email containing instructions on how to reset your password."
+      submit: "Send Reset Instructions"
+      title: "Reset My Password"
+
   sessions:
     controller:
       require_confirmation:
@@ -155,6 +170,7 @@ en:
       title: "Account Confirmation"
       why_this_page: "Why am I seeing this page?"
     new:
+      forgot_my_password: "Forgot My Password"
       login: 'Login'
       remember_me: "Remember Me"
       title: 'Login'
@@ -172,6 +188,14 @@ en:
       thanks: "Thanks for registering."
       unlock_features: "Once confirmed, you'll be able to login and enjoy more features that the site has to offer, such as being able to post comments on articles."
       wont_resell: "We promise not to sell your email address to any third parties."
+    reset_password:
+      admin_email: "admin@example.com"
+      dear: "Dear %{user_name}"
+      how_to_reset: "To reset your password, simply follow the link below:"
+      intro: "You are receiving this email because a request to reset your password was issued at %{time}."
+      my_name: "Mark Holmberg"
+      reset_my_password: "Reset My Password"
+      subject: "MDH.com Password Reset Request"
   users:
     confirm:
       controller:

@@ -82,6 +82,102 @@ describe User do
       user.roles.should include(Role.find_by_key(:commenter))
       user.is?(:commenter).should eq(true)
     end
+
+    describe "concerning PASSWORD RESETS" do
+      describe "concerning VALID password reset requests" do
+        before(:each) do
+          @user = FactoryGirl.create(:user, email: "foo-1337@notexample.com")
+          @user.update_attributes(confirmed_at: Time.zone.now, confirm_token: nil)
+          @user.confirmed?.should eq(true)
+        end
+
+        it "should send a password reset email" do
+          @user.password_reset_sent_at.should be_nil
+          @user.password_reset_token.should be_nil
+          @user.update_attributes(password_reset_sent_at: Time.zone.now, password_reset_token: '12345')
+          @user.password_reset_sent_at.should_not be_nil
+          @user.password_reset_token.should_not be_nil
+
+          expect {
+            @user.send_password_reset_email
+          }.to change(ActionMailer::Base.deliveries, :count).by(1)
+        end
+
+        it "should set the password reset token" do
+          @user.password_reset_token.should be_nil
+          @user.send_password_reset_email
+          @user.reload.password_reset_token.should_not be_nil
+        end
+
+        it "nukes the password reset information" do
+          @user.update_attributes(password_reset_sent_at: Time.zone.now, password_reset_token: '12345')
+          @user.password_reset_sent_at.should_not be_nil
+          @user.password_reset_token.should_not be_nil
+          @user.destroy_password_reset
+          @user.reload.password_reset_token.should be_nil
+          @user.reload.password_reset_sent_at.should be_nil
+        end
+      end
+
+      describe "concerning INVALID password reset requests" do
+        before(:each) do
+          @user = FactoryGirl.create(:user, email: "foo-1337@notexample.com")
+          @user.update_attributes(confirmed_at: Time.zone.now, confirm_token: nil)
+          @user.confirmed?.should eq(true)
+        end
+
+        it "doesnt send a password reset email if it is expired" do
+          @user.password_reset_sent_at.should be_nil
+          @user.password_reset_token.should be_nil
+          @user.update_attributes(password_reset_sent_at: 3.hours.ago, password_reset_token: '12345')
+          @user.password_reset_sent_at.should_not be_nil
+          @user.password_reset_token.should_not be_nil
+
+          # it's expired
+          expect {
+            @user.send_password_reset_email
+          }.to_not change(ActionMailer::Base.deliveries, :count).by(1)
+        end
+
+        it "doesnt send a password reset email if the token is blank" do
+          @user.password_reset_token.should be_nil
+          @user.password_reset_sent_at.should be_nil
+          @user.update_attribute(:password_reset_sent_at, 3.hours.ago)
+          @user.password_reset_sent_at.should_not be_nil
+          @user.password_reset_token.should be_nil
+
+          # the token is blank
+          expect {
+            @user.send_password_reset_email
+          }.to_not change(ActionMailer::Base.deliveries, :count).by(1)
+        end
+
+        it "doesnt send a password reset email if the reset time is blank" do
+          @user.password_reset_token.should be_nil
+          @user.password_reset_sent_at.should be_nil
+          @user.update_attribute(:password_reset_token, '12345')
+          @user.password_reset_sent_at.should be_nil
+          @user.password_reset_token.should_not be_nil
+
+          # it's blank for the reset sent at
+          expect {
+            @user.send_password_reset_email
+          }.to_not change(ActionMailer::Base.deliveries, :count).by(1)
+        end
+
+        it "should NOT send a password reset email to example.com" do
+          @user.password_reset_sent_at.should be_nil
+          @user.password_reset_token.should be_nil
+          @user.update_attributes(email: "foo-1337@example.com", password_reset_sent_at: Time.zone.now, password_reset_token: '12345')
+          @user.password_reset_sent_at.should_not be_nil
+          @user.password_reset_token.should_not be_nil
+
+          expect {
+            @user.send_password_reset_email
+          }.to_not change(ActionMailer::Base.deliveries, :count).by(1)
+        end
+      end
+    end
   end
 
   describe "concerning PUBLIC methods" do
@@ -91,6 +187,13 @@ describe User do
       user.is?(:admin).should eq(true)
       user.is?(:commenter).should eq(false)
     end
+
+    it "should generate a password reset token" do
+      user = FactoryGirl.create(:user)
+      user.generate_password_reset_token
+      user.password_reset_token.should_not be_nil
+    end
+
     it "should return the right name" do
       u = FactoryGirl.create(:user)
       u.name.should match "#{u.first_name} #{u.last_name}"
