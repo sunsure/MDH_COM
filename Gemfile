@@ -19,6 +19,8 @@ gem 'pygments.rb'
 gem 'exception_notification'
 gem 'recaptcha', :require => 'recaptcha/rails'
 gem 'ancestry'
+gem 'rmagick'
+gem 'carrierwave'
 
 unless RUBY_PLATFORM =~ /darwin/i
   gem 'rb-inotify', '~> 0.8.8'
