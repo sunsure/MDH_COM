@@ -7,12 +7,13 @@
       .pull-right
         - if can? :report, comment
           = link_to t('.report'), '#', class: 'btn btn-mini btn-danger'
-    %code.author= comment.user.try(:name)
-    = comment.user.try(:email)
-    - if comment.updated_at?
-      %section.inline.updated_at= l(comment.updated_at, format: :short)
-    - if comment.created_at?
-      %section.inline.created_at= l(comment.created_at, format: :short) if comment.created_at?
+    %strong.author_name= comment.user.try(:name)
+    %code.author_email= comment.user.try(:email)
+    %div
+      - if comment.updated_at?
+        %section.inline.updated_at= l(comment.updated_at, format: :short)
+      - if comment.created_at?
+        %section.inline.created_at= l(comment.created_at, format: :short) if comment.created_at?
     %div.media{ id: "my_comment_content_#{comment.id}" }= to_markdown(comment.content)
     %div{ id: "comment_actions_#{comment.id}" }
       .btn-group

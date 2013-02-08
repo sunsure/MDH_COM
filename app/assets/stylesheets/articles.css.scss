@@ -18,11 +18,11 @@ ul.tag-list {
   &:before {
     content: "Tags: ";
     font-weight: bold;
+    margin-right: 1em;
   }
 }
 section.inline {
   display: inline;
-  margin-left: 0.5em;
 }
 .published_at {
   &:before {
@@ -40,12 +40,13 @@ section.inline {
   &:before {
     content: "Created: ";
     font-weight: bold;
+    margin-left: 0.5em;
   }
 }
 .excerpt {
   margin-top: 0.5em;
 }
-code.author {
+strong.author_name {
   &:before {
     content: "By: "
   }
