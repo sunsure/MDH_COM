@@ -5,7 +5,10 @@ jQuery ->
   $("h4.media-heading button.close").click ->
     $(this).closest(".media").slideUp('slow')
 
-  $(".pop").popover()
+  # don't follow the link!
+  $(".pop").popover().click (e) ->
+    e.preventDefault()
+
   $(".datepicker").datepicker(format: 'yyyy-mm-dd')
 
   $("form#calendar-datepicker input#date").on "changeDate", (e) ->

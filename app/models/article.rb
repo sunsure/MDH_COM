@@ -1,6 +1,8 @@
 class Article < ActiveRecord::Base
   belongs_to :user
   has_many :comments, dependent: :destroy
+  has_many :images, as: :assetable, class_name: "Image", dependent: :destroy
+  accepts_nested_attributes_for :images, allow_destroy: true, reject_if: proc { |image| image[:attachment].blank? }
 
   attr_accessor :publish
 

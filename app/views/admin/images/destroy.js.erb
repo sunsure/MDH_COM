@@ -1,0 +1,4 @@
+<% if @image.destroyed? %>
+  $("div.control-group#image_<%= @image.id %>").removeWithFlair();
+<% end %>
+$(".bootstrap-flash").html('<%= j render("shared/flash_messages") %>');

@@ -1,9 +1,19 @@
-= simple_form_for [:admin, @article], html: { class: 'form-horizontal' } do |f|
+= simple_form_for [:admin, @article], html: { class: 'form-horizontal', multipart: true } do |f|
   = f.input :title
   = f.input :permalink
   = f.input :excerpt, as: :text, input_html: { rows: 10, class: "span9" }
   = f.input :content, as: :text, input_html: { rows: 25, class: "span9" }
   = f.input :tag_list, hint: t('.tag_list_hint')
+  - @article.images.each do |image|
+    .control-group{ id: "image_#{image.id}" }
+      .control-label= t(".images")
+      .controls
+        = link_to "#", data: { target: '#', placement: "right", title: image.pretty_filename, content: image.url }, class: "pop" do
+          = image_tag image.url(:thumb), class: 'img-polaroid'
+        %div= link_to t(".delete_image"), admin_article_image_path(image.assetable.to_param, image), remote: true, method: :delete, confirm: t(".confirm_delete_image")
+  .control-group
+    .control-label
+    .controls= link_to_add_fields t(".add_image"), f, :images
   .form-actions
     - if can?([:create, :update], @article)
       = f.button :submit, class: 'btn-primary'

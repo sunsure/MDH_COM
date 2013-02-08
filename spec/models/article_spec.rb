@@ -69,4 +69,11 @@ describe Article do
       end
     end
   end
+
+  describe "concerning nested models" do
+    it "should accept nested images" do
+      should accept_nested_attributes_for(:images).but_reject({ :attachment => nil })
+    end
+  end
+
 end

@@ -93,6 +93,11 @@ class Admin::ArticlesController < AdminController
       :published_at,
       :title,
       :tag_list,
+      images_attributes:
+      [
+        :attachment,
+        :filename
+      ]
     ]
     params.require(:article).permit(*safe_attributes)
   end

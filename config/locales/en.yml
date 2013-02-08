@@ -248,6 +248,10 @@ en:
       edit:
         title: "Editing Article : %{article_title}"
       form:
+        add_image: 'Add Image'
+        confirm_delete_image: 'Are you sure you want to delete this image?'
+        delete_image: 'Delete Image'
+        images: 'Images'
         tag_list_hint: "Tags (separated by commas)"
       new:
         title: "New Article"
@@ -277,6 +281,11 @@ en:
         destroy:
           success: 'Comment has been destroyed successfully.'
           failure: 'Failed to remove that comment!'
+    images:
+      controller:
+        destroy:
+          success: 'Image has been destroyed successfully.'
+          failure: 'Failed to remove that image!'
     users:
       controller:
         new:

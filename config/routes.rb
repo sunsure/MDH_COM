@@ -17,6 +17,7 @@ Mdh::Application.routes.draw do
     end
 
     resources :articles do
+      resources :images, only: [:destroy]
       resources :comments, only: [:destroy]
       collection do
         match :calendar, via: [:get]
