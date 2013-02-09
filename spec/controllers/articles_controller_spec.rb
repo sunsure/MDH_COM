@@ -12,7 +12,26 @@ describe ArticlesController do
     {}
   end
 
-  # TODO: test the search action
+  describe "GET tag_search" do
+    before(:each) do
+      @tagged_article = FactoryGirl.create(:article, tag_list: "foo, bar, baz, qux")
+    end
+
+    it "can find a tag" do
+      get :tag_search, query: "foo"
+      assigns(:tags).should include(ActsAsTaggableOn::Tag.where(name: 'foo').first)
+    end
+
+    it "returns HTTP success" do
+      get :tag_search, query: "foo"
+      response.should be_success
+    end
+
+    it "renders the tag_search template" do
+      get :tag_search, query: "foo"
+      response.should render_template("tag_search")
+    end
+  end
 
   describe "GET calendar" do
     it "should get the correct articles by date" do

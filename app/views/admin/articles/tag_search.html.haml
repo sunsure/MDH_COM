@@ -1,0 +1,19 @@
+- title t '.title'
+.page-header
+  %h3= t '.title'
+
+= render 'articles/search', placeholder: 'Search Tags'
+
+- if @tags.present?
+  = paginate @tags
+
+  %table.table.table-striped
+    %thead
+      %tr
+        %th Tag Name
+        %th Occurences
+    %tbody
+    - @tags.each do |tag|
+      %tr
+        %td= link_to tag.name, tag_admin_articles_path(tag.name)
+        %td= tag.taggings.count

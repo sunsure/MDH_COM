@@ -20,6 +20,7 @@ Mdh::Application.routes.draw do
       resources :images, only: [:destroy]
       resources :comments, only: [:destroy]
       collection do
+        match "taggings/search", to: "articles#tag_search", as: :tag_search
         match :calendar, via: [:get]
         match :tags, via: [:get]
         match "tags/:tag", to: "articles#tags", via: [:get], as: :tag
@@ -62,6 +63,7 @@ Mdh::Application.routes.draw do
       end
     end
     collection do
+      match "taggings/search", to: "articles#tag_search", as: :tag_search
       match :calendar, via: [:get]
       match :tags, via: [:get], as: :tags
       match "tags/:tag", to: "articles#tags", via: [:get], as: :tag

@@ -2,6 +2,8 @@
 .page-header
   %h3= t '.title', tag: params[:tag].inspect
 
+= render 'articles/search', placeholder: t(".search_articles")
+
 = paginate @articles
 
 %table.table.table-striped
@@ -12,7 +14,11 @@
 
 - content_for(:sidebar) do
   - if can? :tag_search, Article
-    = link_to "#", data: { toggle: "modal", target: "#articleTagCloudModal" }, class: "btn btn-success btn-small btn-block" do
+    = link_to tag_search_admin_articles_path, class: 'btn btn-success btn-small btn-block' do
+      %i.icon-tag.icon-white
+      %span.add-on= t(".tag_search")
+  - if can? :tag_search, Article
+    = link_to "#", data: { toggle: "modal", target: "#articleTagCloudModal" }, class: "btn btn-primary btn-small btn-block" do
       %i.icon-tags.icon-white
       %span.add-on= t('.view_tag_cloud')
   = link_to "#", data: { placement: "left", title: t(".tag_cloud_pop_title"), content: t(".tag_cloud_pop_content") }, class: "pop btn btn-info btn-small btn-block" do

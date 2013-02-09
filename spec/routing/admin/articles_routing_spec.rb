@@ -46,6 +46,10 @@ describe Admin::ArticlesController do
       it "routes to a specific tag" do
         get("#{url}/articles/tags/foobar").should route_to("admin/articles#tags", tag: "foobar")
       end
+
+      it "routes to the tag search action" do
+        get("#{url}/articles/taggings/search").should route_to("admin/articles#tag_search")
+      end
     end
 
     describe "failure" do
@@ -88,6 +92,10 @@ describe Admin::ArticlesController do
 
       it "routes to a specific tag" do
         get("#{bad_url}/articles/tags/foobar").should_not route_to("admin/articles#tags", tag: "foobar")
+      end
+
+      it "routes to the tag search action" do
+        get("#{bad_url}/articles/taggings/search").should_not route_to("admin/articles#tag_search")
       end
     end
 

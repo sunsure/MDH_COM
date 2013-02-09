@@ -66,9 +66,19 @@ class Admin::ArticlesController < AdminController
   def tags
     authorize! :tag_search, Article
     unless params[:tag].blank?
-      @articles = Article.tagged_with(params[:tag]).page(params[:page]).per(params[:per_page])
+      @articles = Article.tagged_with(params[:tag])
+      @articles = @articles.basic_search(params[:query]) if params[:query].present?
+      @articles = @articles.page(params[:page]).per(params[:per_page])
     else
       redirect_to root_url
+    end
+  end
+
+  def tag_search
+    authorize! :tag_search, Article
+    if params[:query].present?
+      @tags = ActsAsTaggableOn::Tag.tag_search(params[:query])
+      @tags = @tags.page(params[:page]).per(params[:per_page])
     end
   end
 

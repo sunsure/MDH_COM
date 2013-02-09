@@ -87,6 +87,7 @@ en:
       calendar: "(calendar)"
       calendar_view: 'Calendar View'
       new: "New Article"
+      search_articles: 'Search Articles'
       title: "Listing Articles"
     modal:
       add_tags_to_articles: "You can add tags to any article by editing them."
@@ -104,10 +105,14 @@ en:
       unpublish: "Un-Publish"
     tags:
       explain_tag_cloud: "What is a Tag Cloud?"
+      search_articles: 'Search Articles'
       tag_cloud_pop_content: "A tag cloud is a collection of tags that are organized and styled by their frequency. Larger tags appear more often while smaller tags are more rare."
       tag_cloud_pop_title: "What is a Tag Cloud?"
+      tag_search: 'Tag Search'
       title: "Listing Articles, Tag: %{tag}"
       view_tag_cloud: "View Tag Cloud"
+    tag_search:
+      title: 'Tag Search'
 
   comments:
     comment:
@@ -261,6 +266,7 @@ en:
         calendar: "(calendar)"
         calendar_view: 'Calendar View'
         new: "New Article"
+        search_articles: 'Search Articles'
         show_all: 'Show All'
         show_drafts: 'Show Drafts'
         show_published: 'Show Published'
@@ -273,10 +279,14 @@ en:
         unpublish: "Un-Publish"
       tags:
         explain_tag_cloud: "What is a Tag Cloud?"
+        search_articles: 'Search Articles'
         tag_cloud_pop_content: "A tag cloud is a collection of tags that are organized and styled by their frequency. Larger tags appear more often while smaller tags are more rare."
         tag_cloud_pop_title: "What is a Tag Cloud?"
+        tag_search: 'Tag Search'
         title: "Listing Articles, Tag: %{tag}"
         view_tag_cloud: "View Tag Cloud"
+      tag_search:
+        title: 'Tag Search'
 
     comments:
       controller:
