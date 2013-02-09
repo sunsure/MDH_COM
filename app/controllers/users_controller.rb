@@ -16,8 +16,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new(safe_params)
     if @user.save
-      cookies[:auth_token] = @user.auth_token # sign them in
-      redirect_to root_url, notice: t('users.controller.create.success')
+      flash[:notice] = t('users.controller.create.success')
+      redirect_to login_url
     else
       flash[:error] = t('users.controller.create.failure')
       render :new

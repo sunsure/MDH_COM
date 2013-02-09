@@ -217,7 +217,7 @@ en:
         already_logged_in: "You are already logged in!"
       create:
         failure: "Something went wrong while trying to register your account!"
-        success: "Thanks for registering."
+        success: "Thanks for registering. You'll receive an email shortly asking you to verify your email address."
       destroy:
         prevent_self_destroy: "You cannot destroy your own account!"
         success: "User was destroyed successfully."

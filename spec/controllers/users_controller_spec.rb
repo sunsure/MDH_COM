@@ -52,7 +52,7 @@ describe UsersController do
 
       it "redirects to the created user" do
         post :create, {user: @attr}
-        response.should redirect_to(root_url)
+        response.should redirect_to(login_url)
       end
     end
 

@@ -12,8 +12,8 @@ describe "Users" do
           fill_in "user_password", with: "foobar"
           fill_in "user_password_confirmation", with: "foobar"
           click_button "Create Account"
-          page.should have_content("Thanks for registering.")
-          current_path.should eq(root_path)
+          page.should have_content("Thanks for registering. You'll receive an email shortly asking you to verify your email address.")
+          current_path.should eq(login_path)
         end.should change(User, :count).by(1)
       end
 
@@ -27,7 +27,8 @@ describe "Users" do
           fill_in "user_password_confirmation", with: "foobar"
           click_button "Create Account"
           page.should have_content("Thanks for registering.")
-          current_path.should eq(root_path)
+          page.should have_content("Thanks for registering. You'll receive an email shortly asking you to verify your email address.")
+          current_path.should eq(login_path)
         }.to change(ActionMailer::Base.deliveries, :count).by(1)
       end
     end
