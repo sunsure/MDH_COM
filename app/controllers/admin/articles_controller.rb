@@ -15,6 +15,7 @@ class Admin::ArticlesController < AdminController
 
   def index
     handle_published
+    @articles = @articles.basic_search(params[:query]) if params[:query].present?
     @articles = @articles.page(params[:page]).per(params[:per_page])
   end
 

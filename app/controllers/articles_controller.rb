@@ -13,6 +13,7 @@ class ArticlesController < ApplicationController
   end
 
   def index
+    @articles = @articles.basic_search(params[:query]) if params[:query].present?
     @articles = @articles.page(params[:page]).per(params[:per_page])
   end
 

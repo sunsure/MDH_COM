@@ -7,6 +7,8 @@
         %i.icon-calendar
         = t(".calendar")
 
+= render 'search'
+
 - content_for :kaminari_per_page do
   = form_tag nil, class: "inline", method: :get do
     = select_tag :per_page, options_for_select(article_per_page_options, selected: params[:per_page]), id: "article_per_page"

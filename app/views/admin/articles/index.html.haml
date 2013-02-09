@@ -7,6 +7,8 @@
         %i.icon-calendar
         = t(".calendar")
 
+= render 'articles/search'
+
 - content_for :kaminari_per_page do
   = form_tag nil, class: "inline", method: :get do
     = select_tag :per_page, options_for_select(article_per_page_options, selected: params[:per_page]), id: "article_per_page"
@@ -25,7 +27,7 @@
 
 #admin_article_controls.btn-toolbar
   .btn-group
-    = link_to t(".show_all"), admin_articles_path, class: "btn #{active(:published, nil, {missing: :true})}"
+    = link_to t(".show_all"), params.merge(published: nil), class: "btn #{active(:published, nil, {missing: :true})}"
     = link_to t(".show_published"), params.merge(published: :true), class: "btn #{active(:published, 'true')}"
     = link_to t(".show_drafts"), params.merge(published: :false), class: "btn #{active(:published, 'false')}"
 

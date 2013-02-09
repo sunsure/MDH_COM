@@ -93,6 +93,8 @@ en:
       comma_separated: "Just separate any tags with commas."
       current_tag: "Current Tag: %{tag}"
       tag_cloud: "Tag Cloud"
+    search:
+      search: 'Search'
     show:
       add_comment: 'Add Comment'
       leave_comments: 'Leave your comments below.'
