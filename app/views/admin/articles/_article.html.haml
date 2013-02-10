@@ -1,6 +1,6 @@
 %div.media{ class: "#{muted(article, :published_at)} #{current_cycle}", id: "article_#{article.permalink}" }
   = link_to '#', class: "pull-left" do
-    = image_tag "arrow.png", class: "media-object"
+    = image_tag "pfp_logo_icon.jpg", class: "media-object"
   %div.media-body
     %h4.media-heading
       = link_to article.title, admin_article_path(article), class: muted(article, :published_at)

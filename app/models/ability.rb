@@ -3,11 +3,11 @@ class Ability
 
   def initialize(user)
     user ||= User.new
-    can [:calendar, :read, :tag_search], Article, ["published_at < ?", Time.now] do |article|
-      article.published_at < Time.now
+    can [:calendar, :read, :tag_search], Article, ["published_at < ?", Time.zone.now] do |article|
+      article.published_at < Time.zone.now
     end
     can :read, Comment
-    can :create, User, user: { role_ids: nil }
+    can :create, User, permissions: { role: { key: 'commenter' } }
     can :confirm, User, confirm_token: user.confirm_token
     if user.is? :commenter
       # they can reply to and report any comment
