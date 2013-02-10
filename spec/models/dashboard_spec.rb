@@ -10,8 +10,7 @@ describe Dashboard do
       Dashboard.boxes_for(@user).should eq(
         [
           {:title=>"My Comments", :link=>[:comments, :my], :content=>"See my recent comments", :permission=>[:create, Comment]},
-          {:title=>"My Inbox", :link=>[:inbox, :my], :content=>"View my inbox messages", :permission=>[:read, Comment]},
-          {:title=>"My Profile", :link=>[:edit, :my, :profile], :content=>"Customize my profile", :permission=>[:read, Article]}
+          {:title=>"My Profile", :link=>[:edit, :my, :profile], :content=>"Customize my profile", :permission=>[:edit, @user]}
         ]
       )
 

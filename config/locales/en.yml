@@ -140,14 +140,11 @@ en:
       comments:
         content: "See my recent comments"
         title: "My Comments"
-      inbox:
-        content: "View my inbox messages"
-        title: "My Inbox"
       profile:
         content: "Customize my profile"
         title: "My Profile"
   my:
-    inbox: 'Inbox'
+    my_dashboard: 'My Dashboard'
     my_profile: 'My Profile'
     dashboard:
       title: "My Dashboard"

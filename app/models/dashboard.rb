@@ -14,22 +14,12 @@ class Dashboard
       permission: [:create, Comment]
     }
 
-    # My Inbox
-    boxes << {
-      # TODO: make the permissions match
-      title: I18n.t("dashboard.boxes.inbox.title"),
-      link: [:inbox, :my],
-      content: I18n.t("dashboard.boxes.inbox.content"),
-      permission: [:read, Comment]
-    }
-
     # Edit My Profile
     boxes << {
-      # TODO: make the permissions match
       title: I18n.t("dashboard.boxes.profile.title"),
       link: [:edit, :my, :profile],
       content: I18n.t("dashboard.boxes.profile.content"),
-      permission: [:read, Article]
+      permission: [:edit, user]
     }
 
     boxes

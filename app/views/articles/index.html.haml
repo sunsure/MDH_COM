@@ -15,12 +15,13 @@
 
 - if current_user
   - content_for(:sidebar) do
-    = link_to '#', class: "btn btn-small btn-block" do
-      %i.icon-envelope
-      %span.addon= t("my.inbox")
-    = link_to '#', class: "btn btn-small btn-block" do
-      %i.icon-user
-      %span.addon= t("my.my_profile")
+    = link_to dashboard_my_path, class: "btn btn-small btn-block" do
+      %i.icon-home
+      %span.addon= t("my.my_dashboard")
+    - if can? :edit, current_user
+      = link_to edit_my_profile_path, class: "btn btn-small btn-block" do
+        %i.icon-user
+        %span.addon= t("my.my_profile")
 
 = paginate @articles
 

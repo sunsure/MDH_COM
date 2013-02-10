@@ -62,6 +62,10 @@ describe User do
     it "should not let them see unpublished articles" do
       @commenter.should_not have_ability([:calendar, :read, :tag_search], for: Article.new(published_at: 1.day.from_now))
     end
+
+    it "should let them edit their profile" do
+      @commenter.should have_ability([:edit, :update], for: @commenter)
+    end
   end
 
   describe "concerning nil users (the public at large)" do

@@ -10,6 +10,7 @@ class Ability
     can :create, User, permissions: { role: { key: 'commenter' } }
     can :confirm, User, confirm_token: user.confirm_token
     if user.is? :commenter
+      can [:edit, :update], User, id: user.id
       # they can reply to and report any comment
       can [:like, :new_reply, :reply, :report], Comment
       # but they can only edit their own

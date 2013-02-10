@@ -48,10 +48,9 @@ Mdh::Application.routes.draw do
   end
   resources :confirm, only: [:edit, :update], to: "users/confirm"
 
-  resource :my, only: [:dashboard, :comments, :inbox], to: "my" do
+  resource :my, only: [:dashboard, :comments], to: "my" do
     match :comments, via: [:get]
     match :dashboard, via: [:get]
-    match :inbox,via: [:get]
     resource :profile, only: [:edit, :update]
   end
 

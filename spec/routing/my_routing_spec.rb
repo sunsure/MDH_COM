@@ -13,9 +13,6 @@ describe MyController do
       it "routes to my#comments" do
         get("#{url}/my/comments").should route_to("my#comments")
       end
-      it "routes to my#inbox" do
-        get("#{url}/my/inbox").should route_to("my#inbox")
-      end
     end
 
     describe "failure" do
@@ -24,9 +21,6 @@ describe MyController do
       end
       it "doesnt route to admin/my#comments" do
         get("#{bad_url}/my/comments").should_not route_to("admin/my#comments")
-      end
-      it "doesnt route to admin/my#inbox" do
-        get("#{bad_url}/my/inbox").should_not route_to("admin/my#inbox")
       end
     end
   end
