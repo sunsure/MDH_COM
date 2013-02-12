@@ -10,7 +10,7 @@
 
 <%= t(".follow") %>
 
-<%= link_to t(".confirm_my_account"), edit_confirm_url(@user.confirm_token, host: ENV["DEFAULT_URL_HOST"]) %>
+<%= link_to t(".confirm_my_account"), edit_confirm_url(@user.confirm_token, host:  Rails.application.config.super_cool_mailer_host) %>
 
 <%= t(".thanks") %>
 

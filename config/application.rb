@@ -63,5 +63,7 @@ module Mdh
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    config.super_cool_mailer_host = Rails.env.production? ? ENV["DEFAULT_URL_HOST"] : 'localhost:3000'
   end
 end
