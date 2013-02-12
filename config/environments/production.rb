@@ -58,6 +58,14 @@ Mdh::Application.configure do
     exception_recipients: 'mark.d.holmberg@gmail.com'
 
   config.action_mailer.delivery_method = :smtp
+  ActionMailer::Base.smtp_settings = {
+    :address => "smtp.gmail.com",
+    :enable_starttls_auto => true,
+    :port => 587,
+    :authentication => :plain,
+    :user_name => ENV["SMTP_USERNAME"],
+    :password => ENV["SMTP_PASSWORD"]
+  }
 
   # Enable threaded mode
   # config.threadsafe!
