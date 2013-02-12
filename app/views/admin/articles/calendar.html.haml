@@ -7,18 +7,19 @@
         %i.icon-list
         = t(".list")
 
-- content_for(:sidebar) do
-  - if can? :create, Article
-    = link_to new_admin_article_path, class: "btn btn-success btn-small btn-block" do
-      %i.icon-list-alt.icon-white
-      %span.addon= t('.new', default: t('helpers.links.new'))
-  = link_to dashboard_my_path, class: "btn btn-small btn-block" do
-    %i.icon-home
-    %span.addon= t("my.my_dashboard")
-  - if can? :edit, current_user
-    = link_to edit_my_profile_path, class: "btn btn-small btn-block" do
-      %i.icon-user
-      %span.addon= t("my.my_profile")
+- if current_user
+  - content_for(:sidebar) do
+    - if can? :create, Article
+      = link_to new_admin_article_path, class: "btn btn-success btn-small btn-block" do
+        %i.icon-list-alt.icon-white
+        %span.addon= t('.new', default: t('helpers.links.new'))
+    = link_to dashboard_my_path, class: "btn btn-small btn-block" do
+      %i.icon-home
+      %span.addon= t("my.my_dashboard")
+    - if can? :edit, current_user
+      = link_to edit_my_profile_path, class: "btn btn-small btn-block" do
+        %i.icon-user
+        %span.addon= t("my.my_profile")
 
 %div#articles
   %h2#month
