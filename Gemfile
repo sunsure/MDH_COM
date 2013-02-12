@@ -22,6 +22,7 @@ gem 'ancestry'
 gem 'rmagick'
 gem 'carrierwave'
 gem 'texticle', '~> 2.0', require: 'texticle/rails'
+gem 'faker'
 
 unless RUBY_PLATFORM =~ /darwin/i
   gem 'rb-inotify', '~> 0.8.8'
@@ -44,7 +45,6 @@ end
 group :test do
   gem 'database_cleaner'
   gem 'factory_girl_rails'
-  gem 'faker'
   gem 'capybara', '1.1.2'
   gem 'launchy'
   gem 'poltergeist'
