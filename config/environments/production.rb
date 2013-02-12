@@ -52,7 +52,7 @@ Mdh::Application.configure do
   config.action_mailer.raise_delivery_errors = false
 
   # TODO: setup the default action mailer host
-  # config.action_mailer.default_url_options = { :host => "markholmberg.com" }
+  config.action_mailer.default_url_options = { :host => "markholmberg-staging.heroku.com" }
   config.middleware.use ExceptionNotifier,
     sender_address: 'noreply@markholmberg.com',
     exception_recipients: 'mark.d.holmberg@gmail.com'
