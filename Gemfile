@@ -56,7 +56,9 @@ group :test, :development do
   gem 'rspec-rails'
 end
 
-gem 'mail_view', :git => 'https://github.com/37signals/mail_view.git'
+group :development do
+  gem 'mail_view', :git => 'https://github.com/37signals/mail_view.git'
+end
 
 gem 'jquery-rails'
 
