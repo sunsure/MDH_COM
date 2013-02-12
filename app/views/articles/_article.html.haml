@@ -6,7 +6,7 @@
       = link_to article.title, article, class: muted(article, :published_at)
       %div.comments_count.inline
         %i.icon-comment
-        = pluralize article.comments.size, 'comment'
+        %span.inline-block= pluralize article.comments.size, 'comment'
       %button.close &times;
     %div
       %code.author= article.try(:user).try(:name)
