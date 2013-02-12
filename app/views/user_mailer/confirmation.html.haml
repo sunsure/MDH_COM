@@ -12,7 +12,7 @@
 
     %p= t(".follow")
 
-    %p= link_to t(".confirm_my_account"), edit_confirm_url(@user.confirm_token)
+    %p= link_to t(".confirm_my_account"), edit_confirm_url(@user.confirm_token, host: 'markholmberg-staging.herokuapp.com')
 
     %p= t(".thanks")
 

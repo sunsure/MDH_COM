@@ -10,7 +10,7 @@
 
 <%= t(".follow") %>
 
-<%= link_to t(".confirm_my_account"), edit_confirm_url(@user.confirm_token) %>
+<%= link_to t(".confirm_my_account"), edit_confirm_url(@user.confirm_token, host: 'markholmberg-staging.herokuapp.com') %>
 
 <%= t(".thanks") %>
 
