@@ -11,7 +11,6 @@ gem 'strong_parameters'
 gem 'cancan'
 gem 'simple_form'
 gem 'redcarpet'
-gem 'less-rails'
 gem 'twitter-bootstrap-rails', git: 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem 'kaminari'
 gem 'acts-as-taggable-on'
@@ -28,14 +27,14 @@ unless RUBY_PLATFORM =~ /darwin/i
   gem 'rb-inotify', '~> 0.8.8'
 end
 
+gem 'sass-rails',   '~> 3.2.3'
+gem 'less-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
 
-  gem 'libv8', '~> 3.11.8'
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   gem 'therubyracer', platforms: :ruby
 
