@@ -9,7 +9,7 @@ class ArticlesController < ApplicationController
     authorize! :calendar, Article
     @articles = @articles.published
     @articles_by_date = @articles.group_by { |article| article.published_at.to_date }
-    @date = params[:date] ? Date.parse(params[:date]) : Date.today
+    @date = params[:date] ? Date.parse(params[:date]) : Time.zone.now.to_date
   end
 
   def index

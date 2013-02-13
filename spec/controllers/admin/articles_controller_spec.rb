@@ -48,7 +48,7 @@ describe Admin::ArticlesController do
       get :calendar
       assigns(:articles).should eq(Article.published)
       assigns(:articles_by_date).should eq(Article.published.group_by { |a| a.published_at.to_date })
-      assigns(:date).should eq(Date.today)
+      assigns(:date).should eq(Time.zone.now.to_date)
     end
 
     it "should return HTTP success" do
