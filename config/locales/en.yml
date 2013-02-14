@@ -65,11 +65,11 @@ en:
       title: "Sidebar: Actions"
     navbar:
       articles: 'Articles'
-      change_password: 'Change Password'
       edit_profile: 'Edit Profile'
       github: 'GitHub'
       login: 'Login'
       logout: 'Logout'
+      my_dashboard: 'My Dashboard'
       register: 'Register'
       users: 'Users'
     sidebar:
@@ -84,6 +84,7 @@ en:
       list_view: 'List View'
       title: "Calendar"
     index:
+      admin: 'Admin'
       calendar: "(calendar)"
       calendar_view: 'Calendar View'
       new: "New Article"

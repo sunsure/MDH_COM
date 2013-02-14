@@ -15,6 +15,10 @@
 
 - if current_user
   - content_for(:sidebar) do
+    - if can? :manage, :all
+      = link_to admin_root_path, class: "btn btn-inverse btn-small btn-block" do
+        %i.icon-heart.icon-white
+        %span.addon= t(".admin")
     = link_to dashboard_my_path, class: "btn btn-small btn-block" do
       %i.icon-home
       %span.addon= t("my.my_dashboard")
