@@ -216,16 +216,22 @@ en:
         submit: "Confirm"
         title: "Confirm Email"
     controller:
-      new:
-        already_logged_in: "You are already logged in!"
       create:
         failure: "Something went wrong while trying to register your account!"
         success: "Thanks for registering. You'll receive an email shortly asking you to verify your email address."
       destroy:
         prevent_self_destroy: "You cannot destroy your own account!"
         success: "User was destroyed successfully."
+      new:
+        already_logged_in: "You are already logged in!"
+      update:
+        failure: 'Something went wrong while trying to update your profile!'
+        success: 'Your profile has been saved successfully.'
+    edit:
+      title: 'Edit My Profile'
     form:
       submit: "Create Account"
+      update_my_profile: 'Update My Profile'
     new:
       title: "Register"
 

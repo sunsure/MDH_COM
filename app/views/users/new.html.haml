@@ -1,4 +1,5 @@
 - title t '.title'
 .page-header
   %h3=t '.title'
-= render "form"
+= simple_form_for @user, html: { class: 'form-horizontal' } do |f|
+  = render "form", f: f

@@ -91,6 +91,7 @@ describe "Users" do
       end
     end
   end
+
   describe "UPDATE an exisitng user" do
     describe "with valid parameters" do
       it "should update the user" do

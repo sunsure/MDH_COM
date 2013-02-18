@@ -79,4 +79,53 @@ describe "Users" do
     end
   end
 
+  describe "UPDATE an exisitng user" do
+    before(:each) do
+      @user = FactoryGirl.create(:user_with_roles, with_roles: ["commenter"])
+      simulate_login(@user, true)
+    end
+    describe "with valid parameters" do
+      it "should update the user" do
+        visit edit_my_profile_path
+        fill_in "user_password", with: "foobar123"
+        fill_in "user_password_confirmation", with: "foobar123"
+        click_button "Update My Profile"
+        page.should have_content("Your profile has been saved successfully.")
+        current_path.should eq(dashboard_my_path)
+      end
+    end
+
+    describe "with invalid parameters" do
+      it "should not update the user if the email is blank" do
+        visit edit_my_profile_path
+        fill_in "user_email", with: ""
+        fill_in "user_password", with: "foobar"
+        fill_in "user_password_confirmation", with: "foobar"
+        click_button "Update My Profile"
+        page.should have_content("can't be blank")
+        current_path.should eq(my_profile_path)
+      end
+
+      it "should not update the user if the password is blank" do
+        visit edit_my_profile_path
+        fill_in "user_password", with: ""
+        fill_in "user_password_confirmation", with: "foobar"
+        click_button "Update My Profile"
+        page.should have_content("doesn't match confirmation")
+        current_path.should eq(my_profile_path)
+      end
+
+      it "should not update the user if the password confirmation is blank" do
+        visit edit_my_profile_path
+        fill_in "user_password", with: "foobar"
+        fill_in "user_password_confirmation", with: ""
+        click_button "Update My Profile"
+        # NOTE: the password field here doesn't persist because it's a password input
+        # so we wont have the "can't be blank" message
+        page.should have_content("doesn't match confirmation")
+        current_path.should eq(my_profile_path)
+      end
+    end
+  end
+
 end

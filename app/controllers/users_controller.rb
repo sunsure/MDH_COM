@@ -24,6 +24,20 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit
+    @user = current_user
+  end
+
+  def update
+    @user = current_user
+    if @user.update_attributes(safe_params)
+      redirect_to dashboard_my_url, notice: t('users.controller.update.success')
+    else
+      flash[:error] =  t('users.controller.update.failure')
+      render :edit
+    end
+  end
+
   def destroy
     unless @user == current_user
       @user.destroy

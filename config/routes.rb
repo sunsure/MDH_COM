@@ -51,7 +51,10 @@ Mdh::Application.routes.draw do
   resource :my, only: [:dashboard, :comments], to: "my" do
     match :comments, via: [:get]
     match :dashboard, via: [:get]
-    resource :profile, only: [:edit, :update]
+    resource :profile, only: [] do
+      match :edit, via: [:get], to: "users#edit"
+      match :update, via: [:put], to: "users#update"
+    end
   end
 
   resources :articles, only: [:index, :show] do

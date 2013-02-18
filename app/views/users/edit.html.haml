@@ -1,0 +1,5 @@
+- title t '.title', name: @user.name
+.page-header
+  %h3=t '.title', name: @user.name
+= simple_form_for @user, url: my_profile_path, method: :put, html: { class: 'form-horizontal' } do |f|
+  = render "form", f: f

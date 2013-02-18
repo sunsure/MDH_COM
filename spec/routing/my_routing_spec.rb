@@ -13,6 +13,12 @@ describe MyController do
       it "routes to my#comments" do
         get("#{url}/my/comments").should route_to("my#comments")
       end
+      it "routes PUT to my#profile" do
+        put("#{url}/my/profile").should route_to("users#update")
+      end
+      it "routes GET to my#profile" do
+        get("#{url}/my/profile/edit").should route_to("users#edit")
+      end
     end
 
     describe "failure" do
@@ -21,6 +27,12 @@ describe MyController do
       end
       it "doesnt route to admin/my#comments" do
         get("#{bad_url}/my/comments").should_not route_to("admin/my#comments")
+      end
+      it "doesnt route PUT to my#profile" do
+        put("#{bad_url}/my/profile").should_not route_to("admin/users#update")
+      end
+      it "doesnt route GET to my#profile" do
+        put("#{bad_url}/my/profile/edit").should_not route_to("admin/users#edit")
       end
     end
   end
