@@ -29,4 +29,8 @@
     - if @articles_by_date[date]
       %ul
       - @articles_by_date[date].each do |article|
-        %li= link_to article.title, article
+        %li
+          = link_to article, data: { remote: true, toggle: "modal", target: "#articleCalendarModal" } do
+            = article.title
+
+= render "calendar_modal"

@@ -26,6 +26,22 @@ class Article < ActiveRecord::Base
     permalink
   end
 
+  def pretty_tag_list(options={})
+    # TODO: make it be able to pass in admin
+    # also write tests for me
+    result = ""
+    result << "<ul class='breadcrumb tag-list'>"
+    result << ""
+    tag_list.each do |tag|
+      result << "<li>"
+      result << ActionController::Base.helpers.link_to(tag, Rails.application.routes.url_helpers.tag_articles_path(tag))
+      result << "<span class='divider'>/</span>" unless tag == tag_list.last
+      result << "</li>"
+    end
+    result << "</ul>"
+    result
+  end
+
   private
 
   def set_published_at

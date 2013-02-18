@@ -2,7 +2,7 @@ class ArticlesController < ApplicationController
   skip_before_filter :authorize, only: [:calendar, :index, :show, :tags, :tag_search]
   load_and_authorize_resource only: [:index, :show], find_by: :permalink
   load_resource only: [:calendar]
-  respond_to :html
+  respond_to :html, :js
 
 
   def calendar

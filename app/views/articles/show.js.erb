@@ -1,0 +1,5 @@
+$('#articleCalendarModal').find('h3#article_title').html("<%= j(link_to @article.title, @article) %>");
+$('#articleCalendarModal').find('h6.weak#tag_list').html("<%= j(@article.pretty_tag_list.html_safe) %>");
+$('#articleCalendarModal').find('div#excerpt').html("<%= j(to_markdown(@article.excerpt)) %>");
+$('#articleCalendarModal').find('section.inline.published_at').html("<%= j(l @article.published_at, format: :short) %>");
+$('#articleCalendarModal').find('section.inline.updated_at').html("<%= j(l @article.updated_at, format: :short) %>");
