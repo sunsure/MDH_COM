@@ -15,6 +15,8 @@ describe "admin/users/new" do
       assert_select "input#user_email", name: "user[email]"
       assert_select "input#user_password", name: "user[password]"
       assert_select "input#user_password_confirmation", name: "user[password_confirmation]"
+      assert_select "input#user_display_email_true", name: "user[display_email]"
+      assert_select "input#user_display_email_false", name: "user[display_email]"
     end
   end
 end

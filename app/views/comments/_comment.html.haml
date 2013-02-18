@@ -8,7 +8,7 @@
         - if can? :report, comment
           = link_to t('.report'), '#', class: 'btn btn-mini btn-danger'
     %strong.author_name= comment.user.try(:name)
-    %code.author_email= comment.user.try(:email)
+    %code.author_email= comment.user.display_email? ? comment.user.try(:email) : t('.email_hidden')
     %div
       - if comment.updated_at?
         %section.inline.updated_at= l(comment.updated_at, format: :short)

@@ -8,8 +8,9 @@ describe "admin/users/show" do
   it "renders attributes in <p>" do
     render
 
-    rendered.should match(/First Name/)
-    rendered.should match(/Last Name/)
-    rendered.should match(/Email/)
+    rendered.should match(@user.email)
+    rendered.should match(@user.display_email? ? 'true' : 'false')
+    rendered.should match(@user.first_name)
+    rendered.should match(@user.last_name)
   end
 end

@@ -57,6 +57,7 @@ class UsersController < ApplicationController
       :email,
       :password,
       :password_confirmation,
+      :display_email,
     ]
     params.require(:user).permit(*safe_attributes)
   end

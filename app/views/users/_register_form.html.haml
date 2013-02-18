@@ -1,8 +1,7 @@
-= simple_form_for @user, url: my_profile_path, method: :put, html: { class: 'form-horizontal' } do |f|
+= simple_form_for @user, html: { class: 'form-horizontal' } do |f|
   = f.input :first_name
   = f.input :last_name
   = f.input :email
-  = f.input :display_email, as: :radio_buttons
   = f.input :password
   = f.input :password_confirmation
   .form-actions

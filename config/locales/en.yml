@@ -119,6 +119,7 @@ en:
     comment:
       destroy: 'Destroy'
       edit: 'Edit'
+      email_hidden: 'email hidden'
       like: 'Like'
       reply: 'Reply'
       report: 'Report'
@@ -230,10 +231,11 @@ en:
     edit:
       title: 'Edit My Profile'
     form:
-      submit: "Create Account"
-      update_my_profile: 'Update My Profile'
+      submit: 'Update My Profile'
     new:
       title: "Register"
+    register_form:
+      submit: "Create Account"
 
   # ADMINISTRATIVE SUBDOMAIN
   admin:

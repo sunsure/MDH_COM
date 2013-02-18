@@ -30,6 +30,10 @@
   %strong= User.human_attribute_name(:email) + ':'
   %br
   = @user.email
+%p
+  %strong= User.human_attribute_name(:display_email) + ':'
+  %br
+  = @user.display_email
 
 - unless @user.roles.blank?
   %dl

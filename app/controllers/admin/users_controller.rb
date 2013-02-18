@@ -54,6 +54,7 @@ class Admin::UsersController < AdminController
       :email,
       :password,
       :password_confirmation,
+      :display_email,
     ]
     if current_user && current_user.is?(:admin)
       safe_attributes += [:role_ids]
