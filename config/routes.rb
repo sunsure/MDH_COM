@@ -18,6 +18,7 @@ Mdh::Application.routes.draw do
 
     resources :articles do
       resources :images, only: [:destroy]
+      resources :icons, only: [:destroy]
       resources :comments, only: [:destroy]
       collection do
         match "taggings/search", to: "articles#tag_search", as: :tag_search

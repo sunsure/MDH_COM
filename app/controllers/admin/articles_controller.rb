@@ -24,9 +24,11 @@ class Admin::ArticlesController < AdminController
   end
 
   def new
+    @article.build_icon
   end
 
   def edit
+    @article.build_icon if @article.icon.blank?
   end
 
   def create
@@ -104,6 +106,11 @@ class Admin::ArticlesController < AdminController
       :published_at,
       :title,
       :tag_list,
+      icon_attributes:
+      [
+        :attachment,
+        :filename
+      ],
       images_attributes:
       [
         :attachment,

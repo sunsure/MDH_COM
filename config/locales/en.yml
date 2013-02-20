@@ -67,10 +67,12 @@ en:
       articles: 'Articles'
       edit_profile: 'Edit Profile'
       github: 'GitHub'
+      icon_manager: 'Icon Manager'
       login: 'Login'
       logout: 'Logout'
       my_dashboard: 'My Dashboard'
       register: 'Register'
+      settings: 'Settings'
       users: 'Users'
     sidebar:
       content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin facilisis, neque nec consequat convallis, ipsum eros feugiat nisi, ut dignissim elit leo quis est. Nulla elit arcu, hendrerit sed varius et, commodo sit amet risus. Maecenas convallis nulla vel tellus placerat malesuada id quis lorem. Maecenas et rhoncus augue. Donec consequat ligula eget eros elementum eu porttitor ante commodo. Duis eu lectus tortor, sed gravida mi. Etiam placerat euismod varius. Nulla tristique scelerisque mattis. Aenean tristique, libero vitae lobortis vulputate, odio est tincidunt lorem, quis imperdiet justo quam ac dolor."
@@ -262,8 +264,11 @@ en:
         title: "Editing Article : %{article_title}"
       form:
         add_image: 'Add Image'
+        confirm_delete_icon: 'Are you sure you want to delete this icon?'
         confirm_delete_image: 'Are you sure you want to delete this image?'
+        delete_icon: 'Delete Icon'
         delete_image: 'Delete Image'
+        icon: 'Icon'
         images: 'Images'
         tag_list_hint: "Tags (separated by commas)"
       new:

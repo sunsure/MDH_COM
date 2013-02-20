@@ -37,14 +37,25 @@
                   = link_to admin_articles_path do
                     %i.icon-list-alt.icon-white
                     %span.addon= t("layout.navbar.articles")
-              - if can? :manage, User
-                %li
-                  = link_to admin_users_path do
-                    %i.icon-user.icon-white
-                    %span.addon= t("layout.navbar.users")
+              %li.dropdown
+                = link_to "#", class: "dropdown-toggle", data: { toggle: "dropdown" } do
+                  %i.icon-wrench.icon-white
+                  %span.addon= t("layout.navbar.settings")
+                  %span.caret
+                %ul.dropdown-menu
+                  - if can? :manage, User
+                    %li
+                      = link_to admin_users_path do
+                        %i.icon-user
+                        %span.addon= t("layout.navbar.users")
+                  %li.divider
+                  - if can? :manage, :all
+                    %li
+                      = link_to '#' do
+                        %i.icon-th-large
+                        %span.addon= t("layout.navbar.icon_manager")
             %ul.nav.pull-right
               - if current_user
-                %li
                 %li.dropdown
                   = link_to "#", class: "dropdown-toggle", data: { toggle: "dropdown" } do
                     = current_user.name

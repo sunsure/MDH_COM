@@ -1,0 +1,4 @@
+<% if @icon.destroyed? %>
+  $("div.control-group#icon_<%= @icon.id %>").removeWithFlair();
+<% end %>
+$(".bootstrap-flash").html('<%= j render("shared/flash_messages") %>');

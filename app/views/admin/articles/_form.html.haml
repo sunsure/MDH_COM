@@ -4,6 +4,16 @@
   = f.input :excerpt, as: :text, input_html: { rows: 10, class: "span9" }
   = f.input :content, as: :text, input_html: { rows: 25, class: "span9" }
   = f.input :tag_list, hint: t('.tag_list_hint')
+  = f.simple_fields_for :icon do |icon_builder|
+    = icon_builder.input :attachment, as: :file, label: t(".icon")
+  - if @article.try(:icon).present? && @article.try(:icon).persisted?
+    - @article.try(:icon).tap do |icon|
+      .control-group{ id: "icon_#{icon.id}" }
+        .control-label= t(".icon")
+        .controls
+          = link_to "#", data: { target: '#', placement: "right", title: icon.pretty_filename, content: icon.url }, class: "pop" do
+            = image_tag icon.url(:thumb), class: 'img-polaroid'
+          %div= link_to t(".delete_icon"), admin_article_icon_path(icon.assetable.to_param, icon), remote: true, method: :delete, confirm: t(".confirm_delete_icon")
   - @article.images.each do |image|
     .control-group{ id: "image_#{image.id}" }
       .control-label= t(".images")

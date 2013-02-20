@@ -4,7 +4,10 @@
 
 %div.media
   = link_to @article, class: "pull-left" do
-    = image_tag "pfp_logo_icon.jpg", class: "media-object"
+    - if @article.icon.present?
+      = image_tag @article.icon.url(:thumb), class: 'media-object'
+    - else
+      = image_tag "pfp_logo_icon.jpg", class: 'media-object'
   %div.media-body
     %h4.media-heading
       = link_to @article.title, articles_path

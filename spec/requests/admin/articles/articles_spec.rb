@@ -4,6 +4,7 @@ describe "Articles" do
   before(:each) do
     @user = FactoryGirl.create(:user_with_roles, with_roles: ["admin"])
     @article = FactoryGirl.create(:article, user: @user)
+    @icon = FactoryGirl.create(:icon, assetable: @article)
     simulate_login(@user, true)
   end
 
