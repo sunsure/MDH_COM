@@ -22,6 +22,7 @@ gem 'rmagick'
 gem 'carrierwave'
 gem 'texticle', '~> 2.0', require: 'texticle/rails'
 gem 'faker'
+gem 'gravtastic'
 
 unless RUBY_PLATFORM =~ /darwin/i
   gem 'rb-inotify', '~> 0.8.8'

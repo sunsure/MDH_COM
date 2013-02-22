@@ -1,5 +1,8 @@
 class User < ActiveRecord::Base
+  include Gravtastic
+
   has_secure_password
+  has_gravatar
 
   has_many :permissions
   has_many :roles, through: :permissions
