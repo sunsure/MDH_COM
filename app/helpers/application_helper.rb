@@ -50,4 +50,16 @@ module ApplicationHelper
     link_to(name, '#', class: "add_fields btn", data: {id: id, fields: fields.gsub("\n", "")})
   end
 
+  def generate_open_graph_meta_tags
+    result = ""
+    if @article.present?
+      result << @article.generate_open_graph_meta_tags
+    else
+      result << "<meta property='og:image' content='/images/favicon.png'/>"
+    end
+    result << "<meta property='og:site_name' content='MarkHolmberg.com - Your Source For Everything Mark Holmberg'/>"
+    result << "<meta property='og:type' content='blog'/>"
+    result.html_safe
+  end
+
 end
