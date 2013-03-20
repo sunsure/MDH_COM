@@ -57,7 +57,7 @@ module ApplicationHelper
     else
       result << "<meta property='og:image' content='/images/favicon.png'/>"
     end
-    result << "<meta property='og:site_name' content='MarkHolmberg.com - Your Source For Everything Mark Holmberg'/>"
+    result << '<meta property="og:site_name" content="MarkHolmberg.com - Your Source For Everything Mark Holmberg"/>'
     result << "<meta property='og:type' content='blog'/>"
     result.html_safe
   end

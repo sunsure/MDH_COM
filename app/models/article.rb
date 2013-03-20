@@ -51,8 +51,8 @@ class Article < ActiveRecord::Base
     else
       result << "<meta property='og:image' content='/images/favicon.png'/>"
     end
-    result << "<meta property='og:title' content='#{title}'/>"
-    result << "<meta property='og:description' content='#{excerpt}'/>"
+    result << "<meta property='og:title' content=#{title.inspect}/>"
+    result << "<meta property='og:description' content=#{excerpt.inspect}/>"
     result << "<meta property='og:url' content='#{Rails.application.routes.url_helpers.article_url(to_param, host:  Rails.application.config.super_cool_mailer_host)}'/>"
 
     result
