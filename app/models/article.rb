@@ -59,7 +59,7 @@ class Article < ActiveRecord::Base
   end
 
   def pretty_excerpt
-    result = excerpt.gsub(/\[(\w+)\]\(([^\)]+)\)/, '<a href=\2>\1</a>')
+    result = excerpt.gsub(/\[(\w+)\]\(([^\)]+)\)/, '\1')
     result.inspect
   end
 
