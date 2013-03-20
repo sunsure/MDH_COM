@@ -49,7 +49,7 @@ class Article < ActiveRecord::Base
     if icon.present?
       result << "<meta property='og:image' content='#{icon.url(:thumb)}'/>"
     else
-      result << "<meta property='og:image' content='#{ActionController::Base.helpers.asset_path("favicon.png")}'/>"
+      result << "<meta property='og:image' content='/images/favicon.png'/>"
     end
     result << "<meta property='og:title' content='#{title}'/>"
     result << "<meta property='og:url' content='#{Rails.application.routes.url_helpers.article_url(to_param, host:  Rails.application.config.super_cool_mailer_host)}'/>"
