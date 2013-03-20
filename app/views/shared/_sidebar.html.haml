@@ -1,4 +1,4 @@
-%div.sidebar-nav{ class: show_sidebar_carousel? ? nil : "well" }
+%div.sidebar-nav{ class: content_for?(:sidebar) ? "well" : nil }
   - if current_user
     - if content_for?(:sidebar)
       .nav-header= t("helpers.actions")
@@ -17,6 +17,3 @@
     - else
       - if show_sidebar_carousel?
         = render "shared/carousel"
-      - else
-        %h3= t('application.titles.my_name')
-        %p= t('layout.sidebar.content')

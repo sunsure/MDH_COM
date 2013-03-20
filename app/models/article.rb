@@ -47,9 +47,9 @@ class Article < ActiveRecord::Base
   def generate_open_graph_meta_tags
     result = ""
     if icon.present?
-      result << "<meta property='og:image' content='#{icon.url(:thumb)}'/>"
+      result << "<meta property='og:image' content='#{Rails.application.routes.url_helpers.root_url(host: Rails.application.config.super_cool_mailer_host).gsub(/\/$/, '')}#{icon.url(:thumb)}'/>"
     else
-      result << "<meta property='og:image' content='/images/favicon.png'/>"
+      result << "<meta property='og:image' content='#{Rails.application.routes.url_helpers.root_url(host: Rails.application.config.super_cool_mailer_host)}images/favicon.png'/>"
     end
     result << "<meta property='og:title' content=#{title.inspect}/>"
     result << "<meta property='og:description' content=#{excerpt.inspect}/>"
