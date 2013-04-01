@@ -4,7 +4,9 @@ class Ability
   def initialize(user)
     user ||= User.new
     can [:calendar, :read, :tag_search], Article, ["published_at < ?", Time.zone.now] do |article|
-      article.published_at < Time.zone.now
+      if article.published_at.present?
+        article.published_at < Time.zone.now
+      end
     end
     can :read, Comment
     can :create, User, permissions: { role: { key: 'commenter' } }
