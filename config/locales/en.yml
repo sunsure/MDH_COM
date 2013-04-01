@@ -182,6 +182,8 @@ en:
       login: 'Login'
       remember_me: "Remember Me"
       title: 'Login'
+    unauthorized:
+      title: 'Not Authorized'
 
   user_mailer:
     confirmation:
