@@ -84,6 +84,10 @@ class Admin::ArticlesController < AdminController
     end
   end
 
+  def permalinker
+    render json: Article.permalinker(params[:query])
+  end
+
   private
 
   def handle_published

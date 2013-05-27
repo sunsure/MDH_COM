@@ -76,4 +76,10 @@ describe Article do
     end
   end
 
+  describe "concerning the Permalinker" do
+    it "should parameterize the permalink" do
+      Article.permalinker("this title has spaces").should eq("this-title-has-spaces")
+    end
+  end
+
 end

@@ -24,6 +24,10 @@ class Article < ActiveRecord::Base
 
   paginates_per 10
 
+  def self.permalinker(query)
+    query.parameterize.presence || "Invalid"
+  end
+
   def to_param
     permalink
   end

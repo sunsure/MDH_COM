@@ -25,6 +25,7 @@ Mdh::Application.routes.draw do
         match :calendar, via: [:get]
         match :tags, via: [:get]
         match "tags/:tag", to: "articles#tags", via: [:get], as: :tag
+        match "permalinker", to: "articles#permalinker", via: [:post]
       end
     end
     resources :users

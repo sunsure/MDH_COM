@@ -50,6 +50,10 @@ describe Admin::ArticlesController do
       it "routes to the tag search action" do
         get("#{url}/articles/taggings/search").should route_to("admin/articles#tag_search")
       end
+
+      it "routes to the permalink parameterize action" do
+        post("#{url}/articles/permalinker").should route_to("admin/articles#permalinker")
+      end
     end
 
     describe "failure" do
@@ -96,6 +100,10 @@ describe Admin::ArticlesController do
 
       it "routes to the tag search action" do
         get("#{bad_url}/articles/taggings/search").should_not route_to("admin/articles#tag_search")
+      end
+
+      it "doesn't route to the permalink parameterize action" do
+        post("#{bad_url}/articles/permalinker").should_not route_to("admin/articles#permalinker")
       end
     end
 

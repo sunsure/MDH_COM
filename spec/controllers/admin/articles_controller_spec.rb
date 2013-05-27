@@ -245,4 +245,11 @@ describe Admin::ArticlesController do
     end
   end
 
+  describe "POST permalinker" do
+    it "sends back a parameterized permalink for automagic fun!" do
+      post :permalinker, query: "^&this is _ - a BAD p3rmalink!()"
+      response.body.should eq("this-is-_-a-bad-p3rmalink")
+    end
+  end
+
 end

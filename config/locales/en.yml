@@ -266,6 +266,7 @@ en:
         title: "Editing Article : %{article_title}"
       form:
         add_image: 'Add Image'
+        automagic_permalink: 'Automagic Permalink!'
         confirm_delete_icon: 'Are you sure you want to delete this icon?'
         confirm_delete_image: 'Are you sure you want to delete this image?'
         delete_icon: 'Delete Icon'

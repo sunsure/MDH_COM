@@ -16,3 +16,15 @@ jQuery ->
 
   $("form select#article_per_page").change ->
     $(this).parent("form").submit();
+
+
+  # Automagic Permalinks
+  $("a#automagic_permalink").click ->
+    $.ajax
+      type: "POST"
+      format: "JSON"
+      url: "/admin/articles/permalinker"
+      data:
+        query: $("form input#article_title").val()
+    .complete (data, status, xhr) ->
+      $("form input#article_permalink").val(data.responseText)

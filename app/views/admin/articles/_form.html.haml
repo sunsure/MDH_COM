@@ -1,6 +1,13 @@
 = simple_form_for [:admin, @article], html: { class: 'form-horizontal', multipart: true } do |f|
   = f.input :title
-  = f.input :permalink
+
+
+  = f.input :permalink do
+    = f.input_field :permalink
+    %span
+      = link_to '#', class: 'btn btn-success', id: 'automagic_permalink', title: t(".automagic_permalink"), rel: 'tooltip', data: { placement: 'right' } do
+        %i.icon-star.icon-white
+        %span.addon
   = f.input :excerpt, as: :text, input_html: { rows: 10, class: "span9" }
   = f.input :content, as: :text, input_html: { rows: 25, class: "span9" }
   = f.input :tag_list, hint: t('.tag_list_hint')
