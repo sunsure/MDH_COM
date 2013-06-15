@@ -81,3 +81,13 @@ strong.author_name {
   background-color: #E9E9E9 !important;
 }
 span.inine-block { display: inline-block !important; }
+
+blockquote p {
+  font-size: 1.2em !important;
+  padding-left: 1em;
+  padding: 0.5em;
+}
+blockquote {
+  border-left: 1em solid #CCCCCC !important;
+  background-color: #f7f7f7;
+}
