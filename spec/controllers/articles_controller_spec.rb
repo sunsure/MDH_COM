@@ -55,6 +55,7 @@ describe ArticlesController do
   describe "GET tags" do
     it "assigns all tagged articles as @articles" do
       @tagged_article = FactoryGirl.create(:article, tag_list: "foo, bar, baz, qux")
+      @unpublished_tagged_article = FactoryGirl.create(:article, tag_list: "foo, bar, baz, qux", published_at: nil)
       get :tags, tag: "foo"
       assigns(:articles).should eq([@tagged_article])
     end
@@ -72,6 +73,11 @@ describe ArticlesController do
     it "should redirect to root if no tag is specified" do
       get :tags
       response.should redirect_to(root_url)
+    end
+
+    it "shouldnt show articles that are not published yet" do
+      get :tags, tag: 'foo'
+      assigns(:articles).should_not include(@unpublished_tagged_article)
     end
   end
 

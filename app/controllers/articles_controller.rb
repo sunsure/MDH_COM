@@ -24,7 +24,7 @@ class ArticlesController < ApplicationController
   def tags
     authorize! :tag_search, Article
     unless params[:tag].blank?
-      @articles = Article.tagged_with(params[:tag])
+      @articles = Article.published.tagged_with(params[:tag])
       @articles = @articles.basic_search(params[:query]) if params[:query].present?
       @articles = @articles.page(params[:page]).per(params[:per_page])
     else
