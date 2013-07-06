@@ -28,3 +28,27 @@ jQuery ->
         query: $("form input#article_title").val()
     .complete (data, status, xhr) ->
       $("form input#article_permalink").val(data.responseText)
+
+  # Do the typeahead
+  $('input.typeahead').typeahead
+    source: (query, process) ->
+      $.getJSON "/articles/typeahead_search?query=" + query, {}, (response) ->
+          data = []
+          for i of response
+            data.push "{\"title\":\"" + response[i]['title'] +  "\",\"published_at\":\"" + response[i]['published_at'] + "\",\"permalink\":\"" + response[i]['permalink'] + "\"}"
+          process data
+
+    property: "title"
+    property: "permalink"
+    property: "published_at"
+
+    highlighter: (item) ->
+      item = JSON.parse(item)
+      item["title"] + " - Published: " + item["published_at"]
+
+    updater: (item) ->
+      attributes = JSON.parse(item)
+      window.location = "/articles/" + attributes["permalink"]
+
+    minLength: 1
+    items: 8

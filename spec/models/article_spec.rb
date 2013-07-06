@@ -82,4 +82,25 @@ describe Article do
     end
   end
 
+  describe "concerning typeahead_search" do
+    before(:each) do
+      @article = FactoryGirl.create(:article)
+    end
+
+    it "should return articles that match ILIKE the title" do
+      result = Article.typeahead_search(@article.title.first(3))
+      result.should include(@article)
+    end
+
+    it "should map only the attributes the typeahead javascript needs" do
+      expected = [{title: @article.title, published_at: I18n.l(@article.published_at, format: :short), permalink: @article.permalink}]
+      Article.published.to_pretty_json.should eq(expected)
+    end
+
+    it "should have a to_pretty_json instance method" do
+      expected = {title: @article.title, published_at: I18n.l(@article.published_at, format: :short), permalink: @article.permalink}
+      @article.to_pretty_json.should eq(expected)
+    end
+  end
+
 end

@@ -28,6 +28,22 @@ class Article < ActiveRecord::Base
     query.parameterize.presence || "Invalid"
   end
 
+  def self.typeahead_search(query)
+    where(arel_table[:title].matches("%#{query}%"))
+  end
+
+  def self.to_pretty_json
+    scoped.map { |thing| thing.to_pretty_json }
+  end
+
+  def to_pretty_json
+    {
+      title: title,
+      published_at: I18n.l(published_at, format: :short),
+      permalink: permalink,
+    }
+  end
+
   def to_param
     permalink
   end

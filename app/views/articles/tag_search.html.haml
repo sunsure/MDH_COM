@@ -2,7 +2,12 @@
 .page-header
   %h3= t '.title'
 
-= render 'search', placeholder: 'Search Tags'
+.row-fluid
+  = form_tag nil, method: :get, class: 'form-search' do
+    .control-group
+    .controls
+      = text_field_tag :query, params[:query], placeholder: 'Search Tags', class: 'input-medium search-query'
+      = submit_tag t(".search"), class: 'btn btn-success'
 
 - if @tags.present?
   = paginate @tags

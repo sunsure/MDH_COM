@@ -1,8 +1,8 @@
 class ArticlesController < ApplicationController
-  skip_before_filter :authorize, only: [:calendar, :index, :show, :tags, :tag_search]
+  skip_before_filter :authorize
   load_and_authorize_resource only: [:index, :show], find_by: :permalink
   load_resource only: [:calendar]
-  respond_to :html, :js
+  respond_to :html, :js, :json
 
 
   def calendar
@@ -38,6 +38,11 @@ class ArticlesController < ApplicationController
       @tags = ActsAsTaggableOn::Tag.tag_search(params[:query])
       @tags = @tags.page(params[:page]).per(params[:per_page])
     end
+  end
+
+  def typeahead_search
+    @articles = Article.published.typeahead_search(params[:query])
+    render json: @articles.to_pretty_json
   end
 
 end

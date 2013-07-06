@@ -56,7 +56,7 @@ en:
 
   time:
     formats:
-      short: "%d %b %Y,%l:%M%p"
+      short: "%d %b %Y, %l:%M%p"
 
   layout:
     explanation:
@@ -115,6 +115,7 @@ en:
       title: "Listing Articles, Tag: %{tag}"
       view_tag_cloud: "View Tag Cloud"
     tag_search:
+      search: 'Search'
       title: 'Tag Search'
 
   comments:

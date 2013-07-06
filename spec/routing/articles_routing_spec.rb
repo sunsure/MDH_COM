@@ -30,6 +30,10 @@ describe ArticlesController do
       it "routes to the tag search action" do
         get("#{url}/articles/taggings/search").should route_to("articles#tag_search")
       end
+
+      it "routes to the typeahead search action" do
+        get("#{url}/articles/typeahead_search").should route_to("articles#typeahead_search")
+      end
     end
 
     describe "failure" do
@@ -76,6 +80,10 @@ describe ArticlesController do
 
       it "doesnt route to the tag search action" do
         get("#{bad_url}/articles/taggings/search").should_not route_to("articles#tag_search")
+      end
+
+      it "doesnt route to the typeahead search action" do
+        get("#{bad_url}/articles/typeahead_search").should_not route_to("articles#typeahead_search")
       end
     end
 

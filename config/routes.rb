@@ -71,6 +71,7 @@ Mdh::Application.routes.draw do
       match :calendar, via: [:get]
       match :tags, via: [:get], as: :tags
       match "tags/:tag", to: "articles#tags", via: [:get], as: :tag
+      match :typeahead_search, via: [:get]
     end
   end
 

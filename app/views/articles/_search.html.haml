@@ -2,5 +2,5 @@
   = form_tag nil, method: :get, class: 'form-search' do
     .control-group
     .controls
-      = text_field_tag :query, params[:query], placeholder: placeholder, class: 'input-medium search-query'
+      = text_field_tag :query, nil, placeholder: placeholder, class: 'input-medium search-query typeahead', autocomplete: 'off', data: { provide: 'typeahead', source: typeahead_search_articles_path }
       = submit_tag t(".search"), class: 'btn btn-success'

@@ -12,6 +12,14 @@ describe ArticlesController do
     {}
   end
 
+  describe "GET typeahead_search" do
+    it "returns JSON data as a response" do
+      get :typeahead_search, query: @article.title.first(3)
+      response.should be_success
+      assigns(:articles).should include(@article)
+    end
+  end
+
   describe "GET tag_search" do
     before(:each) do
       @tagged_article = FactoryGirl.create(:article, tag_list: "foo, bar, baz, qux")
