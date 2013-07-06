@@ -13,6 +13,11 @@
   = form_tag nil, class: "inline", method: :get do
     = select_tag :per_page, options_for_select(article_per_page_options, selected: params[:per_page]), id: "article_per_page"
 
+- if params[:per_page] && (params[:per_page].to_i >= @articles.total_count)
+  %div
+    = form_tag nil, class: "inline", method: :get do
+      = select_tag :per_page, options_for_select(article_per_page_options, selected: params[:per_page]), id: "article_per_page"
+
 - if current_user
   - content_for(:sidebar) do
     - if can? :manage, :all
