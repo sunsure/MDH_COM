@@ -23,6 +23,7 @@ class ArticlesController < ApplicationController
 
   def tags
     authorize! :tag_search, Article
+    @articles_tag_counts = Article.published.tag_counts
     unless params[:tag].blank?
       @articles = Article.published.tagged_with(params[:tag])
       @articles = @articles.basic_search(params[:query]) if params[:query].present?

@@ -5,5 +5,5 @@
     %h6.weak#current_tag= t('.current_tag', tag: params[:tag].inspect )
   .modal-body
     %div#article_tag_cloud
-    - tag_cloud Article.tag_counts, %w[tag_small tag_medium tag_large] do |tag, css_class|
+    - tag_cloud @articles_tag_counts, %w[tag_small tag_medium tag_large] do |tag, css_class|
       = link_to tag.name, tag_articles_path(tag.name), class: css_class

@@ -2,7 +2,13 @@
 .page-header
   %h3= t '.title', tag: params[:tag].inspect
 
-= render 'search', placeholder: t(".search_articles")
+.row-fluid
+  = form_tag nil, method: :get, class: 'form-search' do
+    .control-group
+    .controls
+      = text_field_tag :query, params[:query], placeholder: t(".search_articles"), class: 'input-medium search-query'
+      = submit_tag t(".search"), class: 'btn btn-success'
+
 = paginate @articles
 
 %table.table.table-striped

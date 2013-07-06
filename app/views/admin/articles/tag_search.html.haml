@@ -2,7 +2,12 @@
 .page-header
   %h3= t '.title'
 
-= render 'articles/search', placeholder: 'Search Tags'
+.row-fluid
+  = form_tag nil, method: :get, class: 'form-search' do
+    .control-group
+    .controls
+      = text_field_tag :query, params[:query], placeholder: t(".search_taggings"), class: 'input-medium search-query'
+      = submit_tag t(".search"), class: 'btn btn-success'
 
 - if @tags.present?
   = paginate @tags
@@ -16,4 +21,4 @@
     - @tags.each do |tag|
       %tr
         %td= link_to tag.name, tag_admin_articles_path(tag.name)
-        %td= tag.taggings.count
+        %td= tag.total_taggings_count

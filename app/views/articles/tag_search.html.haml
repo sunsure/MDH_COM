@@ -6,7 +6,7 @@
   = form_tag nil, method: :get, class: 'form-search' do
     .control-group
     .controls
-      = text_field_tag :query, params[:query], placeholder: 'Search Tags', class: 'input-medium search-query'
+      = text_field_tag :query, params[:query], placeholder: t(".search_taggings"), class: 'input-medium search-query'
       = submit_tag t(".search"), class: 'btn btn-success'
 
 - if @tags.present?
@@ -21,4 +21,4 @@
     - @tags.each do |tag|
       %tr
         %td= link_to tag.name, tag_articles_path(tag.name)
-        %td= tag.taggings.count
+        %td= tag.published_taggings_count

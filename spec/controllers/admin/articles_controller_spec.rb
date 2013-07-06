@@ -67,6 +67,7 @@ describe Admin::ArticlesController do
       @tagged_article = FactoryGirl.create(:article, tag_list: "foo, bar, baz, qux")
       get :tags, tag: "foo"
       assigns(:articles).should eq([@tagged_article])
+      assigns(:articles_tag_counts).should_not be_nil
     end
 
     it "returns HTTP success" do

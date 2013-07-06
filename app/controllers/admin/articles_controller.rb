@@ -67,6 +67,7 @@ class Admin::ArticlesController < AdminController
 
   def tags
     authorize! :tag_search, Article
+    @articles_tag_counts = Article.tag_counts
     unless params[:tag].blank?
       @articles = Article.tagged_with(params[:tag])
       @articles = @articles.basic_search(params[:query]) if params[:query].present?

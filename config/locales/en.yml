@@ -108,6 +108,7 @@ en:
       unpublish: "Un-Publish"
     tags:
       explain_tag_cloud: "What is a Tag Cloud?"
+      search: 'Search'
       search_articles: 'Search Articles'
       tag_cloud_pop_content: "A tag cloud is a collection of tags that are organized and styled by their frequency. Larger tags appear more often while smaller tags are more rare."
       tag_cloud_pop_title: "What is a Tag Cloud?"
@@ -116,6 +117,7 @@ en:
       view_tag_cloud: "View Tag Cloud"
     tag_search:
       search: 'Search'
+      search_taggings: 'Search Taggings'
       title: 'Tag Search'
 
   comments:
@@ -294,6 +296,7 @@ en:
         unpublish: "Un-Publish"
       tags:
         explain_tag_cloud: "What is a Tag Cloud?"
+        search: 'Search'
         search_articles: 'Search Articles'
         tag_cloud_pop_content: "A tag cloud is a collection of tags that are organized and styled by their frequency. Larger tags appear more often while smaller tags are more rare."
         tag_cloud_pop_title: "What is a Tag Cloud?"
@@ -302,6 +305,8 @@ en:
         view_tag_cloud: "View Tag Cloud"
       tag_search:
         title: 'Tag Search'
+        search: 'Search'
+        search_taggings: 'Search Taggings'
 
     comments:
       controller:
