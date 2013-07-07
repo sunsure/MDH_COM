@@ -7,8 +7,13 @@ class User < ActiveRecord::Base
   has_many :permissions
   has_many :roles, through: :permissions
   has_many :articles
+
+  # Comments that belong to my articles, whether I was the comment author or not
   has_many :comments
   has_many :comments, through: :articles
+
+  # Comments that I made on ANY article
+  has_many :my_comments, class_name: 'Comment', foreign_key: :user_id
 
   validates :password,
     on: :create,

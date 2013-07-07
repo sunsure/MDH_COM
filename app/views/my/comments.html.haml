@@ -1,0 +1,18 @@
+- title t('.title')
+.page-header
+  %div
+    %h3.inline= t '.title'
+
+- if current_user
+  - content_for(:sidebar) do
+    = link_to dashboard_my_path, class: "btn btn-small btn-block" do
+      %i.icon-home
+      %span.addon= t("my.my_dashboard")
+
+
+= paginate @comments
+
+- @comments.each do |comment|
+  = render "my_comments", comment: comment
+
+= paginate @comments

@@ -13,3 +13,10 @@ h4.media-heading { color: #8CA834; }
 .comments_count.inline {
   color: #858585;
 }
+
+.my-comments {
+  border-left: 2px solid black;
+}
+.not-my-comments {
+  border-left: 2px solid #bada55;
+}

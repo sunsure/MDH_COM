@@ -16,7 +16,7 @@ class Ability
       # they can reply to and report any comment
       can [:like, :new_reply, :reply, :report], Comment
       # but they can only edit their own
-      can [:create, :edit, :update], Comment, user_id: user.id
+      can [:read, :create, :edit, :update], Comment, user_id: user.id
     end
     if user.is? :admin
       can :manage, :all

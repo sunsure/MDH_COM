@@ -153,6 +153,13 @@ en:
   my:
     my_dashboard: 'My Dashboard'
     my_profile: 'My Profile'
+    comments:
+      title: 'My Comments'
+    my_comments:
+      view_article: 'View Article'
+      like: 'Like'
+      edit: 'Edit'
+      reply: 'Reply'
     dashboard:
       title: "My Dashboard"
 

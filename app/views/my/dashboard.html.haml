@@ -7,7 +7,7 @@
   .row-fluid
     - row.each do |box|
       - if can? box[:permission].first, box[:permission].last
-        .span3.well.dashboard-box
+        .span4.well.dashboard-box
           %h3.dashboard-box-title
             = link_to box[:link] do
               %i{ class: box[:icon] }

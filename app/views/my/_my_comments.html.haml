@@ -1,0 +1,30 @@
+%div.media.media-article{ id: "comment_#{comment.id}", class: comment.user == current_user ? 'my-comments' : 'not-my-comments' }
+  = link_to '#', class: "pull-left" do
+    = image_tag comment.user.try(:gravatar_url, size: 64), class: 'media-object'
+  %div.media-body
+    %h4.media-heading
+      = comment.title
+      .pull-right
+        = link_to t('.view_article'), article_path(comment.article), class: 'btn btn-mini'
+    %strong.author_name= comment.user.try(:name)
+    %code.author_email= comment.user.display_email? ? comment.user.try(:email) : t('.email_hidden')
+    %div
+      - if comment.updated_at?
+        %section.inline.updated_at= l(comment.updated_at, format: :short)
+      - if comment.created_at?
+        %section.inline.created_at= l(comment.created_at, format: :short) if comment.created_at?
+    %div.media{ id: "my_comment_content_#{comment.id}" }= to_markdown(comment.content)
+    %div{ id: "comment_actions_#{comment.id}" }
+      .btn-group
+        - if can? :like, comment
+          = link_to t('.like'), '#', class: 'btn btn-small btn-primary'
+        - if can? :reply, comment
+          = link_to t('.reply'), nil, class: 'btn btn-small btn-success'
+        - if can? :edit, comment
+          = link_to t('.edit'), nil, class: 'btn btn-small btn-warning'
+        - if can? :destroy, comment
+          = link_to t('.destroy'), nil, class: 'btn btn-small btn-danger'
+
+    - comment.children.each do |child_comment|
+      = render "my_comments", comment: child_comment
+    %div{ id: "last_reply_comment_#{comment.id}"}
